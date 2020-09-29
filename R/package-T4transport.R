@@ -1,0 +1,18 @@
+#' Tools for Computational Optimal Transport
+#' 
+#' dd
+#'
+#' @docType package
+#' @name T4transport
+#' @aliases T4transport-package
+#' @import Rdpack
+#' @importFrom lpSolve lp
+#' @importFrom stats rnorm median
+#' @importFrom utils packageVersion
+#' @importFrom Rcpp evalCpp
+#' @useDynLib T4transport
+NULL
+# pack <- "T4transport"
+# path <- find.package(pack)
+# system(paste(shQuote(file.path(R.home("bin"), "R")),
+#              "CMD", "Rd2pdf", shQuote(path)))

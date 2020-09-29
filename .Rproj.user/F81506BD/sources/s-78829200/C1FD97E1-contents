@@ -1,0 +1,16 @@
+Package: T4transport
+Type: Package
+Title: Tools for Computational Optimal Transport
+Version: 0.1.0
+Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")))
+Description: More about what it does (maybe more than one line)
+License: MIT + file LICENSE
+Imports: Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
+LinkingTo: Rcpp, RcppArmadillo
+Encoding: UTF-8
+RoxygenNote: 7.1.1
+RdMacros: Rdpack
+Suggests: 
+    ggplot2
+Depends: 
+    R (>= 2.10)

@@ -1,0 +1,27 @@
+#' test with openmp
+#' 
+#' 
+#' @export
+myomp <- function(x, nthr=1){
+  myntr = max(1, round(nthr))
+  return(as.vector(test_omp(x, myntr)))
+}
+
+# library(microbenchmark)
+# nn = 1000
+# pp = 2000
+# X = matrix(rnorm(nn*pp),ncol=pp)
+# microbenchmark::microbenchmark(
+#   "perform" = rowSums(2*X),
+#   "openmp1" = myomp(X, nthr=1),
+#   "openmp2" = myomp(X, nthr=2),
+#   "openmp4" = myomp(X, nthr=4)
+# )
+# 
+# n2 = 5
+# p2 = 3
+# X = matrix(rnorm(n2*p2),ncol=p2)
+# sol = rowSums(2*X)
+# yy1 = myomp(X, nthr=1)
+# yy2 = myomp(X, nthr=2)
+# yy4 = myomp(X, nthr=4)

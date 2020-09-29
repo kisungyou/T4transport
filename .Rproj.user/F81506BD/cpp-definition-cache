@@ -1,0 +1,103 @@
+[
+    {
+        "file": "/home/kisung/Desktop/T4transport/src/elementary.cpp",
+        "file_last_write": 1601350172.0,
+        "definitions": [
+            {
+                "usr": "c:@F@compute_pdist2#&$@N@arma@S@Mat>#d#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "compute_pdist2(arma::mat &, arma::mat &)",
+                "file": "/home/kisung/Desktop/T4transport/src/elementary.cpp",
+                "line": 6,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@cpp_subgrad_weight#$@N@arma@S@Col>#d#S0_#$@N@arma@S@Mat>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_subgrad_weight(arma::vec, arma::vec, arma::mat, double)",
+                "file": "/home/kisung/Desktop/T4transport/src/elementary.cpp",
+                "line": 19,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@cpp_subgrad_plan#$@N@arma@S@Col>#d#S0_#$@N@arma@S@Mat>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_subgrad_plan(arma::vec, arma::vec, arma::mat, double)",
+                "file": "/home/kisung/Desktop/T4transport/src/elementary.cpp",
+                "line": 46,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@cpp_subgrad_both#$@N@arma@S@Col>#d#S0_#$@N@arma@S@Mat>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_subgrad_both(arma::vec, arma::vec, arma::mat, double)",
+                "file": "/home/kisung/Desktop/T4transport/src/elementary.cpp",
+                "line": 74,
+                "column": 24
+            }
+        ]
+    },
+    {
+        "file": "/home/kisung/Desktop/T4transport/src/elementary.h",
+        "file_last_write": 1601341383.0,
+        "definitions": []
+    },
+    {
+        "file": "/home/kisung/Desktop/T4transport/src/src_barycenter.cpp",
+        "file_last_write": 1601399496.0,
+        "definitions": [
+            {
+                "usr": "c:@F@cpp_barysinkhorn14#&$@N@arma@S@field>#$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S5_#d#d#I#d#b#S5_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_barysinkhorn14(arma::field<arma::mat> &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_barycenter.cpp",
+                "line": 16,
+                "column": 11
+            }
+        ]
+    },
+    {
+        "file": "/home/kisung/Desktop/T4transport/src/src_distances.cpp",
+        "file_last_write": 1601398946.0,
+        "definitions": [
+            {
+                "usr": "c:@F@cpp_cost#$@N@arma@S@Mat>#d#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_cost(arma::mat, arma::mat)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_distances.cpp",
+                "line": 9,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@cpp_sinkhorn13#$@N@arma@S@Col>#d#S0_#$@N@arma@S@Mat>#d#d#d#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_sinkhorn13(arma::vec, arma::vec, arma::mat, double, double, int, double)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_distances.cpp",
+                "line": 21,
+                "column": 12
+            }
+        ]
+    },
+    {
+        "file": "/home/kisung/Desktop/T4transport/src/src_images.cpp",
+        "file_last_write": 1601411839.0,
+        "definitions": [
+            {
+                "usr": "c:@F@image_barysinkhorn14#&$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S4_#d#d#I#d#b#S4_#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "image_barysinkhorn14(arma::mat &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec, int)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_images.cpp",
+                "line": 19,
+                "column": 11
+            }
+        ]
+    }
+]
