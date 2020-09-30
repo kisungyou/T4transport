@@ -83,7 +83,7 @@ image(out2$plan, axes=FALSE, main=pm2)
 image(out5$plan, axes=FALSE, main=pm5)
 par(opar)
 
-\donttest{
+\dontrun{
 ## COMPARE WITH ANALYTIC RESULTS
 #  For two Gaussians with same covariance, their 
 #  2-Wasserstein distance is known so let's compare !

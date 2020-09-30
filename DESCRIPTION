@@ -3,7 +3,7 @@ Type: Package
 Title: Tools for Computational Optimal Transport
 Version: 0.1.0
 Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")))
-Description: Transport theory has seen much success in many fields of statistics and machine learning. We provide a variety of algorithms to compute Wasserstein distances and barycenters, two of which are building blocks of the computational approach to the topic. See Peyré and Cuturi (2019) <doi:10.1561/2200000073> for the general exposition to the study of computational optimal transport.
+Description: Transport theory has seen much success in many fields of statistics and machine learning. We provide a variety of algorithms to compute Wasserstein distance, barycenter, and others. See Peyré and Cuturi (2019) <doi:10.1561/2200000073> for the general exposition to the study of computational optimal transport.
 License: MIT + file LICENSE
 Imports: Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
 LinkingTo: Rcpp, RcppArmadillo

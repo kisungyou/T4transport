@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Tools for Computational Optimal Transport
+# Tools for Optimal Transport <a href='https://kyoustat.com/T4transport/'><img src='man/figures/logo.png' align="right" height="150" /></a>
 
 <!-- badges: start -->
 

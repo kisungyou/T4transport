@@ -1,0 +1,42 @@
+url: https://kyoustat.com/T4transport
+
+destination: docs
+
+template:
+  params:
+    bootswatch: united
+    ganalytics: UA-163713603-1
+
+home:
+  strip_header: false
+
+navbar:
+  title: "T4transport"
+  left:
+    - text: "Functions"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+  right:
+    - icon: fa-twitter
+      href: https://twitter.com/kyoustat
+    - icon: fa-github
+      href: https://github.com/kyoustat/T4cluster
+    - icon: fa-envelope
+      href: mailto:kyoustat@gmail.com
+
+reference:
+  - title: "[1] Wasserstein Distance"
+    contents:
+      - has_concept("distance")
+  - title: "[2] Wasserstein Barycenter"
+    contents:
+      - has_concept("barycenter")
+  - title: "Others"
+  - subtitle: "Data"
+    contents:
+      - has_concept("data")
+  - subtitle: "Barycenter of Images"
+    contents:
+      - has_concept("imagecenter")
+

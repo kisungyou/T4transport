@@ -1,7 +1,7 @@
 #' Tools for Computational Optimal Transport
 #' 
-#' dd
-#'
+#' 
+#' @noRd
 #' @docType package
 #' @name T4transport
 #' @aliases T4transport-package
