@@ -29,7 +29,7 @@ reference:
   - title: "[1] Wasserstein Distance"
     contents:
       - has_concept("distance")
-  - title: "[2] Wasserstein Barycenter"
+  - title: "[2] Barycenter with Fixed Support"
     contents:
       - has_concept("barycenter")
   - title: "Others"
