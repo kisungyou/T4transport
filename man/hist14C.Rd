@@ -60,7 +60,7 @@ par(mfrow=c(1,2))
 barplot(histxy[[1]]$density, col=rgb(0,0,1,1/4), 
         ylim=c(0, 0.75), main="Two Histograms")
 barplot(histxy[[2]]$density, col=rgb(1,0,0,1/4), 
-        ylim=c(0, 0.75), add=T)
+        ylim=c(0, 0.75), add=TRUE)
 barplot(hh$density, main="Barycenter",
         ylim=c(0, 0.75))
 par(opar)
