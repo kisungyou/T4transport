@@ -3,7 +3,7 @@
 \name{sinkhorn}
 \alias{sinkhorn}
 \alias{sinkhornD}
-\title{Sinkhorn Distance by Cuturi (2013)}
+\title{Computing Wasserstein Distance by Entropic Regularization}
 \usage{
 sinkhorn(X, Y, p = 2, wx = NULL, wy = NULL, lambda = 0.1, ...)
 

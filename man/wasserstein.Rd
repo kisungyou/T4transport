@@ -3,7 +3,7 @@
 \name{wasserstein}
 \alias{wasserstein}
 \alias{wassersteinD}
-\title{Wasserstein Distance between Empirical Measures}
+\title{Computing Wasserstein Distance between Empirical Measures}
 \usage{
 wasserstein(X, Y, p = 2, wx = NULL, wy = NULL)
 

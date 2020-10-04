@@ -37,6 +37,25 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_barybregman15
+arma::vec cpp_barybregman15(arma::field<arma::mat>& listdXY, arma::field<arma::vec>& marginals, arma::vec weights, double p, double lambda, int maxiter, double abstol, bool printer, arma::vec initvec);
+RcppExport SEXP _T4transport_cpp_barybregman15(SEXP listdXYSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP pSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP printerSEXP, SEXP initvecSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::field<arma::mat>& >::type listdXY(listdXYSEXP);
+    Rcpp::traits::input_parameter< arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< bool >::type printer(printerSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type initvec(initvecSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_barybregman15(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_sinkhorn13
 Rcpp::List cpp_sinkhorn13(arma::vec a, arma::vec b, arma::mat dab, double lambda, double p, int maxiter, double abstol);
 RcppExport SEXP _T4transport_cpp_sinkhorn13(SEXP aSEXP, SEXP bSEXP, SEXP dabSEXP, SEXP lambdaSEXP, SEXP pSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
@@ -54,9 +73,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// image_barysinkhorn14
-arma::vec image_barysinkhorn14(arma::mat& dxy, arma::field<arma::vec>& marginals, arma::vec weights, double p, double lambda, int maxiter, double abstol, bool printer, arma::vec initvec, int nthread);
-RcppExport SEXP _T4transport_image_barysinkhorn14(SEXP dxySEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP pSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP printerSEXP, SEXP initvecSEXP, SEXP nthreadSEXP) {
+// cpp_ipot20
+Rcpp::List cpp_ipot20(arma::vec a, arma::vec b, arma::mat dab, double lambda, double p, int maxiter, double abstol, int L);
+RcppExport SEXP _T4transport_cpp_ipot20(SEXP aSEXP, SEXP bSEXP, SEXP dabSEXP, SEXP lambdaSEXP, SEXP pSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP LSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type a(aSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type dab(dabSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< int >::type L(LSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_ipot20(a, b, dab, lambda, p, maxiter, abstol, L));
+    return rcpp_result_gen;
+END_RCPP
+}
+// routine_bary14C
+arma::vec routine_bary14C(arma::mat& dxy, arma::field<arma::vec>& marginals, arma::vec weights, double p, double lambda, int maxiter, double abstol, bool printer, arma::vec initvec, int nthread);
+RcppExport SEXP _T4transport_routine_bary14C(SEXP dxySEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP pSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP printerSEXP, SEXP initvecSEXP, SEXP nthreadSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -70,7 +107,27 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type printer(printerSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type initvec(initvecSEXP);
     Rcpp::traits::input_parameter< int >::type nthread(nthreadSEXP);
-    rcpp_result_gen = Rcpp::wrap(image_barysinkhorn14(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread));
+    rcpp_result_gen = Rcpp::wrap(routine_bary14C(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread));
+    return rcpp_result_gen;
+END_RCPP
+}
+// routine_bary15B
+arma::vec routine_bary15B(arma::mat& dxy, arma::field<arma::vec>& marginals, arma::vec weights, double p, double lambda, int maxiter, double abstol, bool printer, arma::vec initvec, int nthread);
+RcppExport SEXP _T4transport_routine_bary15B(SEXP dxySEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP pSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP printerSEXP, SEXP initvecSEXP, SEXP nthreadSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type dxy(dxySEXP);
+    Rcpp::traits::input_parameter< arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< bool >::type printer(printerSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type initvec(initvecSEXP);
+    Rcpp::traits::input_parameter< int >::type nthread(nthreadSEXP);
+    rcpp_result_gen = Rcpp::wrap(routine_bary15B(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -78,8 +135,11 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_compute_pdist2", (DL_FUNC) &_T4transport_compute_pdist2, 2},
     {"_T4transport_cpp_barysinkhorn14", (DL_FUNC) &_T4transport_cpp_barysinkhorn14, 9},
+    {"_T4transport_cpp_barybregman15", (DL_FUNC) &_T4transport_cpp_barybregman15, 9},
     {"_T4transport_cpp_sinkhorn13", (DL_FUNC) &_T4transport_cpp_sinkhorn13, 7},
-    {"_T4transport_image_barysinkhorn14", (DL_FUNC) &_T4transport_image_barysinkhorn14, 10},
+    {"_T4transport_cpp_ipot20", (DL_FUNC) &_T4transport_cpp_ipot20, 8},
+    {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
+    {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
     {NULL, NULL, 0}
 };
 

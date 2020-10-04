@@ -1,4 +1,4 @@
-#' Sinkhorn Distance by Cuturi (2013)
+#' Computing Wasserstein Distance by Entropic Regularization
 #' 
 #' Due to high computational cost for linear programming approaches to compute 
 #' Wasserstein distance, Cuturi (2013) proposed an entropic regularization 

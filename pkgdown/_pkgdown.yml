@@ -29,14 +29,16 @@ reference:
   - title: "[1] Wasserstein Distance"
     contents:
       - has_concept("distance")
-  - title: "[2] Barycenter with Fixed Support"
+  - title: "[2] Wasserstein Barycenter with Fixed Support"
     contents:
       - has_concept("barycenter")
-  - title: "Others"
-  - subtitle: "Data"
+  - title: "[3] Wasserstein Barycenter for Specific Inputs"
+  - subtitle: "Histograms"
     contents:
-      - has_concept("data")
-  - subtitle: "Barycenter of Images"
+      - has_concept("histcenter")
+  - subtitle: "Images"
     contents:
       - has_concept("imagecenter")
-
+  - title: "[4] Data"
+    contents:
+      - has_concept("data")

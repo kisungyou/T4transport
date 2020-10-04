@@ -48,7 +48,7 @@
     },
     {
         "file": "/home/kisung/Desktop/T4transport/src/src_barycenter.cpp",
-        "file_last_write": 1601399496.0,
+        "file_last_write": 1601836820.0,
         "definitions": [
             {
                 "usr": "c:@F@cpp_barysinkhorn14#&$@N@arma@S@field>#$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S5_#d#d#I#d#b#S5_#",
@@ -56,14 +56,23 @@
                 "parent_name": "",
                 "name": "cpp_barysinkhorn14(arma::field<arma::mat> &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec)",
                 "file": "/home/kisung/Desktop/T4transport/src/src_barycenter.cpp",
-                "line": 16,
+                "line": 17,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@cpp_barybregman15#&$@N@arma@S@field>#$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S5_#d#d#I#d#b#S5_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_barybregman15(arma::field<arma::mat> &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_barycenter.cpp",
+                "line": 79,
                 "column": 11
             }
         ]
     },
     {
         "file": "/home/kisung/Desktop/T4transport/src/src_distances.cpp",
-        "file_last_write": 1601398946.0,
+        "file_last_write": 1601771583.0,
         "definitions": [
             {
                 "usr": "c:@F@cpp_cost#$@N@arma@S@Mat>#d#S0_#",
@@ -82,20 +91,38 @@
                 "file": "/home/kisung/Desktop/T4transport/src/src_distances.cpp",
                 "line": 21,
                 "column": 12
+            },
+            {
+                "usr": "c:@F@cpp_ipot20#$@N@arma@S@Col>#d#S0_#$@N@arma@S@Mat>#d#d#d#I#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cpp_ipot20(arma::vec, arma::vec, arma::mat, double, double, int, double, int)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_distances.cpp",
+                "line": 83,
+                "column": 12
             }
         ]
     },
     {
-        "file": "/home/kisung/Desktop/T4transport/src/src_images.cpp",
-        "file_last_write": 1601411839.0,
+        "file": "/home/kisung/Desktop/T4transport/src/src_routines.cpp",
+        "file_last_write": 1601836769.0,
         "definitions": [
             {
-                "usr": "c:@F@image_barysinkhorn14#&$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S4_#d#d#I#d#b#S4_#I#",
+                "usr": "c:@F@routine_bary14C#&$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S4_#d#d#I#d#b#S4_#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "image_barysinkhorn14(arma::mat &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec, int)",
-                "file": "/home/kisung/Desktop/T4transport/src/src_images.cpp",
-                "line": 19,
+                "name": "routine_bary14C(arma::mat &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec, int)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_routines.cpp",
+                "line": 13,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@routine_bary15B#&$@N@arma@S@Mat>#d#&$@N@arma@S@field>#$@N@arma@S@Col>#d#S4_#d#d#I#d#b#S4_#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "routine_bary15B(arma::mat &, arma::field<arma::vec> &, arma::vec, double, double, int, double, bool, arma::vec, int)",
+                "file": "/home/kisung/Desktop/T4transport/src/src_routines.cpp",
+                "line": 74,
                 "column": 11
             }
         ]
