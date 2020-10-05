@@ -32,7 +32,7 @@ reference:
   - title: "[2] Wasserstein Barycenter with Fixed Support"
     contents:
       - has_concept("barycenter")
-  - title: "[3] Wasserstein Barycenter for Specific Inputs"
+  - title: "[3] Wasserstein Barycenter with Specific Inputs"
   - subtitle: "Histograms"
     contents:
       - has_concept("histcenter")
