@@ -88,7 +88,7 @@ par(opar)
 #  For two Gaussians with same covariance, their 
 #  2-Wasserstein distance is known so let's compare !
 
-niter = 5000          # number of iterations
+niter = 1000          # number of iterations
 vdist = rep(0,niter)
 for (i in 1:niter){
   mm = sample(30:50, 1)
