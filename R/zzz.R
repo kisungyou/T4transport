@@ -1,5 +1,19 @@
 .pkgenv <- new.env(parent = emptyenv())
 
+# RETICULATE : https://cran.r-project.org/web/packages/reticulate/vignettes/package.html
+numpy      <- NULL
+cython     <- NULL
+matplotlib <- NULL
+ot         <- NULL
+
+.onLoad <- function(libname, pkgname){
+  # use superassignment to update global reference
+  numpy <<- reticulate::import("numpy", delay_load = TRUE)
+  cython <<- reticulate::import("cython", delay_load = TRUE)
+  matplotlib <<- reticulate::import("matplotlib", delay_load = TRUE)
+  ot    <<- reticulate::import("ot",    delay_load = TRUE)
+}
+
 .onAttach <- function(...){
   ## Retrieve Year Information
   date <- date()
@@ -13,8 +27,9 @@
   packageStartupMessage("** ------------------------------------------------------- **")
   packageStartupMessage("**   T4transport || Computational Optimal Transport in R ")
   packageStartupMessage("**")
-  packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
+  packageStartupMessage("** Authors    : Rémi Flamary, Nicolas Courty, Kisung You")
   packageStartupMessage("** Maintainer : Kisung You  (kyoustat@gmail.com)")
+  packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
   packageStartupMessage("** Website    : https://kyoustat.com/T4transport/")
   packageStartupMessage("**")
   packageStartupMessage("** Please share any bugs or suggestions to the maintainer.")

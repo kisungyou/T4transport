@@ -29,16 +29,20 @@ reference:
   - title: "[1] Wasserstein Distance"
     contents:
       - has_concept("distance")
-  - title: "[2] Wasserstein Barycenter with Fixed Support"
+  - title: "[2] Wasserstein Barycenter"
+  - subtitle: "Fixed Support"
     contents:
       - has_concept("barycenter")
-  - title: "[3] Wasserstein Barycenter with Specific Inputs"
   - subtitle: "Histograms"
     contents:
       - has_concept("histcenter")
   - subtitle: "Images"
     contents:
       - has_concept("imagecenter")
-  - title: "[4] Data"
+  - title: "[3] Gromov-Wasserstein Distance"
+    contents:
+      - has_concept("gromov")
+  - title: "Others"
+  - subtitle: "Data"
     contents:
       - has_concept("data")

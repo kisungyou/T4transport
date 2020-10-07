@@ -7,6 +7,9 @@ cache: packages
 os:
   - linux
 
+before_install:
+  - pip install numpy ot cython matplotlib
+
 addons:
   apt:
     packages:

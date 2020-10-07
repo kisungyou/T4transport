@@ -7,6 +7,7 @@
 #' @aliases T4transport-package
 #' @import Rdpack
 #' @import CVXR
+#' @import reticulate
 #' @importFrom lpSolve lp
 #' @importFrom CVXR Variable Minimize matrix_trace Problem solve
 #' @importFrom stats rnorm median

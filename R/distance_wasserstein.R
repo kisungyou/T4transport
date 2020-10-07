@@ -31,6 +31,7 @@
 #' \item{distance}{\eqn{\mathcal{W}_p} distance value}
 #' \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 #' }
+#' 
 #' @examples 
 #' #-------------------------------------------------------------------
 #' #  Wasserstein Distance between Samples from Two Bivariate Normal
@@ -115,12 +116,12 @@ wasserstein <- function(X, Y, p=2, wx=NULL, wy=NULL){
   m = base::nrow(X)
   n = base::nrow(Y)
   
-  wxname = paste0("'",deparse(substitute(wx)),"'")
+  wxname =  paste0("'",deparse(substitute(wx)),"'")
   wyname = paste0("'",deparse(substitute(wy)),"'")
   fname  = "wasserstein"
   
-  par_wx = valid_weight(wx, m, wxname, fname)
-  par_wy = valid_weight(wy, n, wyname, fname)
+  par_wx = valid_single_marginal(wx, m, fname)
+  par_wy = valid_single_marginal(wy, n, fname) #valid_weight(wy, n, wyname, fname)
   par_p  = max(1, as.double(p))
   par_D  = as.matrix(compute_pdist2(X, Y))
   
@@ -137,8 +138,8 @@ wassersteinD <- function(D, p=2, wx=NULL, wy=NULL){
   name.wy  = paste0("'",deparse(substitute(wy)),"'")
   
   par_D  = valid_distance(D, name.D, name.fun)
-  par_wx = valid_weight(wx, base::nrow(D), name.wx, name.fun)
-  par_wy = valid_weight(wy, base::ncol(D), name.wy, name.fun)
+  par_wx = valid_single_marginal(wx, m, fname)
+  par_wy = valid_single_marginal(wy, n, fname) #valid_weight(wy, n, wyname, fname)
   par_p  = max(1, as.double(p))
   
   ## RUN

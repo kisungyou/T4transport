@@ -8,7 +8,7 @@
 #  (7) valid_multiple_distance : distance between support and measure
 #  (8) check_images            : for barycenter of images
 #  (9) check_hists             : for barycenter of histograms
-
+#  (10) valid_single_marginal  : check single marginal 
 
 
 # (1) valid_weight --------------------------------------------------------
@@ -141,6 +141,7 @@ valid_multiple_weight <- function(weight, K, fname){
   }
 }
 
+
 # (7) valid_multiple_distance ---------------------------------------------
 #' @keywords internal
 #' @noRd
@@ -252,4 +253,22 @@ check_hists <- function(hists, fname){
   output$midpts  = hists[[1]]$mids
   output$density = mydensity
   return(output)
+}
+
+
+
+# (10) valid_single_marginal ----------------------------------------------
+#' @keywords internal
+#' @noRd
+valid_single_marginal <- function(mvec, M, fname){
+  dname = paste0("'",deparse(substitute(mvec)),"'")
+  if ((length(mvec)==0)&&is.null(mvec)){
+    return(rep(1/M, M))
+  } else {
+    mvec = as.vector(mvec)
+    if ((length(mvec)!=M)||(any(mvec<0))){
+      stop(paste0("* ",fname," : ",dname," should be a nonnegative vector of length ",M,"."))
+    }
+    return(mvec/base::sum(mvec))
+  }
 }
