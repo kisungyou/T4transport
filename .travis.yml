@@ -1,4 +1,5 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+# R for travis     : see documentation at https://docs.travis-ci.com/user/languages/r
+# Python reference : GeoMongo, scaffolder
 
 language: R
 sudo: true
@@ -7,8 +8,15 @@ cache: packages
 os:
   - linux
 
+python:
+  - 3.5   
+
 before_install:
-  - pip install numpy ot cython matplotlib
+  - sudo apt-get install python3-pip
+  - sudo pip3 install --upgrade pip
+  - sudo python3 -m pip install --upgrade --ignore-installed numpy cython matplotlib POT
+  - sudo apt-get install r-base-dev
+  - sudo apt-get update
 
 addons:
   apt:
@@ -42,6 +50,8 @@ r-packages:
   - ggplot2
   - knitr
   - lpSolve
+  - reticulate
+  - rmarkdown
 
 env:
   global:
