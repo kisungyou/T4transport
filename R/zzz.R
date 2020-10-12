@@ -12,6 +12,7 @@ ot         <- NULL
   cython <<- reticulate::import("cython", delay_load = TRUE)
   matplotlib <<- reticulate::import("matplotlib", delay_load = TRUE)
   ot    <<- reticulate::import("ot",    delay_load = TRUE)
+  reticulate::configure_environment(pkgname)
 }
 
 .onAttach <- function(...){

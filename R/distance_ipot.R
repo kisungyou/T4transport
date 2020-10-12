@@ -117,8 +117,12 @@ ipotD <- function(D, p=2, wx=NULL, wy=NULL, lambda=1, ...){
   name.wy  = paste0("'",deparse(substitute(wy)),"'")
   
   par_D  = valid_distance(D, name.D, name.fun)
-  par_wx = valid_weight(wx, base::nrow(D), name.wx, name.fun)
-  par_wy = valid_weight(wy, base::ncol(D), name.wy, name.fun)
+  
+  m = base::nrow(par_D)
+  n = base::ncol(par_D)
+  
+  par_wx = valid_weight(wx, m, name.wx, name.fun)
+  par_wy = valid_weight(wy, n, name.wy, name.fun)
   par_p  = max(1, as.double(p))
   par_lbd  = max(sqrt(.Machine$double.eps), as.double(lambda))
   

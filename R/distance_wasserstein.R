@@ -138,6 +138,10 @@ wassersteinD <- function(D, p=2, wx=NULL, wy=NULL){
   name.wy  = paste0("'",deparse(substitute(wy)),"'")
   
   par_D  = valid_distance(D, name.D, name.fun)
+  
+  m = base::nrow(par_D)
+  n = base::ncol(par_D)
+  
   par_wx = valid_single_marginal(wx, m, fname)
   par_wy = valid_single_marginal(wy, n, fname) #valid_weight(wy, n, wyname, fname)
   par_p  = max(1, as.double(p))
