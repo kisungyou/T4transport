@@ -9,8 +9,7 @@ Description: Transport theory has seen much success in many fields of statistics
 Config/reticulate:
   list(
     packages = list(
-      list(package = "cython"),
-      list(package = "numpy"),
+      list(package = "cython", pip=TRUE),
       list(package = "pot", pip=TRUE)
     )
   )

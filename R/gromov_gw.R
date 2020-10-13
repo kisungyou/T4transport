@@ -57,7 +57,7 @@ NULL
 gw <- function(X, Y, wx=NULL, wy=NULL, loss=c("square","KL"), armijo=FALSE){
   ## CHECK OT MODULE AVAILABILITY 
   fname = "gw"
-  # check_pot(fname)
+  check_pot(fname)
   
   ## INPUTS : EXPLICIT
   if (is.vector(X)){
@@ -107,7 +107,7 @@ gw <- function(X, Y, wx=NULL, wy=NULL, loss=c("square","KL"), armijo=FALSE){
 gwD <- function(distX, distY, wx=NULL, wy=NULL, loss=c("square","KL"), armijo=FALSE){
   # CHECK OT MODULE AVAILABILITY 
   fname = "gwD"
-  # check_pot(fname)
+  check_pot(fname)
   
   # INPUT : EXPLICIT
   if (!inherits(distX,"dist")){    stop(paste0("* ",fname," : input 'distX' should be a 'dist' object. See help with 'help(dist)'."))  }

@@ -6,8 +6,7 @@
 #' T4transport::install_pot()
 #' }
 #' 
-#' @keywords internal
-#' @noRd
+#' @export
 install_pot <- function(method = "auto", conda = "auto"){
   listed = c("numpy","cython","matplotlib","ot")
   for (i in listed){
