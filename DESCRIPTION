@@ -2,22 +2,13 @@ Package: T4transport
 Type: Package
 Title: Tools for Computational Optimal Transport
 Version: 0.1.1
-Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")),
-             person("Rémi", "Flamary", role="aut", email="remi.flamary@polytechnique.edu"),
-             person("Nicolas","Courty",role="aut", email="Nicolas.Courty@irisa.fr"))
+Authors@R: person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X"))
 Description: Transport theory has seen much success in many fields of statistics and machine learning. We provide a variety of algorithms to compute Wasserstein distance, barycenter, and others. See Peyré and Cuturi (2019) <doi:10.1561/2200000073> for the general exposition to the study of computational optimal transport.
-Config/reticulate:
-  list(
-    packages = list(
-      list(package = "cython", pip=TRUE),
-      list(package = "pot", pip=TRUE)
-    )
-  )
 License: MIT + file LICENSE
-Imports: CVXR, Rcpp (>= 1.0.5), Rdpack, lpSolve, reticulate (>= 1.16), stats, utils
+Imports: CVXR, Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
 LinkingTo: Rcpp, RcppArmadillo
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 RdMacros: Rdpack
 Suggests: 
     ggplot2

@@ -29,7 +29,7 @@ would be taken, or it should be a nonnegative real number.}
 an \eqn{(m\times n)} matrix of the barycentric image.
 }
 \description{
-Using entropic regularization for Wasserstein barycenter computation, \code{image14C} 
+Using entropic regularization for Wasserstein barycenter computation, \code{image15B} 
 finds a \emph{barycentric} image \eqn{X^*} given multiple images \eqn{X_1,X_2,\ldots,X_N}. 
 Please note the followings; (1) we only take a matrix as an image so please 
 make it grayscale if not, (2) all images should be of same size - no resizing is performed.
