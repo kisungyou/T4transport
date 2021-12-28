@@ -13,10 +13,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Tools for Optimal Transport <a href='https://kyoustat.com/T4transport/'><img src='man/figures/logo.png' align="right" height="150" /></a>
+# Tools for Optimal Transport <a href='https://kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" height="150" /></a>
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/kyoustat/T4transport.svg?branch=master)](https://travis-ci.com/kyoustat/T4transport)
+[![Travis build status](https://travis-ci.com/kisungyou/T4transport.svg?branch=master)](https://travis-ci.com/kisungyou/T4transport)
 <!-- badges: end -->
 
 **T4transport** is an **R** package designed as a computational toolkit for 
@@ -36,5 +36,5 @@ install.packages("T4transport")
 if (!require("devtools")) {
   install.packages("devtools")
 }
-devtools::install_github("kyoustat/T4transport")
+devtools::install_github("kisungyou/T4transport")
 ```
