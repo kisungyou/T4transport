@@ -39,9 +39,6 @@ reference:
   - subtitle: "Images"
     contents:
       - has_concept("imagecenter")
-  - title: "[3] Gromov-Wasserstein Distance"
-    contents:
-      - has_concept("gromov")
   - title: "Others"
   - subtitle: "Data"
     contents:

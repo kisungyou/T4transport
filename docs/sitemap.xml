@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kyoustat.com/T4transport/404.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/authors.html</loc>
+  </url>
+  <url>
     <loc>https://kyoustat.com/T4transport/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/reference/T4transport.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/T4transport/reference/bary14C.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/T4transport/reference/bary15B.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/reference/barysinkhorn14.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/T4transport/reference/digit3.html</loc>
@@ -22,10 +43,19 @@
     <loc>https://kyoustat.com/T4transport/reference/hist15B.html</loc>
   </url>
   <url>
+    <loc>https://kyoustat.com/T4transport/reference/hist20X.html</loc>
+  </url>
+  <url>
     <loc>https://kyoustat.com/T4transport/reference/image14C.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/T4transport/reference/image15B.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/T4transport/reference/install_pot.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/T4transport/reference/ipot.html</loc>

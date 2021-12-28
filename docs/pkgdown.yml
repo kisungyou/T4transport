@@ -1,8 +1,8 @@
-pandoc: 2.7.3
-pkgdown: 1.6.1
+pandoc: 2.11.4
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2020-10-07T20:25Z
+last_built: 2021-12-28T15:28Z
 urls:
   reference: https://kyoustat.com/T4transport/reference
   article: https://kyoustat.com/T4transport/articles
