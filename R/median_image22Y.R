@@ -25,10 +25,11 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
   
   # --------------------------------------------------------------------------
   # GRID AND TRANSFORM
-  imgsize = dim(images[[1]])
-  coordx  = seq(from=0, to=1, length.out=imgsize[2])
-  coordy  = seq(from=1, to=0, length.out=imgsize[1])
-  coords  = expand.grid(coordx, coordy)
+  imgsize  = dim(images[[1]])
+  coordx   = seq(from=0, to=1, length.out=imgsize[2])
+  coordy   = seq(from=1, to=0, length.out=imgsize[1])
+  coords   = expand.grid(coordx, coordy)
+  nsupport = base::nrow(coords)
   
   dxy    = as.matrix(stats::dist(coords)) 
   nimage = length(images)
@@ -40,22 +41,18 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
   for (i in 1:nimage){
     mymarginal[[i]] = as.vector(t(images[[i]]))
   }
-  myweights = valid_multiple_weight(weights, nimage, name.f)
-  myweights = myweights/base::sum(myweights)
+  mypi      = valid_multiple_weight(weights, nimage, name.f)
+  mypi      = mypi/base::sum(mypi)
+  myweights = mypi
   if ((length(lambda)==0)&&(is.null(lambda))){
     mylambda = 1/(60/(stats::median(dxy)^myp)) # choice of the paper
   } else {
     mylambda = max(100*.Machine$double.eps, as.double(lambda)) 
   }
+  
   params = list(...)
   pnames = names(params)
-  myiter = max(1, round(ifelse((("maxiter")%in%pnames), params$maxiter, 496)))
-  mytol  = max(100*.Machine$double.eps, as.double(ifelse(("abstol"%in%pnames), params$abstol, 1e-8)))
-  mynthr = max(1, round(ifelse(("nthread"%in%pnames), params$nthread, 1))) # OpenMP Threads
   
-
-  
-  nsupport = base::nrow(coords)
   if ("init.image" %in% pnames){
     par_init = as.vector(t(params$init.image))
     par_init = par_init/base::sum(par_init)
@@ -70,7 +67,21 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
   } else {
     myshow = FALSE
   }
-  digit_show = abs(round(log10(mytol)))+1
+  if ("maxiter"%in%pnames){
+    myiter = max(1, round(params$maxiter))
+  } else {
+    myiter = 496
+  }
+  if ("abstol"%in%pnames){
+    mytol = max(100*.Machine$double.eps, params$abstol)
+  } else {
+    mytol = 1e-8
+  }
+  if ("nthread"%in%pnames){ # OpenMP Threads
+    mynthr = max(1, round(params$nthread))
+  } else {
+    mynthr = 1
+  }
   
   # --------------------------------------------------------------------------
   # ITERATIVE PROCEDURE
@@ -79,28 +90,46 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
   for (it in 1:myiter){
     # update the relative weight
     for (i in 1:length(myweights)){
-      sinkhorn_run = cpp_sinkhorn13(as.vector(mymarginal[[i]]), image_old, dxy, mylambda, myp, myiter, mytol)
-      myweights[i] = 1/as.double(sinkhorn_run$distance) # compute distance by Sinkhorn
+      sinkhorn_run = cpp_sinkhorn13(as.vector(mymarginal[[i]]), image_old, dxy, mylambda, myp, 100, mytol)
+      myweights[i] = mypi[i]/as.double(sinkhorn_run$distance) # compute distance by Sinkhorn
     }
     myweights = myweights/base::sum(myweights)
     
     # update an image
-    image_new = routine_bary15B(dxy, mymarginal, myweights, myp, mylambda, myiter, mytol, FALSE, image_old, mynthr)
+    image_new = routine_bary15B(dxy, mymarginal, myweights, myp, mylambda, 100, mytol, FALSE, image_old, mynthr)
     image_new = as.vector(image_new)
     
     # compute the error & update
-    increment = sqrt(sum(image_old-image_new)^2)
+    increment = max(as.vector(abs(image_old-image_new)))
     if (increment < mytol){
       if (myshow){
-        print(paste0("* medimage22Y : algorithm terminates at iteration ",it," : increment error=",round(increment,digit_show)))
+        print(paste0("* medimage22Y : algorithm terminates at iteration ",it," : increment error=",increment))
       }
       return(matrix(image_new, imgsize[1], imgsize[2], byrow=TRUE))
       break
     }
     image_old = image_new
     if (myshow){
-      print(paste0("* medimage22Y : iteration ",it,"/",myiter," complete : increment error=",round(increment,digit_show)))
+      print(paste0("* medimage22Y : iteration ",it,"/",myiter," complete : increment error=",increment))
     }
   }
   return(matrix(image_old, imgsize[1], imgsize[2], byrow=TRUE))
 }
+
+# data("digit3")
+# data("digit4")
+# 
+# gathered = c(digit3[sample(1:2000, 7)], digit4[sample(1:2000, 3)])
+# fbary1   = image15B(gathered, p=1, maxiter=50, print.progress=TRUE)
+# fbary2   = image15B(gathered, p=2, maxiter=50, print.progress=TRUE)
+# fmedian  = medimage22Y(gathered, print.progress=TRUE, maxiter=20)
+# 
+# par(mfrow=c(1,3), pty="s")
+# image(fbary1)
+# image(fbary2)
+# image(fmedian)
+# 
+# par(mfrow=c(2,5), pty="s")
+# for (i in 1:10){
+#   image(gathered[[i]])
+# }
