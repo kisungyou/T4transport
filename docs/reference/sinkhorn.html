@@ -90,25 +90,37 @@ when necessary.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sinkhorn</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, p <span class="op">=</span> <span class="fl">2</span>, wx <span class="op">=</span> <span class="cn">NULL</span>, wy <span class="op">=</span> <span class="cn">NULL</span>, lambda <span class="op">=</span> <span class="fl">0.1</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">sinkhornD</span><span class="op">(</span><span class="va">D</span>, p <span class="op">=</span> <span class="fl">2</span>, wx <span class="op">=</span> <span class="cn">NULL</span>, wy <span class="op">=</span> <span class="cn">NULL</span>, lambda <span class="op">=</span> <span class="fl">0.1</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sinkhorn</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, p <span class="op">=</span> <span class="fl">2</span>, wx <span class="op">=</span> <span class="cn">NULL</span>, wy <span class="op">=</span> <span class="cn">NULL</span>, lambda <span class="op">=</span> <span class="fl">0.1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">sinkhornD</span><span class="op">(</span><span class="va">D</span>, p <span class="op">=</span> <span class="fl">2</span>, wx <span class="op">=</span> <span class="cn">NULL</span>, wy <span class="op">=</span> <span class="cn">NULL</span>, lambda <span class="op">=</span> <span class="fl">0.1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>X</dt>
 <dd><p>an \((M\times P)\) matrix of row observations.</p></dd>
+
+
 <dt>Y</dt>
 <dd><p>an \((N\times P)\) matrix of row observations.</p></dd>
+
+
 <dt>p</dt>
 <dd><p>an exponent for the order of the distance (default: 2).</p></dd>
+
+
 <dt>wx</dt>
 <dd><p>a length-\(M\) marginal density that sums to \(1\). If <code>NULL</code> (default), uniform weight is set.</p></dd>
+
+
 <dt>wy</dt>
 <dd><p>a length-\(N\) marginal density that sums to \(1\). If <code>NULL</code> (default), uniform weight is set.</p></dd>
+
+
 <dt>lambda</dt>
 <dd><p>a regularization parameter (default: 0.1).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra parameters including</p><dl><dt>maxiter</dt>
 <dd><p>maximum number of iterations (default: 496).</p></dd>
@@ -118,12 +130,17 @@ when necessary.</p>
 
 
 </dl></dd>
+
+
 <dt>D</dt>
 <dd><p>an \((M\times N)\) distance matrix \(d(x_m, y_n)\) between two sets of observations.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a named list containing</p><dl><dt>distance</dt>
+    
+
+<p>a named list containing</p><dl><dt>distance</dt>
 <dd><p>\(\mathcal{W}_p\) distance value</p></dd>
 
 <dt>iteration</dt>
@@ -144,37 +161,37 @@ Number of pages: 9 Place: Lake Tahoe, Nevada.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#-------------------------------------------------------------------</span></span>
-<span class="r-in"><span class="co">#  Wasserstein Distance between Samples from Two Bivariate Normal</span></span>
-<span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="co"># * class 1 : samples from Gaussian with mean=(-1, -1)</span></span>
-<span class="r-in"><span class="co"># * class 2 : samples from Gaussian with mean=(+1, +1)</span></span>
-<span class="r-in"><span class="co">#-------------------------------------------------------------------</span></span>
-<span class="r-in"><span class="co">## SMALL EXAMPLE</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">=</span> <span class="fl">20</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">=</span> <span class="fl">10</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">m</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co"># m obs. for X</span></span>
-<span class="r-in"><span class="va">Y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co"># n obs. for Y</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## COMPARE WITH WASSERSTEIN </span></span>
-<span class="r-in"><span class="va">outw</span> <span class="op">=</span> <span class="fu"><a href="wasserstein.html">wasserstein</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">skh1</span> <span class="op">=</span> <span class="fu">sinkhorn</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, lambda<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">skh2</span> <span class="op">=</span> <span class="fu">sinkhorn</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, lambda<span class="op">=</span><span class="fl">0.10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## VISUALIZE : SHOW THE PLAN AND DISTANCE</span></span>
-<span class="r-in"><span class="va">pm1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"wasserstein plan ; distance="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">outw</span><span class="op">$</span><span class="va">distance</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pm2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"sinkhorn lbd=0.05; distance="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">skh1</span><span class="op">$</span><span class="va">distance</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">pm5</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"sinkhorn lbd=0.1 ; distance="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">skh2</span><span class="op">$</span><span class="va">distance</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">outw</span><span class="op">$</span><span class="va">plan</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="va">pm1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">skh1</span><span class="op">$</span><span class="va">plan</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="va">pm2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">skh2</span><span class="op">$</span><span class="va">plan</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="va">pm5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">#  Wasserstein Distance between Samples from Two Bivariate Normal</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># * class 1 : samples from Gaussian with mean=(-1, -1)</span></span></span>
+<span class="r-in"><span><span class="co"># * class 2 : samples from Gaussian with mean=(+1, +1)</span></span></span>
+<span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## SMALL EXAMPLE</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m</span> <span class="op">=</span> <span class="fl">20</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">m</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co"># m obs. for X</span></span></span>
+<span class="r-in"><span><span class="va">Y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co"># n obs. for Y</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## COMPARE WITH WASSERSTEIN </span></span></span>
+<span class="r-in"><span><span class="va">outw</span> <span class="op">=</span> <span class="fu"><a href="wasserstein.html">wasserstein</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">skh1</span> <span class="op">=</span> <span class="fu">sinkhorn</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, lambda<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">skh2</span> <span class="op">=</span> <span class="fu">sinkhorn</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, lambda<span class="op">=</span><span class="fl">0.10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## VISUALIZE : SHOW THE PLAN AND DISTANCE</span></span></span>
+<span class="r-in"><span><span class="va">pm1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"wasserstein plan ; distance="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">outw</span><span class="op">$</span><span class="va">distance</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"sinkhorn lbd=0.05; distance="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">skh1</span><span class="op">$</span><span class="va">distance</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">pm5</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"sinkhorn lbd=0.1 ; distance="</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">skh2</span><span class="op">$</span><span class="va">distance</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">outw</span><span class="op">$</span><span class="va">plan</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="va">pm1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">skh1</span><span class="op">$</span><span class="va">plan</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="va">pm2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">skh2</span><span class="op">$</span><span class="va">plan</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="va">pm5</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="sinkhorn-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -186,7 +203,7 @@ Number of pages: 9 Place: Lake Tahoe, Nevada.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

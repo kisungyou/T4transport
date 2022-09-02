@@ -84,40 +84,52 @@ approximated using the entropic regularization.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bary14C</span><span class="op">(</span>
-  <span class="va">support</span>,
-  <span class="va">atoms</span>,
-  marginals <span class="op">=</span> <span class="cn">NULL</span>,
-  weights <span class="op">=</span> <span class="cn">NULL</span>,
-  lambda <span class="op">=</span> <span class="fl">0.1</span>,
-  p <span class="op">=</span> <span class="fl">2</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">bary14Cdist</span><span class="op">(</span>
-  <span class="va">distances</span>,
-  marginals <span class="op">=</span> <span class="cn">NULL</span>,
-  weights <span class="op">=</span> <span class="cn">NULL</span>,
-  lambda <span class="op">=</span> <span class="fl">0.1</span>,
-  p <span class="op">=</span> <span class="fl">2</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bary14C</span><span class="op">(</span></span>
+<span>  <span class="va">support</span>,</span>
+<span>  <span class="va">atoms</span>,</span>
+<span>  marginals <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lambda <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  p <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">bary14Cdist</span><span class="op">(</span></span>
+<span>  <span class="va">distances</span>,</span>
+<span>  marginals <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  lambda <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  p <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>support</dt>
 <dd><p>an \((N\times P)\) matrix of rows being atoms for the fixed support.</p></dd>
+
+
 <dt>atoms</dt>
 <dd><p>a length-\(K\) list where each element is an \((N_k \times P)\) matrix of atoms.</p></dd>
+
+
 <dt>marginals</dt>
 <dd><p>marginal distribution for empirical measures; if <code>NULL</code> (default), uniform weights are set for all measures. Otherwise, it should be a length-\(K\) list where each element is a length-\(N_i\) vector of nonnegative weights that sum to 1.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>weights for each individual measure; if <code>NULL</code> (default), each measure is considered equally. Otherwise, it should be a length-\(K\) vector.</p></dd>
+
+
 <dt>lambda</dt>
 <dd><p>regularization parameter (default: 0.1).</p></dd>
+
+
 <dt>p</dt>
 <dd><p>an exponent for the order of the distance (default: 2).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra parameters including</p><dl><dt>abstol</dt>
 <dd><p>stopping criterion for iterations (default: 1e-10).</p></dd>
@@ -133,12 +145,17 @@ approximated using the entropic regularization.</p>
 
 
 </dl></dd>
+
+
 <dt>distances</dt>
 <dd><p>a length-\(K\) list where each element is an \((N\times N_k)\) pairwise distance between atoms of the fixed support and given measures.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a length-\(N\) vector of probability vector.</p>
+    
+
+<p>a length-\(N\) vector of probability vector.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -150,43 +167,43 @@ In Xing EP, Jebara T (eds.), <em>Proceedings of the 31st international conferenc
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#-------------------------------------------------------------------</span></span>
-<span class="r-in"><span class="co">#     Wasserstein Barycenter for Fixed Atoms with Two Gaussians</span></span>
-<span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="co"># * class 1 : samples from Gaussian with mean=(-4, -4)</span></span>
-<span class="r-in"><span class="co"># * class 2 : samples from Gaussian with mean=(+4, +4)</span></span>
-<span class="r-in"><span class="co"># * target support consists of 7 integer points from -6 to 6,</span></span>
-<span class="r-in"><span class="co">#   where ideally, weight is concentrated near 0 since it's average!</span></span>
-<span class="r-in"><span class="co">#-------------------------------------------------------------------</span></span>
-<span class="r-in"><span class="co">## GENERATE DATA</span></span>
-<span class="r-in"><span class="co">#  Empirical Measures</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ndat</span> <span class="op">=</span> <span class="fl">100</span></span>
-<span class="r-in"><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">ndat</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">-</span><span class="fl">4</span>, sd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dat2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">ndat</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">+</span><span class="fl">4</span>, sd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">myatoms</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">myatoms</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">dat1</span></span>
-<span class="r-in"><span class="va">myatoms</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">dat2</span></span>
-<span class="r-in"><span class="va">mydata</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">dat2</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#  Fixed Support</span></span>
-<span class="r-in"><span class="va">support</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="op">-</span><span class="fl">8</span>,to<span class="op">=</span><span class="fl">8</span>,by<span class="op">=</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">                <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="op">-</span><span class="fl">8</span>,to<span class="op">=</span><span class="fl">8</span>,by<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## COMPUTE</span></span>
-<span class="r-in"><span class="va">comp1</span> <span class="op">=</span> <span class="fu">bary14C</span><span class="op">(</span><span class="va">support</span>, <span class="va">myatoms</span>, lambda<span class="op">=</span><span class="fl">0.5</span>, maxiter<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">comp2</span> <span class="op">=</span> <span class="fu">bary14C</span><span class="op">(</span><span class="va">support</span>, <span class="va">myatoms</span>, lambda<span class="op">=</span><span class="fl">1</span>,   maxiter<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">comp3</span> <span class="op">=</span> <span class="fu">bary14C</span><span class="op">(</span><span class="va">support</span>, <span class="va">myatoms</span>, lambda<span class="op">=</span><span class="fl">5</span>,   maxiter<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## VISUALIZE</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">comp1</span>, main<span class="op">=</span><span class="st">"lambda=0.5"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">comp2</span>, main<span class="op">=</span><span class="st">"lambda=1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">comp3</span>, main<span class="op">=</span><span class="st">"lambda=5"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">#     Wasserstein Barycenter for Fixed Atoms with Two Gaussians</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># * class 1 : samples from Gaussian with mean=(-4, -4)</span></span></span>
+<span class="r-in"><span><span class="co"># * class 2 : samples from Gaussian with mean=(+4, +4)</span></span></span>
+<span class="r-in"><span><span class="co"># * target support consists of 7 integer points from -6 to 6,</span></span></span>
+<span class="r-in"><span><span class="co">#   where ideally, weight is concentrated near 0 since it's average!</span></span></span>
+<span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## GENERATE DATA</span></span></span>
+<span class="r-in"><span><span class="co">#  Empirical Measures</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ndat</span> <span class="op">=</span> <span class="fl">100</span></span></span>
+<span class="r-in"><span><span class="va">dat1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">ndat</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">-</span><span class="fl">4</span>, sd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">ndat</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">+</span><span class="fl">4</span>, sd<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">myatoms</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">myatoms</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">dat1</span></span></span>
+<span class="r-in"><span><span class="va">myatoms</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">dat2</span></span></span>
+<span class="r-in"><span><span class="va">mydata</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">dat1</span>, <span class="va">dat2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#  Fixed Support</span></span></span>
+<span class="r-in"><span><span class="va">support</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="op">-</span><span class="fl">8</span>,to<span class="op">=</span><span class="fl">8</span>,by<span class="op">=</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="op">-</span><span class="fl">8</span>,to<span class="op">=</span><span class="fl">8</span>,by<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## COMPUTE</span></span></span>
+<span class="r-in"><span><span class="va">comp1</span> <span class="op">=</span> <span class="fu">bary14C</span><span class="op">(</span><span class="va">support</span>, <span class="va">myatoms</span>, lambda<span class="op">=</span><span class="fl">0.5</span>, maxiter<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">comp2</span> <span class="op">=</span> <span class="fu">bary14C</span><span class="op">(</span><span class="va">support</span>, <span class="va">myatoms</span>, lambda<span class="op">=</span><span class="fl">1</span>,   maxiter<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">comp3</span> <span class="op">=</span> <span class="fu">bary14C</span><span class="op">(</span><span class="va">support</span>, <span class="va">myatoms</span>, lambda<span class="op">=</span><span class="fl">5</span>,   maxiter<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## VISUALIZE</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">comp1</span>, main<span class="op">=</span><span class="st">"lambda=0.5"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">comp2</span>, main<span class="op">=</span><span class="st">"lambda=1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">comp3</span>, main<span class="op">=</span><span class="st">"lambda=5"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="bary14C-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -198,7 +215,7 @@ In Xing EP, Jebara T (eds.), <em>Proceedings of the 31st international conferenc
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

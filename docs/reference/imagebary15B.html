@@ -72,21 +72,29 @@ make it grayscale if not, (2) all images should be of same size - no resizing is
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">imagebary15B</span><span class="op">(</span><span class="va">images</span>, p <span class="op">=</span> <span class="fl">2</span>, weights <span class="op">=</span> <span class="cn">NULL</span>, lambda <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">imagebary15B</span><span class="op">(</span><span class="va">images</span>, p <span class="op">=</span> <span class="fl">2</span>, weights <span class="op">=</span> <span class="cn">NULL</span>, lambda <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>images</dt>
 <dd><p>a length-\(N\) list of same-size image matrices of size \((m\times n)\).</p></dd>
+
+
 <dt>p</dt>
 <dd><p>an exponent for the order of the distance (default: 2).</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>a weight of each image; if <code>NULL</code> (default), uniform weight is set. Otherwise, 
 it should be a length-\(N\) vector of nonnegative weights.</p></dd>
+
+
 <dt>lambda</dt>
 <dd><p>a regularization parameter; if <code>NULL</code> (default), a paper's suggestion 
 would be taken, or it should be a nonnegative real number.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra parameters including</p><dl><dt>abstol</dt>
 <dd><p>stopping criterion for iterations (default: 1e-8).</p></dd>
@@ -105,10 +113,13 @@ would be taken, or it should be a nonnegative real number.</p></dd>
 
 
 </dl></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>an \((m\times n)\) matrix of the barycentric image.</p>
+    
+
+<p>an \((m\times n)\) matrix of the barycentric image.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -125,40 +136,40 @@ ISSN 1064-8275, 1095-7197, doi: <a href="https://doi.org/10.1137/141000439" clas
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#----------------------------------------------------------------------</span></span>
-<span class="r-in"><span class="co">#                       MNIST Data with Digit 3</span></span>
-<span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="co"># EXAMPLE 1 : Very Small  Example for CRAN; just showing how to use it!</span></span>
-<span class="r-in"><span class="co"># EXAMPLE 2 : Medium-size Example for Evolution of Output</span></span>
-<span class="r-in"><span class="co">#----------------------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># EXAMPLE 1</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">digit3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">datsmall</span> <span class="op">=</span> <span class="va">digit3</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
-<span class="r-in"><span class="va">outsmall</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">datsmall</span>, maxiter<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># EXAMPLE 2 : Barycenter of 100 Images</span></span>
-<span class="r-in"><span class="co"># RANDOMLY SELECT THE IMAGES</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">digit3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dat2</span> <span class="op">=</span> <span class="va">digit3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">]</span>  <span class="co"># select 100 images</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># RUN SEQUENTIALLY</span></span>
-<span class="r-in"><span class="va">run05</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">dat2</span>, maxiter<span class="op">=</span><span class="fl">5</span><span class="op">)</span>                    <span class="co"># first 5 iterations</span></span>
-<span class="r-in"><span class="va">run10</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">dat2</span>, maxiter<span class="op">=</span><span class="fl">5</span>,  init.image<span class="op">=</span><span class="va">run05</span><span class="op">)</span> <span class="co"># run 5 more</span></span>
-<span class="r-in"><span class="va">run50</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">dat2</span>, maxiter<span class="op">=</span><span class="fl">40</span>, init.image<span class="op">=</span><span class="va">run10</span><span class="op">)</span> <span class="co"># run 40 more</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># VISUALIZE</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"a random image"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"a random image"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"a random image"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">run05</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"barycenter after 05 iter"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">run10</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"barycenter after 10 iter"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">run50</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"barycenter after 50 iter"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#----------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">#                       MNIST Data with Digit 3</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># EXAMPLE 1 : Very Small  Example for CRAN; just showing how to use it!</span></span></span>
+<span class="r-in"><span><span class="co"># EXAMPLE 2 : Medium-size Example for Evolution of Output</span></span></span>
+<span class="r-in"><span><span class="co">#----------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># EXAMPLE 1</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">digit3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">datsmall</span> <span class="op">=</span> <span class="va">digit3</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">outsmall</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">datsmall</span>, maxiter<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># EXAMPLE 2 : Barycenter of 100 Images</span></span></span>
+<span class="r-in"><span><span class="co"># RANDOMLY SELECT THE IMAGES</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">digit3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat2</span> <span class="op">=</span> <span class="va">digit3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2000</span>, <span class="fl">100</span><span class="op">)</span><span class="op">]</span>  <span class="co"># select 100 images</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># RUN SEQUENTIALLY</span></span></span>
+<span class="r-in"><span><span class="va">run05</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">dat2</span>, maxiter<span class="op">=</span><span class="fl">5</span><span class="op">)</span>                    <span class="co"># first 5 iterations</span></span></span>
+<span class="r-in"><span><span class="va">run10</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">dat2</span>, maxiter<span class="op">=</span><span class="fl">5</span>,  init.image<span class="op">=</span><span class="va">run05</span><span class="op">)</span> <span class="co"># run 5 more</span></span></span>
+<span class="r-in"><span><span class="va">run50</span> <span class="op">=</span> <span class="fu">imagebary15B</span><span class="op">(</span><span class="va">dat2</span>, maxiter<span class="op">=</span><span class="fl">40</span>, init.image<span class="op">=</span><span class="va">run10</span><span class="op">)</span> <span class="co"># run 40 more</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># VISUALIZE</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"a random image"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"a random image"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dat2</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"a random image"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">run05</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"barycenter after 05 iter"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">run10</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"barycenter after 10 iter"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">run50</span>, axes<span class="op">=</span><span class="cn">FALSE</span>, main<span class="op">=</span><span class="st">"barycenter after 50 iter"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -170,7 +181,7 @@ ISSN 1064-8275, 1095-7197, doi: <a href="https://doi.org/10.1137/141000439" clas
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>
