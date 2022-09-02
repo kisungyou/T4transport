@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Tools for Optimal Transport <a href='https://kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" height="150" /></a>
+## Computational Optimal Transport in R <a href='https://kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" height="150" /></a>
 
 <!-- badges: start -->
 
@@ -12,7 +12,7 @@ status](https://www.r-pkg.org/badges/version/T4transport)](https://CRAN.R-projec
 **T4transport** is an **R** package designed as a computational toolkit
 for well-known algorithms in the field of optimal transport.
 
-### Installation
+#### Installation
 
 -   Option 1 : **released** version from
     [CRAN](https://CRAN.R-project.org).
