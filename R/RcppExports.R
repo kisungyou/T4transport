@@ -21,6 +21,18 @@ cpp_ipot20 <- function(a, b, dab, lambda, p, maxiter, abstol, L) {
     .Call('_T4transport_cpp_ipot20', PACKAGE = 'T4transport', a, b, dab, lambda, p, maxiter, abstol, L)
 }
 
+gauss_weiszfeld <- function(X, weights, abstol, maxiter) {
+    .Call('_T4transport_gauss_weiszfeld', PACKAGE = 'T4transport', X, weights, abstol, maxiter)
+}
+
+gauss_spdbary16A <- function(array3d, weight, abstol, maxiter) {
+    .Call('_T4transport_gauss_spdbary16A', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
+}
+
+gauss_spdmed22Y <- function(array3d, weight, abstol, maxiter) {
+    .Call('_T4transport_gauss_spdmed22Y', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
+}
+
 routine_bary14C <- function(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread) {
     .Call('_T4transport_routine_bary14C', PACKAGE = 'T4transport', dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
 }

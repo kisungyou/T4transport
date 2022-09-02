@@ -37,9 +37,12 @@ reference:
     contents:
       - has_concept("barycenter")
   - title: "[3] Special Cases"
-  - subtitle: "Empirical CDFs"
+  - subtitle: "Empirical Distributions"
     contents:
       - has_concept("ecdf")
+  - subtitle: "Gaussian Distributions"
+    contents:
+      - has_concept("gaussian")
   - subtitle: "Histograms"
     contents:
       - has_concept("histogram")
