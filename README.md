@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.com/kisungyou/T4transport.svg?branch=master)](https://travis-ci.com/kisungyou/T4transport)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/T4transport)](https://CRAN.R-project.org/package=T4transport)
 <!-- badges: end -->
 
 **T4transport** is an **R** package designed as a computational toolkit
@@ -25,8 +25,6 @@ install.packages("T4transport")
     [GitHub](https://github.com/).
 
 ``` r
-if (!require("devtools")) {
-  install.packages("devtools")
-}
+# install.packages("devtools")
 devtools::install_github("kisungyou/T4transport")
 ```

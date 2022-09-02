@@ -31,10 +31,11 @@ a \code{"histogram"} object of barycenter.
 \description{
 Given multiple histograms represented as \code{"histogram"} S3 objects, compute 
 Wasserstein barycenter. We need one requirement that all histograms in an 
-input list \code{hists} must have same breaks. See the example on how to 
+input list \code{hists} must have \bold{same breaks}. See the example on how to 
 construct a histogram on predefined breaks/bins.
 }
 \examples{
+\donttest{
 #----------------------------------------------------------------------
 #                      Binned from Two Gaussians
 #
@@ -64,6 +65,7 @@ barplot(histxy[[2]]$density, col=rgb(1,0,0,1/4),
 barplot(hh$density, main="Barycenter",
         ylim=c(0, 0.75))
 par(opar)
+}
 
 }
 \references{

@@ -6,8 +6,33 @@
 \usage{
 histmed22Y(hists, weights = NULL, lambda = NULL, ...)
 }
+\arguments{
+\item{hists}{a length-\eqn{N} list of histograms (\code{"histogram"} object) of same breaks.}
+
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
+it should be a length-\eqn{N} vector of nonnegative weights.}
+
+\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion 
+would be taken, or it should be a nonnegative real number.}
+
+\item{...}{extra parameters including \describe{
+\item{abstol}{stopping criterion for iterations (default: 1e-8).}
+\item{init.vec}{an initial weight vector (default: uniform weight).}
+\item{maxiter}{maximum number of iterations (default: 496).}
+\item{nthread}{number of threads for OpenMP run (default: 1).}
+\item{print.progress}{a logical to show current iteration (default: \code{FALSE}).}
+}}
+
+\item{p}{an exponent for the order of the distance (default: 2).}
+}
+\value{
+a \code{"histogram"} object of the Wasserstein median histogram.
+}
 \description{
-Wasserstein Median of Histograms by You et al. (2022)
+Given multiple histograms represented as \code{"histogram"} S3 objects, compute the 
+Wasserstein median of order 2. We need one requirement that all histograms in an 
+input list \code{hists} must have \bold{same breaks}. See the example on how to 
+construct a histogram on predefined breaks/bins.
 }
 \examples{
 \donttest{
@@ -44,7 +69,6 @@ barplot(hmeds$density, main="Wasserstein Median",
         ylim=c(0, 1.05))
 par(opar)
 }
-
 
 }
 \concept{histogram}

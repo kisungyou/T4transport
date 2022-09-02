@@ -2,7 +2,7 @@
 #' 
 #' Given multiple histograms represented as \code{"histogram"} S3 objects, compute 
 #' Wasserstein barycenter. We need one requirement that all histograms in an 
-#' input list \code{hists} must have same breaks. See the example on how to 
+#' input list \code{hists} must have \bold{same breaks}. See the example on how to 
 #' construct a histogram on predefined breaks/bins.
 #' 
 #' @param hists a length-\eqn{N} list of histograms (\code{"histogram"} object) of same breaks.

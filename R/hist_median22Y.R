@@ -1,6 +1,25 @@
 #' Wasserstein Median of Histograms by You et al. (2022)
 #' 
+#' Given multiple histograms represented as \code{"histogram"} S3 objects, compute the 
+#' Wasserstein median of order 2. We need one requirement that all histograms in an 
+#' input list \code{hists} must have \bold{same breaks}. See the example on how to 
+#' construct a histogram on predefined breaks/bins.
 #' 
+#' @param hists a length-\eqn{N} list of histograms (\code{"histogram"} object) of same breaks.
+#' @param p an exponent for the order of the distance (default: 2).
+#' @param weights a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
+#' it should be a length-\eqn{N} vector of nonnegative weights. 
+#' @param lambda a regularization parameter; if \code{NULL} (default), a paper's suggestion 
+#' would be taken, or it should be a nonnegative real number.
+#' @param ... extra parameters including \describe{
+#' \item{abstol}{stopping criterion for iterations (default: 1e-8).}
+#' \item{init.vec}{an initial weight vector (default: uniform weight).}
+#' \item{maxiter}{maximum number of iterations (default: 496).}
+#' \item{nthread}{number of threads for OpenMP run (default: 1).}
+#' \item{print.progress}{a logical to show current iteration (default: \code{FALSE}).}
+#' }
+#' 
+#' @return a \code{"histogram"} object of the Wasserstein median histogram.
 #' 
 #' @examples 
 #' \donttest{
@@ -38,7 +57,6 @@
 #' par(opar)
 #' }
 #' 
-#' 
 #' @concept histogram
 #' @export
 histmed22Y <- function(hists, weights=NULL, lambda=NULL, ...){
@@ -50,15 +68,19 @@ histmed22Y <- function(hists, weights=NULL, lambda=NULL, ...){
   
   # grid's pairwise distance
   dxy      = as.matrix(stats::dist(matrix(check.f$midpts,ncol=1))) 
-  nhists   = length(hists)
+  nimage   = length(hists)
   nsupport = base::nrow(dxy)
   
   # weights
-  myweights = valid_multiple_weight(weights, nhists, name.f)
-  myweights = myweights/base::sum(myweights)
+  mypi      = valid_multiple_weight(weights, nimage, name.f)
+  mypi      = mypi/base::sum(mypi)
+  myweights = mypi
   
-  # lambda
+  # order & discretized marginal densities
   myp = 2.0
+  mymarginal = check.f$density
+
+  # lambda
   if ((length(lambda)==0)&&(is.null(lambda))){
     mylambda = 1/(60/(stats::median(dxy)^myp)) # choice of the paper
   } else {
@@ -80,6 +102,7 @@ histmed22Y <- function(hists, weights=NULL, lambda=NULL, ...){
   } else {
     mytol = 1e-8
   }
+  round_digit = ceiling(abs(log10(mytol)))
   if ("nthread"%in%pnames){
     mynthr = max(1, round(params$nthread))
   } else {
@@ -94,43 +117,54 @@ histmed22Y <- function(hists, weights=NULL, lambda=NULL, ...){
   } else {
     par_init = rep(1/nsupport, nsupport)
   }
-
+  if ("print.progress"%in%pnames){
+    myshow = as.logical(params$print.progress)
+  } else {
+    myshow = FALSE
+  }
   # ----------------------------------------------------------------------------
   # COMPUTATION
   # initialize
-  hist_old    = par_init
-  hist_breaks = as.vector(check.f$midpts)
+  hist_old = par_init
   
   # iterate
-  tmp_dists  = rep(0, nhists)
-  tmp_weight = rep(0, nhists)
   for (it in 1:myiter){
-    # it-1. update the relative weight
-    for (i in 1:nhists){
-      # distance / break if too close for one of the histograms
-      tmp_histvec  = as.vector(check.f$density[[i]])
-      tmp_dists[i] = hist_dist2dis(hist_breaks, hist_old, tmp_histvec)
-      if (tmp_dists[i] < 100*.Machine$double.eps){
+    # it-1. update the relative weights
+    for (i in 1:length(myweights)){
+      # compute the distance
+      sinkhorn_run = cpp_sinkhorn13(as.vector(mymarginal[[i]]), hist_old, dxy, mylambda, myp, 100, mytol)
+      
+      # break if sufficiently close to one of the data
+      if (as.double(sinkhorn_run$distance) < sqrt(.Machine$double.eps)){
         output   = hists[[1]]
-        output$density = as.vector(tmp_histvec)
-        output$counts  = round(base::sum(output$counts)*as.vector(tmp_histvec))
-        output$xname   = "barycenter"
-        return(output)
+        output$density = as.vector(mymarginal[[i]])
+        output$counts  = round(base::sum(output$counts)*as.vector(mymarginal[[i]]))
+        output$xname   = "Wasserstein median"
+        return(output)  
       }
-      tmp_weight[i] = myweights[i]/as.double(tmp_dists[i])
+      
+      # update weights
+      myweights[i] = mypi[i]/as.double(sinkhorn_run$distance) # compute distance by Sinkhorn
     }
-    tmp_weight = tmp_weight/base::sum(tmp_weight)
     
-    # it-2. update a histogram
-    hist_new = routine_bary15B(dxy, check.f$density, tmp_weight, 
-                               2.0, mylambda, 100, 1e-12, FALSE, 
-                               par_init, mynthr)
+    # it-2. normalize weights
+    myweights = myweights/base::sum(myweights)
     
-    # it-3. compute the error and update
-    increment = hist_dist2dis(hist_breaks, hist_old, hist_new)
+    # it-3. update histograms
+    hist_new = routine_bary15B(dxy, mymarginal, myweights, myp, mylambda, 100, mytol, FALSE, hist_old, mynthr)
+    hist_new = as.vector(hist_new)
+    
+    # it-4. compute the error and update
+    increment = max(abs(hist_old-hist_new))
     hist_old  = hist_new
     if (increment < mytol){
+      if (myshow){
+        print(paste0("* histmed22Y : algorithm terminates at iteration ",it," : increment=",round(increment, round_digit),"."))
+      }
       break
+    }
+    if (myshow){
+      print(paste0("* histmed22Y : iteration ",it,"/",myiter," complete : increment=",round(increment, round_digit),"."))
     }
   }
   

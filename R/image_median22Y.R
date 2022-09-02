@@ -19,7 +19,7 @@
 #' \item{print.progress}{a logical to show current iteration (default: \code{TRUE}).}
 #' }
 #' 
-#' @return an \eqn{(m\times n)} matrix of the barycentric image.
+#' @return an \eqn{(m\times n)} matrix of the Wasserstein median image.
 #' 
 #' @examples
 #' \dontrun{

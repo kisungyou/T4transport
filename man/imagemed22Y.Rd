@@ -24,7 +24,7 @@ would be taken, or it should be a nonnegative real number.}
 }}
 }
 \value{
-an \eqn{(m\times n)} matrix of the barycentric image.
+an \eqn{(m\times n)} matrix of the Wasserstein median image.
 }
 \description{
 Given multiple images \eqn{X_1,\ldots,X_N}, the Wasserstein median of 
