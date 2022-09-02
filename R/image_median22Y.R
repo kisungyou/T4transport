@@ -1,26 +1,56 @@
 #' Wasserstein Median of Images by You et al. (2022)
 #' 
+#' Given multiple images \eqn{X_1,\ldots,X_N}, the Wasserstein median of 
+#' order 2 is computed. The proposed method relies on a choice of barycenter computation 
+#' in that we opt for an algorithm of \code{\link{imagebary15B}}, which uses 
+#' entropic regularization for barycenter computation. Please note the followings; (1) we only take a matrix as an image so please 
+#' make it grayscale if not, (2) all images should be of same size - no resizing is performed. 
 #' 
+#' @param images a length-\eqn{N} list of same-size image matrices of size \eqn{(m\times n)}.
+#' @param weights a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
+#' it should be a length-\eqn{N} vector of nonnegative weights. 
+#' @param lambda a regularization parameter; if \code{NULL} (default), a paper's suggestion 
+#' would be taken, or it should be a nonnegative real number.
+#' @param ... extra parameters including \describe{
+#' \item{abstol}{stopping criterion for iterations (default: 1e-8).}
+#' \item{init.image}{an initial weight image (default: uniform weight).}
+#' \item{maxiter}{maximum number of iterations (default: 496).}
+#' \item{nthread}{number of threads for OpenMP run (default: 1).}
+#' \item{print.progress}{a logical to show current iteration (default: \code{TRUE}).}
+#' }
 #' 
-#' @examples 
+#' @return an \eqn{(m\times n)} matrix of the barycentric image.
+#' 
+#' @examples
+#' \dontrun{
 #' #----------------------------------------------------------------------
 #' #                       MNIST Data with Digit 3
 #' #
-#' # EXAMPLE 1 : Very Small  Example for CRAN; just showing how to use it!
-#' # EXAMPLE 2 : Medium-size Example for Evolution of Output
+#' # EXAMPLE : Very Small Example for CRAN; just showing how to use it!
 #' #----------------------------------------------------------------------
-#' # EXAMPLE 1
+#' # LOAD THE DATA
 #' data(digit3)
-#' datsmall = digit3[1:3]
-#' outsmall = medimage22Y(datsmall, print.progress=TRUE)
+#' datsmall = digit3[1:10]
+#'  
+#' # COMPUTE
+#' outsmall = imagemed22Y(datsmall, maxiter=5)
 #' 
+#' # VISUALIZE
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,4), pty="s")
+#' image(outsmall, xaxt='n', yaxt='n', main="Wasserstein Median")
+#' image(datsmall[[3]], xaxt='n', yaxt='n', main="3rd image")
+#' image(datsmall[[6]], xaxt='n', yaxt='n', main="6th image")
+#' image(datsmall[[9]], xaxt='n', yaxt='n', main="9th image")
+#' par(opar)
+#' } 
 #' 
-#' @concept median_image
+#' @concept image
 #' @export
-medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
+imagemed22Y <- function(images, weights=NULL, lambda=NULL, ...){
   # --------------------------------------------------------------------------
   # CHECK THE INPUT
-  name.f  = "medimage22Y"
+  name.f  = "imagemed22Y"
   check.f = check_images(images, name.f)
   
   # --------------------------------------------------------------------------
@@ -57,7 +87,7 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
     par_init = as.vector(t(params$init.image))
     par_init = par_init/base::sum(par_init)
     if ((length(par_init)!=nsupport)||(any(par_init < 0))){
-      stop(paste0("* medimage22Y : 'init.image' should be of matching size as other images with nonnegative values."))
+      stop(paste0("* imagemed22Y : 'init.image' should be of matching size as other images with nonnegative values."))
     }
   } else {
     par_init = rep(1/nsupport, nsupport)
@@ -65,7 +95,7 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
   if ("print.progress"%in%pnames){
     myshow = as.logical(params$print.progress)
   } else {
-    myshow = FALSE
+    myshow = TRUE
   }
   if ("maxiter"%in%pnames){
     myiter = max(1, round(params$maxiter))
@@ -77,6 +107,8 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
   } else {
     mytol = 1e-8
   }
+  round_digit = ceiling(abs(log10(mytol)))
+  
   if ("nthread"%in%pnames){ # OpenMP Threads
     mynthr = max(1, round(params$nthread))
   } else {
@@ -103,14 +135,14 @@ medimage22Y <- function(images, weights=NULL, lambda=NULL, ...){
     increment = max(as.vector(abs(image_old-image_new)))
     if (increment < mytol){
       if (myshow){
-        print(paste0("* medimage22Y : algorithm terminates at iteration ",it," : increment error=",increment))
+        print(paste0("* imagemed22Y : algorithm terminates at iteration ",it," : increment=",round(increment, round_digit)))
       }
       return(matrix(image_new, imgsize[1], imgsize[2], byrow=TRUE))
       break
     }
     image_old = image_new
     if (myshow){
-      print(paste0("* medimage22Y : iteration ",it,"/",myiter," complete : increment error=",increment))
+      print(paste0("* imagemed22Y : iteration ",it,"/",myiter," complete : increment=",round(increment, round_digit)))
     }
   }
   return(matrix(image_old, imgsize[1], imgsize[2], byrow=TRUE))

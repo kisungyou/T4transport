@@ -3,9 +3,12 @@ url: https://kisungyou.com/T4transport
 destination: docs
 
 template:
+  bootstrap: 5
+  bslib:
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
   params:
-    bootswatch: united
-    ganalytics: UA-163713603-1
+    bootswatch: flatly
 
 home:
   strip_header: false
@@ -21,7 +24,7 @@ navbar:
     - icon: fa-twitter
       href: https://twitter.com/kisung_you
     - icon: fa-github
-      href: https://github.com/kisungyou/T4cluster
+      href: https://github.com/kisungyou/T4transport
     - icon: fa-envelope
       href: mailto:kisungyou@outlook.com
 
@@ -33,13 +36,16 @@ reference:
   - subtitle: "Fixed Support"
     contents:
       - has_concept("barycenter")
+  - title: "[3] Special Cases"
+  - subtitle: "Empirical CDFs"
+    contents:
+      - has_concept("ecdf")
   - subtitle: "Histograms"
     contents:
-      - has_concept("histcenter")
+      - has_concept("histogram")
   - subtitle: "Images"
     contents:
-      - has_concept("imagecenter")
-  - title: "Others"
-  - subtitle: "Data"
+      - has_concept("image")
+  - title: "[4] Data"
     contents:
       - has_concept("data")

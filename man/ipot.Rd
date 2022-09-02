@@ -48,6 +48,7 @@ regularization parameter \eqn{\lambda}. Empirical observation says that
 very small number of inner loop iteration like \code{L=1} is sufficient.
 }
 \examples{
+\donttest{
 #-------------------------------------------------------------------
 #  Wasserstein Distance between Samples from Two Bivariate Normal
 #
@@ -77,6 +78,7 @@ image(outw$plan, axes=FALSE, main=pmw)
 image(ipt1$plan, axes=FALSE, main=pm1)
 image(ipt2$plan, axes=FALSE, main=pm2)
 par(opar)
+}
 
 }
 \references{

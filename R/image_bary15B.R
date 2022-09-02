@@ -1,6 +1,6 @@
 #' Barycenter of Images according to Benamou et al. (2015)
 #' 
-#' Using entropic regularization for Wasserstein barycenter computation, \code{image15B} 
+#' Using entropic regularization for Wasserstein barycenter computation, \code{imagebary15B} 
 #' finds a \emph{barycentric} image \eqn{X^*} given multiple images \eqn{X_1,X_2,\ldots,X_N}. 
 #' Please note the followings; (1) we only take a matrix as an image so please 
 #' make it grayscale if not, (2) all images should be of same size - no resizing is performed. 
@@ -31,7 +31,7 @@
 #' # EXAMPLE 1
 #' data(digit3)
 #' datsmall = digit3[1:2]
-#' outsmall = image15B(datsmall, maxiter=3)
+#' outsmall = imagebary15B(datsmall, maxiter=3)
 #' 
 #' \dontrun{
 #' # EXAMPLE 2 : Barycenter of 100 Images
@@ -40,9 +40,9 @@
 #' dat2 = digit3[sample(1:2000, 100)]  # select 100 images
 #' 
 #' # RUN SEQUENTIALLY
-#' run05 = image15B(dat2, maxiter=5)                    # first 5 iterations
-#' run10 = image15B(dat2, maxiter=5,  init.image=run05) # run 5 more
-#' run50 = image15B(dat2, maxiter=40, init.image=run10) # run 40 more
+#' run05 = imagebary15B(dat2, maxiter=5)                    # first 5 iterations
+#' run10 = imagebary15B(dat2, maxiter=5,  init.image=run05) # run 5 more
+#' run50 = imagebary15B(dat2, maxiter=40, init.image=run10) # run 40 more
 #' 
 #' # VISUALIZE
 #' opar <- par(no.readonly=TRUE)
@@ -61,11 +61,11 @@
 #' @references 
 #' \insertRef{benamou_iterative_2015}{T4transport}
 #' 
-#' @concept imagecenter
+#' @concept image
 #' @export
-image15B <- function(images, p=2, weights=NULL, lambda=NULL, ...){
+imagebary15B <- function(images, p=2, weights=NULL, lambda=NULL, ...){
   # CHECK THE INPUT
-  name.f  = "image15B"
+  name.f  = "imagebary15B"
   check.f = check_images(images, name.f)
   
   # GRID AND TRANSFORM
@@ -102,7 +102,7 @@ image15B <- function(images, p=2, weights=NULL, lambda=NULL, ...){
     par_init = as.vector(t(params$init.image))
     par_init = par_init/base::sum(par_init)
     if ((length(par_init)!=nsupport)||(any(par_init < 0))){
-      stop(paste0("* image15B : 'init.image' should be of matching size as other images with nonnegative values."))
+      stop(paste0("* imagebary15B : 'init.image' should be of matching size as other images with nonnegative values."))
     }
   } else {
     par_init = rep(1/nsupport, nsupport)

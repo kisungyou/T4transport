@@ -33,8 +33,6 @@ install.packages("T4transport")
 * Option 2 : **development** version from [GitHub](https://github.com/).
 
 ``` r
-if (!require("devtools")) {
-  install.packages("devtools")
-}
+# install.packages("devtools")
 devtools::install_github("kisungyou/T4transport")
 ```

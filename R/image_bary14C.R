@@ -1,6 +1,6 @@
 #' Barycenter of Images according to Cuturi & Doucet (2014)
 #' 
-#' Using entropic regularization for Wasserstein barycenter computation, \code{image14C} 
+#' Using entropic regularization for Wasserstein barycenter computation, \code{imagebary14C} 
 #' finds a \emph{barycentric} image \eqn{X^*} given multiple images \eqn{X_1,X_2,\ldots,X_N}. 
 #' Please note the followings; (1) we only take a matrix as an image so please 
 #' make it grayscale if not, (2) all images should be of same size - no resizing is performed. 
@@ -34,7 +34,7 @@
 #' # EXAMPLE 1
 #' data(digit3)
 #' datsmall = digit3[1:2]
-#' outsmall = image14C(datsmall, maxiter=3)
+#' outsmall = imagebary14C(datsmall, maxiter=3)
 #' 
 #' \dontrun{
 #' # EXAMPLE 2 : Barycenter of 100 Images
@@ -43,9 +43,9 @@
 #' dat2 = digit3[sample(1:2000, 100)]  # select 100 images
 #' 
 #' # RUN SEQUENTIALLY
-#' run10 = image14C(dat2, maxiter=10)                   # first 10 iterations
-#' run20 = image14C(dat2, maxiter=10, init.image=run10) # run 40 more
-#' run50 = image14C(dat2, maxiter=30, init.image=run20) # run 50 more
+#' run10 = imagebary14C(dat2, maxiter=10)                   # first 10 iterations
+#' run20 = imagebary14C(dat2, maxiter=10, init.image=run10) # run 40 more
+#' run50 = imagebary14C(dat2, maxiter=30, init.image=run20) # run 50 more
 #' 
 #' # VISUALIZE
 #' opar <- par(no.readonly=TRUE)
@@ -61,11 +61,11 @@
 #' 
 #' @seealso \code{\link{bary14C}}
 #' 
-#' @concept imagecenter
+#' @concept image
 #' @export
-image14C <- function(images, p=2, weights=NULL, lambda=NULL, ...){
+imagebary14C <- function(images, p=2, weights=NULL, lambda=NULL, ...){
   # CHECK THE INPUT
-  name.f  = "image14C"
+  name.f  = "imagebary14C"
   check.f = check_images(images, name.f)
   
   # GRID AND TRANSFORM
@@ -102,7 +102,7 @@ image14C <- function(images, p=2, weights=NULL, lambda=NULL, ...){
     par_init = as.vector(t(params$init.image))
     par_init = par_init/base::sum(par_init)
     if ((length(par_init)!=nsupport)||(any(par_init < 0))){
-      stop(paste0("* image14C : 'init.image' should be of matching size as other images with nonnegative values."))
+      stop(paste0("* imagebary14C : 'init.image' should be of matching size as other images with nonnegative values."))
     }
   } else {
     par_init = rep(1/nsupport, nsupport)
@@ -138,12 +138,12 @@ image14C <- function(images, p=2, weights=NULL, lambda=NULL, ...){
 # 
 # data("digit3")
 # pdat  = digit3[1:10]
-# out10 = image14C(pdat, maxiter=10, print.progress=TRUE)
-# out20 = image14C(pdat, maxiter=10, print.progress=TRUE, init.image=out10)
-# out50 = image14C(pdat, maxiter=30, print.progress=TRUE, init.image=out20)
-# out100 = image14C(pdat, maxiter=50, print.progress=TRUE, init.image=out50) 
-# out200 = image14C(pdat, maxiter=100, print.progress=TRUE, init.image=out100) 
-# out500 = image14C(pdat, maxiter=300, print.progress=TRUE, init.image=out200)
+# out10 = imagebary14C(pdat, maxiter=10, print.progress=TRUE)
+# out20 = imagebary14C(pdat, maxiter=10, print.progress=TRUE, init.image=out10)
+# out50 = imagebary14C(pdat, maxiter=30, print.progress=TRUE, init.image=out20)
+# out100 = imagebary14C(pdat, maxiter=50, print.progress=TRUE, init.image=out50) 
+# out200 = imagebary14C(pdat, maxiter=100, print.progress=TRUE, init.image=out100) 
+# out500 = imagebary14C(pdat, maxiter=300, print.progress=TRUE, init.image=out200)
 # 
 # par(mfrow=c(1,3), pty="s")
 # image(out10,  main="after 10 iterations")

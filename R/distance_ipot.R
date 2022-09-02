@@ -28,7 +28,8 @@
 #' \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 #' }
 #' 
-#' @examples 
+#' @examples
+#' \donttest{
 #' #-------------------------------------------------------------------
 #' #  Wasserstein Distance between Samples from Two Bivariate Normal
 #' #
@@ -58,6 +59,7 @@
 #' image(ipt1$plan, axes=FALSE, main=pm1)
 #' image(ipt2$plan, axes=FALSE, main=pm2)
 #' par(opar)
+#' }
 #' 
 #' @references 
 #' \insertRef{xie_fast_2020}{T4transport}

@@ -39,7 +39,7 @@
 #' histxy[[2]] = hist(y, breaks=bk, plot=FALSE)
 #' 
 #' # COMPUTE
-#' hh = hist15B(histxy, maxiter=5)
+#' hh = histbary15B(histxy, maxiter=5)
 #' 
 #' # VISUALIZE
 #' opar <- par(no.readonly=TRUE)
@@ -57,11 +57,11 @@
 #' @references 
 #' \insertRef{benamou_iterative_2015}{T4transport}
 #' 
-#' @concept histcenter
+#' @concept histogram
 #' @export
-hist15B <- function(hists, p=2, weights=NULL, lambda=NULL, ...){
+histbary15B <- function(hists, p=2, weights=NULL, lambda=NULL, ...){
   # CHECK THE INPUT
-  name.f  = "hist15B"
+  name.f  = "histbary15B"
   check.f = check_hists(hists, name.f)
   
   # COMPUTE DISTANCE MATRIX
@@ -90,7 +90,7 @@ hist15B <- function(hists, p=2, weights=NULL, lambda=NULL, ...){
     par_init = as.vector(t(params$init.vec))
     par_init = par_init/base::sum(par_init)
     if ((length(par_init)!=nsupport)||(any(par_init < 0))){
-      stop(paste0("* hist15B : 'init.image' should be of matching size as other images with nonnegative values."))
+      stop(paste0("* histbary15B : 'init.image' should be of matching size as other images with nonnegative values."))
     }
   } else {
     par_init = rep(1/nsupport, nsupport)
