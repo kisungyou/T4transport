@@ -9,10 +9,10 @@ imagemed22Y(images, weights = NULL, lambda = NULL, ...)
 \arguments{
 \item{images}{a length-\eqn{N} list of same-size image matrices of size \eqn{(m\times n)}.}
 
-\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise,
 it should be a length-\eqn{N} vector of nonnegative weights.}
 
-\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion 
+\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion
 would be taken, or it should be a nonnegative real number.}
 
 \item{...}{extra parameters including \describe{
@@ -27,10 +27,10 @@ would be taken, or it should be a nonnegative real number.}
 an \eqn{(m\times n)} matrix of the Wasserstein median image.
 }
 \description{
-Given multiple images \eqn{X_1,\ldots,X_N}, the Wasserstein median of 
-order 2 is computed. The proposed method relies on a choice of barycenter computation 
-in that we opt for an algorithm of \code{\link{imagebary15B}}, which uses 
-entropic regularization for barycenter computation. Please note the followings; (1) we only take a matrix as an image so please 
+Given multiple images \eqn{X_1,\ldots,X_N}, the Wasserstein median of
+order 2 is computed. The proposed method relies on a choice of barycenter computation
+in that we opt for an algorithm of \code{\link{imagebary15B}}, which uses
+entropic regularization for barycenter computation. Please note the followings; (1) we only take a matrix as an image so please
 make it grayscale if not, (2) all images should be of same size - no resizing is performed.
 }
 \examples{

@@ -11,10 +11,10 @@ a length-\eqn{2000} named list \code{"digit3"} of \eqn{(28\times 28)} matrices.
 data(digit3)
 }
 \description{
-\code{digit3} contains 2000 images from the famous MNIST dataset of digit 3. 
-Each element of the list is an image represented as an \eqn{(28\times 28)} 
-matrix that sums to 1. This normalization is conventional and it does not 
-hurt its visualization via a basic `image()` function.
+\code{digit3} contains 2000 images from the famous MNIST dataset of digit 3.
+Each element of the list is an image represented as an \eqn{(28\times 28)}
+matrix that sums to 1. This normalization is conventional and it does not
+hurt its visualization via a basic \code{image()} function.
 }
 \examples{
 ## LOAD THE DATA

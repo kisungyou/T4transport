@@ -11,10 +11,10 @@ imagebary15B(images, p = 2, weights = NULL, lambda = NULL, ...)
 
 \item{p}{an exponent for the order of the distance (default: 2).}
 
-\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise,
 it should be a length-\eqn{N} vector of nonnegative weights.}
 
-\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion 
+\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion
 would be taken, or it should be a nonnegative real number.}
 
 \item{...}{extra parameters including \describe{
@@ -29,9 +29,9 @@ would be taken, or it should be a nonnegative real number.}
 an \eqn{(m\times n)} matrix of the barycentric image.
 }
 \description{
-Using entropic regularization for Wasserstein barycenter computation, \code{imagebary15B} 
-finds a \emph{barycentric} image \eqn{X^*} given multiple images \eqn{X_1,X_2,\ldots,X_N}. 
-Please note the followings; (1) we only take a matrix as an image so please 
+Using entropic regularization for Wasserstein barycenter computation, \code{imagebary15B}
+finds a \emph{barycentric} image \eqn{X^*} given multiple images \eqn{X_1,X_2,\ldots,X_N}.
+Please note the followings; (1) we only take a matrix as an image so please
 make it grayscale if not, (2) all images should be of same size - no resizing is performed.
 }
 \examples{

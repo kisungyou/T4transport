@@ -38,13 +38,13 @@ a named list containing\describe{
 }
 }
 \description{
-Due to high computational cost for linear programming approaches to compute 
-Wasserstein distance, Cuturi (2013) proposed an entropic regularization 
-scheme as an efficient approximation to the original problem. This comes with 
+Due to high computational cost for linear programming approaches to compute
+Wasserstein distance, Cuturi (2013) proposed an entropic regularization
+scheme as an efficient approximation to the original problem. This comes with
 a regularization parameter \eqn{\lambda > 0} in the term
-\deqn{\lambda h(\Gamma) = \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}).} 
-IPOT algorithm is known to be relatively robust to the choice of 
-regularization parameter \eqn{\lambda}. Empirical observation says that 
+\deqn{\lambda h(\Gamma) = \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}).}
+IPOT algorithm is known to be relatively robust to the choice of
+regularization parameter \eqn{\lambda}. Empirical observation says that
 very small number of inner loop iteration like \code{L=1} is sufficient.
 }
 \examples{

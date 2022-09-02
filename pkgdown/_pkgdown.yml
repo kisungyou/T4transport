@@ -37,7 +37,7 @@ reference:
     contents:
       - has_concept("barycenter")
   - title: "[3] Special Cases"
-  - subtitle: "Empirical Distributions"
+  - subtitle: "Cumulative Distribution Functions"
     contents:
       - has_concept("ecdf")
   - subtitle: "Gaussian Distributions"
@@ -52,3 +52,6 @@ reference:
   - title: "[4] Data"
     contents:
       - has_concept("data")
+  - title: "[5] Others"
+    contents:
+      - has_concept("other")

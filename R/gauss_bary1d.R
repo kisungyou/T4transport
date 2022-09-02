@@ -1,12 +1,12 @@
-#' Barycenter of Gaussian Distributions in R^1
+#' Barycenter of Gaussian Distributions in \eqn{\mathbb{R}}
 #' 
-#' Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,N}, 
+#' Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
 #' compute the Wasserstein barycenter of order 2. For the barycenter computation of 
 #' variance components, we use a fixed-point algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.
 #' 
-#' @param means a length-\eqn{N} vector of mean parameters.
-#' @param vars a length-\eqn{N} vector of variance parameters.
-#' @param weights a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{N} vector of nonnegative weights.
+#' @param means a length-\eqn{n} vector of mean parameters.
+#' @param vars a length-\eqn{n} vector of variance parameters.
+#' @param weights a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{n} vector of nonnegative weights.
 #' @param ... extra parameters including \describe{
 #' \item{abstol}{stopping criterion for iterations (default: 1e-8).}
 #' \item{maxiter}{maximum number of iterations (default: 496).}
@@ -49,6 +49,8 @@
 #' @references 
 #' \insertAllCited{}
 #' 
+#' 
+#' @seealso [T4transport::gaussbarypd()] for multivariate case.
 #' @concept gaussian
 #' @export
 gaussbary1d <- function(means, vars, weights=NULL, ...){

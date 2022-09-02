@@ -37,15 +37,15 @@ a named list containing\describe{
 }
 }
 \description{
-Due to high computational cost for linear programming approaches to compute 
-Wasserstein distance, Cuturi (2013) proposed an entropic regularization 
-scheme as an efficient approximation to the original problem. This comes with 
+Due to high computational cost for linear programming approaches to compute
+Wasserstein distance, Cuturi (2013) proposed an entropic regularization
+scheme as an efficient approximation to the original problem. This comes with
 a regularization parameter \eqn{\lambda > 0} in the term
 \deqn{\lambda h(\Gamma) = \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}).}
-As \eqn{\lambda\rightarrow 0}, 
-the solution to an approximation problem approaches to the solution of a 
-true problem. However, we have an issue with numerical underflow. Our 
-implementation returns an error when it happens, so please use a larger number 
+As \eqn{\lambda\rightarrow 0},
+the solution to an approximation problem approaches to the solution of a
+true problem. However, we have an issue with numerical underflow. Our
+implementation returns an error when it happens, so please use a larger number
 when necessary.
 }
 \examples{

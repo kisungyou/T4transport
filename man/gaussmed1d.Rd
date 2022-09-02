@@ -2,16 +2,16 @@
 % Please edit documentation in R/gauss_median1d.R
 \name{gaussmed1d}
 \alias{gaussmed1d}
-\title{Wasserstein Median of Gaussian Distributions in R^1}
+\title{Wasserstein Median of Gaussian Distributions in \eqn{\mathbb{R}}}
 \usage{
 gaussmed1d(means, vars, weights = NULL, ...)
 }
 \arguments{
-\item{means}{a length-\eqn{N} vector of mean parameters.}
+\item{means}{a length-\eqn{n} vector of mean parameters.}
 
-\item{vars}{a length-\eqn{N} vector of variance parameters.}
+\item{vars}{a length-\eqn{n} vector of variance parameters.}
 
-\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{N} vector of nonnegative weights.}
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{n} vector of nonnegative weights.}
 
 \item{...}{extra parameters including \describe{
 \item{abstol}{stopping criterion for iterations (default: 1e-8).}
@@ -25,22 +25,22 @@ a named list containing \describe{
 }
 }
 \description{
-Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,N}, 
+Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n},
 compute the Wasserstein median.
 }
 \examples{
 \donttest{
 #----------------------------------------------------------------------
-#                         Three Gaussians
+#                         Tree Gaussians
 #
 # Three Gaussian distributions are parametrized as follows.
 # Type 1 : (mean, sd) = (-4, 1)
-# Type 2 : (mean, sd) = (0,  1/2)
-# Type 3 : (mean, sd) = (+6, 1/5)
+# Type 2 : (mean, sd) = ( 0, 1/5)
+# Type 3 : (mean, sd) = (+6, 1/2)
 #----------------------------------------------------------------------
 # GENERATE PARAMETERS
 par_mean = c(-4, 0, +6)
-par_vars = c(1, 0.25, 0.04)
+par_vars = c(1, 0.04, 0.25)
 
 # COMPUTE THE WASSERSTEIN MEDIAN
 gmeds = gaussmed1d(par_mean, par_vars)
@@ -60,16 +60,19 @@ y_gmeds = stats::dnorm(x_grid, mean=gmeds$mean, sd=sqrt(gmeds$var))
 # VISUALIZE
 opar <- par(no.readonly=TRUE)
 plot(x_grid, y_gmeds, lwd=3, col="red", type="l",
-     main="Two Gaussians", xlab="x", ylab="density", 
-     xlim=range(x_grid), ylim=c(0,2))
-lines(x_grid, y_gmean, lwd=3, lty=2, col="blue")
-lines(x_grid, y_dist1, lwd=0.5)
-lines(x_grid, y_dist2, lwd=0.5)
-lines(x_grid, y_dist3, lwd=0.5)
+     main="Three Gaussians", xlab="x", ylab="density", 
+     xlim=range(x_grid), ylim=c(0,2.5))
+lines(x_grid, y_gmean, lwd=3, col="blue")
+lines(x_grid, y_dist1, lwd=1.5, lty=2)
+lines(x_grid, y_dist2, lwd=1.5, lty=2)
+lines(x_grid, y_dist3, lwd=1.5, lty=2)
 legend("topleft", legend=c("Median","Barycenter"),
        col=c("red","blue"), lwd=c(3,3), lty=c(1,2))
 par(opar)
 }
 
+}
+\seealso{
+\code{\link[=gaussmedpd]{gaussmedpd()}} for multivariate case.
 }
 \concept{gaussian}

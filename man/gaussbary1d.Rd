@@ -2,16 +2,16 @@
 % Please edit documentation in R/gauss_bary1d.R
 \name{gaussbary1d}
 \alias{gaussbary1d}
-\title{Barycenter of Gaussian Distributions in R^1}
+\title{Barycenter of Gaussian Distributions in \eqn{\mathbb{R}}}
 \usage{
 gaussbary1d(means, vars, weights = NULL, ...)
 }
 \arguments{
-\item{means}{a length-\eqn{N} vector of mean parameters.}
+\item{means}{a length-\eqn{n} vector of mean parameters.}
 
-\item{vars}{a length-\eqn{N} vector of variance parameters.}
+\item{vars}{a length-\eqn{n} vector of variance parameters.}
 
-\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{N} vector of nonnegative weights.}
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{n} vector of nonnegative weights.}
 
 \item{...}{extra parameters including \describe{
 \item{abstol}{stopping criterion for iterations (default: 1e-8).}
@@ -25,8 +25,8 @@ a named list containing \describe{
 }
 }
 \description{
-Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,N}, 
-compute the Wasserstein barycenter of order 2. For the barycenter computation of 
+Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n},
+compute the Wasserstein barycenter of order 2. For the barycenter computation of
 variance components, we use a fixed-point algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.
 }
 \examples{
@@ -61,5 +61,8 @@ par(opar)
 }
 \references{
 \insertAllCited{}
+}
+\seealso{
+\code{\link[=gaussbarypd]{gaussbarypd()}} for multivariate case.
 }
 \concept{gaussian}

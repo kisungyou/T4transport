@@ -9,10 +9,10 @@ histmed22Y(hists, weights = NULL, lambda = NULL, ...)
 \arguments{
 \item{hists}{a length-\eqn{N} list of histograms (\code{"histogram"} object) of same breaks.}
 
-\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise,
 it should be a length-\eqn{N} vector of nonnegative weights.}
 
-\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion 
+\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion
 would be taken, or it should be a nonnegative real number.}
 
 \item{...}{extra parameters including \describe{
@@ -29,9 +29,9 @@ would be taken, or it should be a nonnegative real number.}
 a \code{"histogram"} object of the Wasserstein median histogram.
 }
 \description{
-Given multiple histograms represented as \code{"histogram"} S3 objects, compute the 
-Wasserstein median of order 2. We need one requirement that all histograms in an 
-input list \code{hists} must have \bold{same breaks}. See the example on how to 
+Given multiple histograms represented as \code{"histogram"} S3 objects, compute the
+Wasserstein median of order 2. We need one requirement that all histograms in an
+input list \code{hists} must have \bold{same breaks}. See the example on how to
 construct a histogram on predefined breaks/bins.
 }
 \examples{

@@ -43,6 +43,9 @@ gauss_checknd <- function(means, vars){
   
   for (i in 1:n){
     tgt = vars[,,i]
+    if (!isSymmetric(tgt)){
+      return(FALSE)
+    }
     if (min(base::eigen(tgt)$value) <= 10*.Machine$double.eps){
       return(FALSE)
     }
