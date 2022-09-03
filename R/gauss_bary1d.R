@@ -17,7 +17,7 @@
 #' \item{var}{variance of the estimated barycenter distribution.}
 #' }
 #' 
-#' @examples 
+#' @examples
 #' #----------------------------------------------------------------------
 #' #                         Two Gaussians
 #' #
@@ -48,7 +48,6 @@
 #' 
 #' @references 
 #' \insertAllCited{}
-#' 
 #' 
 #' @seealso [T4transport::gaussbarypd()] for multivariate case.
 #' @concept gaussian
