@@ -27,5 +27,5 @@ hist_dist2obj <- function(hobj1, hobj2, p=2.0){
   vec_y2  = hobj2$density
   
   # integrate using the (1)
-  return(hist_dist2dist(hobj1, hobj2, p=p))
+  return(hist_dist2dis(hobj1, hobj2, p=p))
 }

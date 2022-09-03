@@ -6,7 +6,6 @@
 #' construct a histogram on predefined breaks/bins.
 #' 
 #' @param hists a length-\eqn{N} list of histograms (\code{"histogram"} object) of same breaks.
-#' @param p an exponent for the order of the distance (default: 2).
 #' @param weights a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
 #' it should be a length-\eqn{N} vector of nonnegative weights. 
 #' @param lambda a regularization parameter; if \code{NULL} (default), a paper's suggestion 

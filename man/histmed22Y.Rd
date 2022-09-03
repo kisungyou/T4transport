@@ -22,8 +22,6 @@ would be taken, or it should be a nonnegative real number.}
 \item{nthread}{number of threads for OpenMP run (default: 1).}
 \item{print.progress}{a logical to show current iteration (default: \code{FALSE}).}
 }}
-
-\item{p}{an exponent for the order of the distance (default: 2).}
 }
 \value{
 a \code{"histogram"} object of the Wasserstein median histogram.
