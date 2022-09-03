@@ -2,7 +2,7 @@
 % Please edit documentation in R/gauss_median1d.R
 \name{gaussmed1d}
 \alias{gaussmed1d}
-\title{Wasserstein Median of Gaussian Distributions in \eqn{\mathbb{R}}}
+\title{Wasserstein Median of Gaussian Distributions in \eqn{\mathbf{R}}}
 \usage{
 gaussmed1d(means, vars, weights = NULL, ...)
 }

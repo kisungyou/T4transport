@@ -1,4 +1,4 @@
-#' Barycenter of Gaussian Distributions in \eqn{\mathbb{R}^p}
+#' Barycenter of Gaussian Distributions in \eqn{\mathbf{R}^p}
 #' 
 #' Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{\mathcal{N}(\mu_i, \Sigma_i^2)} 
 #' for \eqn{i=1,\ldots,n}, compute the Wasserstein barycenter of order 2. 

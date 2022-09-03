@@ -1,4 +1,4 @@
-#' Sampling Gaussian Distributions in \eqn{\mathbb{R}^2} for Visualization
+#' Sampling Gaussian Distributions in \eqn{\mathbf{R}^2} for Visualization
 #' 
 #' This function samples points along the contour of an ellipse represented 
 #' by mean and variance parameters for a 2-dimensional Gaussian distribution 

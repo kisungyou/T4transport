@@ -1,4 +1,4 @@
-#' Barycenter of Gaussian Distributions in \eqn{\mathbb{R}}
+#' Barycenter of Gaussian Distributions in \eqn{\mathbf{R}}
 #' 
 #' Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
 #' compute the Wasserstein barycenter of order 2. For the barycenter computation of 

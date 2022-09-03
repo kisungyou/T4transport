@@ -2,7 +2,7 @@
 % Please edit documentation in R/gauss_bary1d.R
 \name{gaussbary1d}
 \alias{gaussbary1d}
-\title{Barycenter of Gaussian Distributions in \eqn{\mathbb{R}}}
+\title{Barycenter of Gaussian Distributions in \eqn{\mathbf{R}}}
 \usage{
 gaussbary1d(means, vars, weights = NULL, ...)
 }

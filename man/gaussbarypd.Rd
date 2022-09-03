@@ -2,7 +2,7 @@
 % Please edit documentation in R/gauss_barypd.R
 \name{gaussbarypd}
 \alias{gaussbarypd}
-\title{Barycenter of Gaussian Distributions in \eqn{\mathbb{R}^p}}
+\title{Barycenter of Gaussian Distributions in \eqn{\mathbf{R}^p}}
 \usage{
 gaussbarypd(means, vars, weights = NULL, ...)
 }

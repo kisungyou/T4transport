@@ -1,4 +1,4 @@
-#' Wasserstein Median of Gaussian Distributions in \eqn{\mathbb{R}^p}
+#' Wasserstein Median of Gaussian Distributions in \eqn{\mathbf{R}^p}
 #' 
 #' Given a collection of \eqn{p}-dimensional Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
 #' compute the Wasserstein median.
