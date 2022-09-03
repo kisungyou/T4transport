@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# T4transport <a href='https://kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" width="130" /></a>
+# T4transport <a href='https://www.kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" width="130" /></a>
 
 <!-- badges: start -->
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/other_gaussvis2d.R
 \name{gaussvis2d}
 \alias{gaussvis2d}
-\title{Sampling Gaussian Distributions in \eqn{\mathbf{R}^2} for Visualization}
+\title{Sampling from a Bivariate Gaussian Distribution for Visualization}
 \usage{
 gaussvis2d(mean, var, n = 500)
 }
