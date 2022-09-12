@@ -45,9 +45,9 @@
 #'      main="Three Gaussians", xlab="", ylab="", 
 #'      xlim=c(-6,8), ylim=c(-2.5,2.5))
 #' lines(pt_gmeds, lwd=2, col="blue")
-#' lines(pt_type1, lty=2)
-#' lines(pt_type2, lty=2)
-#' lines(pt_type3, lty=2)
+#' lines(pt_type1, lty=2, lwd=5)
+#' lines(pt_type2, lty=2, lwd=5)
+#' lines(pt_type3, lty=2, lwd=5)
 #' abline(h=0, col="grey80", lty=3)
 #' abline(v=0, col="grey80", lty=3)
 #' legend("topright", legend=c("Median","Barycenter"),
@@ -95,11 +95,12 @@ gaussmedpd <- function(means, vars, weights=NULL, ...){
   
   # --------------------------------------------------------------------------
   # COMPUTE
-  # compute the mean
-  out_mean = as.vector(gauss_weiszfeld(means, weight, par_tol, par_iter))
+  # run the product-manifold algorithm
+  out_run = gauss_median_general(means, vars, weight, par_tol, par_iter)
   
-  # compute the variance
-  out_var  = as.matrix(gauss_spdmed22Y(vars, weight, par_tol, par_iter))
+  # separate out
+  out_mean = as.vector(out_run$mean)
+  out_var  = as.matrix(out_run$var)
   
   # --------------------------------------------------------------------------
   # RETURN

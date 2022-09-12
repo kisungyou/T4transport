@@ -62,9 +62,9 @@ plot(pt_gmean, lwd=2, col="red", type="l",
      main="Three Gaussians", xlab="", ylab="", 
      xlim=c(-6,8), ylim=c(-2.5,2.5))
 lines(pt_gmeds, lwd=2, col="blue")
-lines(pt_type1, lty=2)
-lines(pt_type2, lty=2)
-lines(pt_type3, lty=2)
+lines(pt_type1, lty=2, lwd=5)
+lines(pt_type2, lty=2, lwd=5)
+lines(pt_type3, lty=2, lwd=5)
 abline(h=0, col="grey80", lty=3)
 abline(v=0, col="grey80", lty=3)
 legend("topright", legend=c("Median","Barycenter"),

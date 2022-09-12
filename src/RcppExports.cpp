@@ -124,9 +124,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// gauss_spdmed22Y
-arma::mat gauss_spdmed22Y(arma::cube& array3d, arma::vec& weight, double abstol, int maxiter);
-RcppExport SEXP _T4transport_gauss_spdmed22Y(SEXP array3dSEXP, SEXP weightSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
+// gauss_median_general
+Rcpp::List gauss_median_general(arma::mat& mean2d, arma::cube& array3d, arma::vec& weight, double abstol, int maxiter);
+RcppExport SEXP _T4transport_gauss_median_general(SEXP mean2dSEXP, SEXP array3dSEXP, SEXP weightSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type mean2d(mean2dSEXP);
+    Rcpp::traits::input_parameter< arma::cube& >::type array3d(array3dSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type weight(weightSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(gauss_median_general(mean2d, array3d, weight, abstol, maxiter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gauss_median_centered
+arma::mat gauss_median_centered(arma::cube& array3d, arma::vec& weight, double abstol, int maxiter);
+RcppExport SEXP _T4transport_gauss_median_centered(SEXP array3dSEXP, SEXP weightSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -134,7 +149,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec& >::type weight(weightSEXP);
     Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
-    rcpp_result_gen = Rcpp::wrap(gauss_spdmed22Y(array3d, weight, abstol, maxiter));
+    rcpp_result_gen = Rcpp::wrap(gauss_median_centered(array3d, weight, abstol, maxiter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -187,7 +202,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_cpp_ipot20", (DL_FUNC) &_T4transport_cpp_ipot20, 8},
     {"_T4transport_gauss_weiszfeld", (DL_FUNC) &_T4transport_gauss_weiszfeld, 4},
     {"_T4transport_gauss_spdbary16A", (DL_FUNC) &_T4transport_gauss_spdbary16A, 4},
-    {"_T4transport_gauss_spdmed22Y", (DL_FUNC) &_T4transport_gauss_spdmed22Y, 4},
+    {"_T4transport_gauss_median_general", (DL_FUNC) &_T4transport_gauss_median_general, 5},
+    {"_T4transport_gauss_median_centered", (DL_FUNC) &_T4transport_gauss_median_centered, 4},
     {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
     {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
     {NULL, NULL, 0}

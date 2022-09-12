@@ -102,11 +102,12 @@ gaussmed1d <- function(means, vars, weights=NULL, ...){
     array_vars[,,i] = dat_vars[i]
   }
   
-  # compute the median
-  out_mean = as.double(gauss_weiszfeld(array_mean, weight, par_tol, par_iter));
+  # run the product-manifold algorithm
+  out_run = gauss_median_general(array_mean, array_vars, weight, par_tol, par_iter)
   
-  # compute the variance
-  out_var = as.double(gauss_spdmed22Y(array_vars, weight, par_tol, par_iter))
+  # separate out
+  out_mean = as.double(out_run$mean)
+  out_var  = as.double(out_run$var)
 
   # --------------------------------------------------------------------------
   # RETURN

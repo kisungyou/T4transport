@@ -29,8 +29,12 @@ gauss_spdbary16A <- function(array3d, weight, abstol, maxiter) {
     .Call('_T4transport_gauss_spdbary16A', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
 }
 
-gauss_spdmed22Y <- function(array3d, weight, abstol, maxiter) {
-    .Call('_T4transport_gauss_spdmed22Y', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
+gauss_median_general <- function(mean2d, array3d, weight, abstol, maxiter) {
+    .Call('_T4transport_gauss_median_general', PACKAGE = 'T4transport', mean2d, array3d, weight, abstol, maxiter)
+}
+
+gauss_median_centered <- function(array3d, weight, abstol, maxiter) {
+    .Call('_T4transport_gauss_median_centered', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
 }
 
 routine_bary14C <- function(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread) {

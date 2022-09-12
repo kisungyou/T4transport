@@ -10,7 +10,9 @@ using namespace std;
 // gauss_wassdist   : SPD matrices and their Wasserstein distance of order 2
 // gauss_weiszfeld  : weiszfeld algorithm
 // gauss_spdbary16A : wasserstein barycenter for SPDs by Alvarez-Esteban
-// gauss_spdmed22Y  : my proposal for Wasserstein Median
+
+// gauss_median_centered : Wasserstein Median of centered Gaussian distributions 
+// gauss_median_general  : Wasserstein Median of fully characterized Gaussians  
 
 
 // gauss_wassdist --------------------------------------------------------------
@@ -127,10 +129,81 @@ arma::mat gauss_spdbary16A(arma::cube array3d, arma::vec weight, double abstol, 
   return(S_old);
 }
 
-
-// gauss_spdmed22Y -------------------------------------------------------------
+// gauss_median_general --------------------------------------------------------
 // [[Rcpp::export]]
-arma::mat gauss_spdmed22Y(arma::cube &array3d, arma::vec &weight, double abstol, int maxiter){
+Rcpp::List gauss_median_general(arma::mat &mean2d, arma::cube &array3d, arma::vec &weight, double abstol, int maxiter){
+  // parameters
+  int p = array3d.n_rows;
+  int N = array3d.n_slices;
+  
+  // initialize
+  arma::rowvec mean_old(p,fill::zeros);
+  arma::rowvec mean_new(p,fill::zeros);
+  arma::mat cov_old(p,p,fill::zeros);
+  arma::mat cov_new(p,p,fill::zeros);
+  
+  for (int n=0; n<N; n++){
+    mean_old += mean2d.row(n)*weight(n);
+    cov_old  += array3d.slice(n)*weight(n);
+  }
+  
+  // quantities
+  double nearness = 100.0*arma::datum::eps;
+  double stop_inc1 = 10.0;
+  double stop_inc2 = 10.0;
+  double dist_mean = 0.0;
+  double dist_covs = 0.0;
+  double dist_full = 0.0;
+  arma::vec tmp_weight(N,fill::zeros);
+  
+  // iterate
+  for (int it=0; it<maxiter; it++){
+    // it-1. update the relative weights
+    tmp_weight.fill(0.0);
+    for (int n=0; n<N; n++){
+      dist_mean = arma::norm(mean2d.row(n)-mean_old,2);
+      dist_covs = gauss_wassdist(array3d.slice(n), cov_old);
+      dist_full = std::sqrt((dist_mean*dist_mean) + (dist_covs*dist_covs));
+      if (dist_full < nearness){
+        // just return now!
+        return(Rcpp::List::create(
+          Rcpp::Named("mean") = mean_old,
+          Rcpp::Named("var")  = cov_old
+        ));
+      }
+      tmp_weight(n) = weight(n)/dist_full;
+    }
+    
+    // it-2. normalize the weight
+    tmp_weight /= arma::accu(tmp_weight);
+    
+    // it-3. update the two
+    mean_new = gauss_weiszfeld(mean2d, tmp_weight, 1e-10, 100);
+    cov_new  = gauss_spdbary16A(array3d, tmp_weight, 1e-10, 100);
+    
+    // it-4. error & update
+    stop_inc1 = arma::norm(mean_old-mean_new,2);
+    stop_inc2 = arma::norm(cov_new-cov_old,"fro");
+    
+    mean_old = mean_new;
+    cov_old  = cov_new;
+    
+    if ((stop_inc1 < abstol)&&(stop_inc2 < abstol)){
+      break;
+    }
+  }
+  
+  // return
+  return(Rcpp::List::create(
+      Rcpp::Named("mean") = mean_old,
+      Rcpp::Named("var")  = cov_old
+  ));
+}
+
+
+// gauss_median_centered -------------------------------------------------------
+// [[Rcpp::export]]
+arma::mat gauss_median_centered(arma::cube &array3d, arma::vec &weight, double abstol, int maxiter){
   // parameters
   int p = array3d.n_rows;
   int N = array3d.n_slices;
