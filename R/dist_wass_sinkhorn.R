@@ -1,7 +1,7 @@
-#' Computing Wasserstein Distance by Entropic Regularization
+#' Wasserstein Distance by Entropic Regularization
 #' 
 #' Due to high computational cost for linear programming approaches to compute 
-#' Wasserstein distance, Cuturi (2013) proposed an entropic regularization 
+#' Wasserstein distance, \insertCite{cuturi_sinkhorn_2013;textual}{T4transport} proposed an entropic regularization 
 #' scheme as an efficient approximation to the original problem. This comes with 
 #' a regularization parameter \eqn{\lambda > 0} in the term
 #' \deqn{\lambda h(\Gamma) = \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}).}
@@ -24,12 +24,13 @@
 #' }
 #' 
 #' @return a named list containing\describe{
-#' \item{distance}{\eqn{\mathcal{W}_p} distance value}
+#' \item{distance}{\eqn{\mathcal{W}_p} distance value.}
 #' \item{iteration}{the number of iterations it took to converge.}
 #' \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 #' }
 #' 
 #' @examples 
+#' \donttest{
 #' #-------------------------------------------------------------------
 #' #  Wasserstein Distance between Samples from Two Bivariate Normal
 #' #
@@ -59,9 +60,10 @@
 #' image(skh1$plan, axes=FALSE, main=pm2)
 #' image(skh2$plan, axes=FALSE, main=pm5)
 #' par(opar)
+#' }
 #' 
 #' @references 
-#' \insertRef{cuturi_sinkhorn_2013}{T4transport}
+#' \insertAllCited{}
 #' 
 #' @concept dist_wass
 #' @name sinkhorn
@@ -100,8 +102,17 @@ sinkhorn <- function(X, Y, p=2, wx=NULL, wy=NULL, lambda=0.1, ...){
   ## INPUTS : IMPLICIT
   params = list(...)
   pnames = names(params)
-  par_iter = max(1, round(ifelse((("maxiter")%in%pnames), params$maxiter, 496)))
-  par_tol  = max(sqrt(.Machine$double.eps), as.double(ifelse(("abstol"%in%pnames), params$abstol, 1e-10)))
+  
+  if ("maxiter" %in% pnames){
+    par_iter = max(2, round(params$maxiter))
+  } else {
+    par_iter = 496
+  }
+  if ("abstol" %in% pnames){
+    par_tol = max(100*.Machine$double.eps, as.double(params$abstol))
+  } else {
+    par_tol = 1e-10
+  }
   
   # ## MAIN COMPUTATION
   output = cpp_sinkhorn13(par_wx, par_wy, par_D, par_lbd, par_p, par_iter, par_tol)

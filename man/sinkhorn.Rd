@@ -3,7 +3,7 @@
 \name{sinkhorn}
 \alias{sinkhorn}
 \alias{sinkhornD}
-\title{Computing Wasserstein Distance by Entropic Regularization}
+\title{Wasserstein Distance by Entropic Regularization}
 \usage{
 sinkhorn(X, Y, p = 2, wx = NULL, wy = NULL, lambda = 0.1, ...)
 
@@ -31,14 +31,14 @@ sinkhornD(D, p = 2, wx = NULL, wy = NULL, lambda = 0.1, ...)
 }
 \value{
 a named list containing\describe{
-\item{distance}{\eqn{\mathcal{W}_p} distance value}
+\item{distance}{\eqn{\mathcal{W}_p} distance value.}
 \item{iteration}{the number of iterations it took to converge.}
 \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 }
 }
 \description{
 Due to high computational cost for linear programming approaches to compute
-Wasserstein distance, Cuturi (2013) proposed an entropic regularization
+Wasserstein distance, \insertCite{cuturi_sinkhorn_2013;textual}{T4transport} proposed an entropic regularization
 scheme as an efficient approximation to the original problem. This comes with
 a regularization parameter \eqn{\lambda > 0} in the term
 \deqn{\lambda h(\Gamma) = \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}).}
@@ -49,6 +49,7 @@ implementation returns an error when it happens, so please use a larger number
 when necessary.
 }
 \examples{
+\donttest{
 #-------------------------------------------------------------------
 #  Wasserstein Distance between Samples from Two Bivariate Normal
 #
@@ -78,9 +79,10 @@ image(outw$plan, axes=FALSE, main=pm1)
 image(skh1$plan, axes=FALSE, main=pm2)
 image(skh2$plan, axes=FALSE, main=pm5)
 par(opar)
+}
 
 }
 \references{
-\insertRef{cuturi_sinkhorn_2013}{T4transport}
+\insertAllCited{}
 }
 \concept{dist_wass}

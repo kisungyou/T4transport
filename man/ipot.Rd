@@ -3,7 +3,7 @@
 \name{ipot}
 \alias{ipot}
 \alias{ipotD}
-\title{Computing Wasserstein Distance by Inexact Proximal Point Method}
+\title{Wasserstein Distance by Inexact Proximal Point Method}
 \usage{
 ipot(X, Y, p = 2, wx = NULL, wy = NULL, lambda = 1, ...)
 

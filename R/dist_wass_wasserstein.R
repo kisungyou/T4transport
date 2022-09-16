@@ -1,4 +1,4 @@
-#' Computing Wasserstein Distance between Empirical Measures
+#' Wasserstein Distance between Empirical Measures
 #' 
 #' Given two empirical measures \eqn{\mu, \nu} consisting of \eqn{M} and \eqn{N} observations on \eqn{\mathcal{X}}, \eqn{p}-Wasserstein distance for \eqn{p\geq 1} between two empirical measures 
 #' is defined as 

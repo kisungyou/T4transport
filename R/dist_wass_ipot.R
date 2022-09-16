@@ -1,4 +1,4 @@
-#' Computing Wasserstein Distance by Inexact Proximal Point Method
+#' Wasserstein Distance by Inexact Proximal Point Method
 #' 
 #' Due to high computational cost for linear programming approaches to compute 
 #' Wasserstein distance, Cuturi (2013) proposed an entropic regularization 

@@ -101,3 +101,47 @@ arma::field<arma::mat> cpp_subgrad_both(arma::vec a, arma::vec b, arma::mat M, d
   output(1) = arma::diagmat(uold)*K*arma::diagmat(vold);
   return(output);
 }
+
+
+arma::mat cpp_sinkhorn_getmap(arma::mat c, arma::mat p, arma::mat q, double lambda, int maxiter, double abstol){
+  // parameters
+  int m = p.n_elem;
+  int n = q.n_elem;
+  
+  // prepare
+  // Gibbs kernel
+  arma::mat K  = arma::exp(-c/lambda);
+  arma::mat Kt = arma::trans(K); 
+  
+  // updaters
+  arma::vec a_old(m,fill::ones);
+  arma::vec a_new(m,fill::zeros);
+  arma::vec b_old(n,fill::zeros);
+  arma::vec b_new(n,fill::zeros);
+  
+  // stopping criterion
+  double a_inc = 100.0;
+  double b_inc = 100.0;
+  
+  // iteration
+  for (int it=0; it<maxiter; it++){
+    // update b & a once
+    b_new = q/(Kt*a_old);
+    a_new = p/(K*b_new);
+    
+    // stopping
+    a_inc = arma::norm(a_old-a_new,2);
+    b_inc = arma::norm(b_old-b_new,2);
+    a_old = a_new;
+    b_old = b_new;
+    
+    // stop if small
+    if ((a_inc < abstol)&&(b_inc < abstol)){
+      break;
+    }
+  }
+  
+  // compute the estimated coupling
+  arma::mat output = arma::diagmat(a_old)*K*arma::diagmat(b_old);
+  return(output);
+}

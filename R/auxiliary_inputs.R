@@ -1,14 +1,15 @@
 ## AUXILIARY FUNCTIONS
-#  (1) valid_weight            : weight vector of provided length
-#  (2) valid_distance          : distance matrix should contain no {(-)/Inf,NA}s
-#  (3) valid_matrixed          : vector -> matrix.
-#  (4) valid_multiple_measures : do many things for atoms
-#  (5) valid_multiple_marginal : check the marginal's setting
-#  (6) valid_multiple_weight   : weight of each measures
-#  (7) valid_multiple_distance : distance between support and measure
-#  (8) check_images            : for barycenter of images
-#  (9) check_hists             : for barycenter of histograms
-#  (10) valid_single_marginal  : check single marginal 
+#  (1) valid_weight             : weight vector of provided length
+#  (2) valid_distance           : distance matrix should contain no {(-)/Inf,NA}s
+#  (3) valid_matrixed           : vector -> matrix.
+#  (4) valid_multiple_measures  : do many things for atoms
+#  (5) valid_multiple_marginal  : check the marginal's setting
+#  (6) valid_multiple_weight    : weight of each measures
+#  (7) valid_multiple_distance  : distance between support and measure
+#  (8) check_images             : for barycenter of images
+#  (9) check_hists              : for barycenter of histograms
+#  (10) valid_single_marginal   : check single marginal 
+#  (11) valid_single_similarity : kernel/distance in the Gromow-Wasserstein setting 
 
 
 # (1) valid_weight --------------------------------------------------------
@@ -270,5 +271,26 @@ valid_single_marginal <- function(mvec, M, fname){
       stop(paste0("* ",fname," : ",dname," should be a nonnegative vector of length ",M,"."))
     }
     return(mvec/base::sum(mvec))
+  }
+}
+
+# (11) valid_single_similarity --------------------------------------------
+#' @keywords internal
+#' @noRd
+valid_single_similarity <- function(matC, error_message){
+  if (inherits(matC, "dist")){
+    return(as.matrix(matC))
+  } else {
+    distmat = as.matrix(matC)
+    if (nrow(distmat)!=ncol(distmat)){
+      stop(error_message)
+    }
+    if (!isSymmetric(distmat)){
+      stop(error_message)
+    }
+    if (any(distmat<0)){
+      stop(error_message)
+    }
+    return(distmat)
   }
 }
