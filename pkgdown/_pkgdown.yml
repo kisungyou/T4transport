@@ -29,9 +29,10 @@ navbar:
       href: mailto:kisungyou@outlook.com
 
 reference:
-  - title: "[1] Wasserstein Distance"
+  - title: "[1] Distance"
+  - subtitle: "Wasserstein Distance"
     contents:
-      - has_concept("distance")
+      - has_concept("dist_wass")
   - title: "[2] Wasserstein Barycenter"
   - subtitle: "Fixed Support"
     contents:

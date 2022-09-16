@@ -92,7 +92,7 @@
 #' @references 
 #' \insertRef{peyre_computational_2019}{T4transport}
 #' 
-#' @concept distance
+#' @concept dist_wass
 #' @name wasserstein
 #' @rdname wasserstein
 NULL
