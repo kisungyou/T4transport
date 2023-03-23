@@ -7,7 +7,7 @@
 #' whose marginals are \eqn{\mu} and \eqn{\nu} on the first and second factors, respectively. Please see the section 
 #' for detailed description on the usage of the function.
 #' 
-#' @section Usage \code{wasserstein()} function:
+#' @section Using \code{wasserstein()} function:
 #' We assume empirical measures are defined on the Euclidean space \eqn{\mathcal{X}=\mathbf{R}^d},
 #' \deqn{\mu = \sum_{m=1}^M \mu_m \delta_{X_m}\quad\textrm{and}\quad \nu = \sum_{n=1}^N \nu_n \delta_{Y_n}} 
 #' and the distance metric used here is standard Euclidean norm \eqn{d(x,y) = \|x-y\|}. Here, the 
@@ -28,7 +28,7 @@
 #' @param wy a length-\eqn{N} marginal density that sums to \eqn{1}. If \code{NULL} (default), uniform weight is set.
 #' 
 #' @return a named list containing\describe{
-#' \item{distance}{\eqn{\mathcal{W}_p} distance value}
+#' \item{distance}{\eqn{\mathcal{W}_p} distance value.}
 #' \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 #' }
 #' 

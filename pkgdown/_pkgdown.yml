@@ -33,6 +33,9 @@ reference:
   - subtitle: "Wasserstein Distance"
     contents:
       - has_concept("dist_wass")
+  - subtitle: "Others"
+    contents:
+      - has_concept("dist_others")
   - title: "[2] Wasserstein Barycenter"
   - subtitle: "Fixed Support"
     contents:

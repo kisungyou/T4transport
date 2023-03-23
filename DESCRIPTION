@@ -8,7 +8,7 @@ License: MIT + file LICENSE
 Imports: CVXR, Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
 LinkingTo: Rcpp, RcppArmadillo
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 RdMacros: Rdpack
 Suggests: 
     ggplot2

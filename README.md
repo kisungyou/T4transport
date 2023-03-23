@@ -15,15 +15,14 @@ optimal transport.
 
 ### Installation
 
--   Option 1 : **released** version from
-    [CRAN](https://CRAN.R-project.org).
+- Option 1 : **released** version from
+  [CRAN](https://CRAN.R-project.org).
 
 ``` r
 install.packages("T4transport")
 ```
 
--   Option 2 : **development** version from
-    [GitHub](https://github.com/).
+- Option 2 : **development** version from [GitHub](https://github.com/).
 
 ``` r
 # install.packages("devtools")

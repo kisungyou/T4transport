@@ -3,8 +3,8 @@
 #' 
 #' 
 #' 
-#' @concept dist_gw
-#' @export
+#' @keywords internal
+#' @noRd
 gwdist16P <- function(C1, C2, p1=NULL, p2=NULL, cost=c("KL","quadratic"), ...){
   # --------------------------------------------------------------------------
   # CHECK THE INPUT
