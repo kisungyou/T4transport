@@ -14,7 +14,7 @@ swdist(X, Y, p = 2, ...)
 \item{p}{an exponent for the order of the distance (default: 2).}
 
 \item{...}{extra parameters including \describe{
-\item{niter}{the number of Monte Carlo samples for SW computation (default: 496).}
+\item{nproj}{the number of Monte Carlo samples for SW computation (default: 496).}
 }}
 }
 \value{
@@ -51,7 +51,7 @@ X = matrix(rnorm(m*2, mean=-1),ncol=2) # m obs. for X
 Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 
 # COMPUTE THE SLICED-WASSERSTEIN DISTANCE
-outsw <- swdist(X, Y, niter=1000)
+outsw <- swdist(X, Y, nproj=100)
 
 # VISUALIZE
 # prepare ingredients for plotting

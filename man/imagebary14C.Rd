@@ -35,6 +35,7 @@ Please note the followings; (1) we only take a matrix as an image so please
 make it grayscale if not, (2) all images should be of same size - no resizing is performed.
 }
 \examples{
+\dontrun{
 #----------------------------------------------------------------------
 #                       MNIST Data with Digit 3
 #
@@ -46,7 +47,6 @@ data(digit3)
 datsmall = digit3[1:2]
 outsmall = imagebary14C(datsmall, maxiter=3)
 
-\dontrun{
 # EXAMPLE 2 : Barycenter of 100 Images
 # RANDOMLY SELECT THE IMAGES
 data(digit3)

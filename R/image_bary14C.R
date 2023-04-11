@@ -25,6 +25,7 @@
 #' \insertRef{cuturi_fast_2014}{T4transport}
 #' 
 #' @examples 
+#' \dontrun{
 #' #----------------------------------------------------------------------
 #' #                       MNIST Data with Digit 3
 #' #
@@ -36,7 +37,6 @@
 #' datsmall = digit3[1:2]
 #' outsmall = imagebary14C(datsmall, maxiter=3)
 #' 
-#' \dontrun{
 #' # EXAMPLE 2 : Barycenter of 100 Images
 #' # RANDOMLY SELECT THE IMAGES
 #' data(digit3)

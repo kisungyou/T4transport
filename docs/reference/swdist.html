@@ -111,7 +111,7 @@ it is computed via Monte Carlo integration.</p>
 
 
 <dt>...</dt>
-<dd><p>extra parameters including</p><dl><dt>niter</dt>
+<dd><p>extra parameters including</p><dl><dt>nproj</dt>
 <dd><p>the number of Monte Carlo samples for SW computation (default: 496).</p></dd>
 
 
@@ -135,8 +135,7 @@ it is computed via Monte Carlo integration.</p>
     <p>Rabin J, Peyré G, Delon J, Bernot M (2012).
 “Wasserstein Barycenter and Its Application to Texture Mixing.”
 In Bruckstein AM, ter Haar Romeny BM, Bronstein AM, Bronstein MM (eds.), <em>Scale Space and Variational Methods in Computer Vision</em>, volume 6667, 435--446.
-Springer Berlin Heidelberg, Berlin, Heidelberg.
-ISBN 978-3-642-24784-2 978-3-642-24785-9, <a href="2023-03-23">2023-03-23</a>.</p>
+Springer Berlin Heidelberg, Berlin, Heidelberg.</p>
     </div>
 
     <div class="section level2">
@@ -156,7 +155,7 @@ ISBN 978-3-642-24784-2 978-3-642-24785-9, <a href="2023-03-23">2023-03-23</a>.</
 <span class="r-in"><span><span class="va">Y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="fl">2</span>, mean<span class="op">=</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span> <span class="co"># n obs. for Y</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># COMPUTE THE SLICED-WASSERSTEIN DISTANCE</span></span></span>
-<span class="r-in"><span><span class="va">outsw</span> <span class="op">&lt;-</span> <span class="fu">swdist</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, niter<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">outsw</span> <span class="op">&lt;-</span> <span class="fu">swdist</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, nproj<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># VISUALIZE</span></span></span>
 <span class="r-in"><span><span class="co"># prepare ingredients for plotting</span></span></span>

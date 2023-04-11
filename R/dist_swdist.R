@@ -15,7 +15,7 @@
 #' @param Y an \eqn{(N\times P)} matrix of row observations.
 #' @param p an exponent for the order of the distance (default: 2).
 #' @param ... extra parameters including \describe{
-#' \item{niter}{the number of Monte Carlo samples for SW computation (default: 496).}
+#' \item{nproj}{the number of Monte Carlo samples for SW computation (default: 496).}
 #' }
 #' 
 #' @return a named list containing\describe{
@@ -39,7 +39,7 @@
 #' Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 #' 
 #' # COMPUTE THE SLICED-WASSERSTEIN DISTANCE
-#' outsw <- swdist(X, Y, niter=1000)
+#' outsw <- swdist(X, Y, nproj=100)
 #' 
 #' # VISUALIZE
 #' # prepare ingredients for plotting
@@ -59,7 +59,6 @@
 #' 
 #' @references 
 #' \insertAllCited{}
-#' 
 #' 
 #' @concept dist_others
 #' @name swdist
@@ -84,8 +83,8 @@ swdist <- function(X, Y, p=2, ...){
   params = list(...)
   pnames = names(params)
   
-  if ("niter"%in%pnames){
-    par_niter = max(1, round(params$niter))
+  if ("nproj"%in%pnames){
+    par_niter = max(1, round(params$nproj))
   } else {
     par_niter = 496
   }
