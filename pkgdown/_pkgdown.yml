@@ -6,7 +6,7 @@ template:
   bootstrap: 5
   math-rendering: mathjax
   bslib:
-    bootswatch: flatly
+    bootswatch: minty
     border-radius: 0.25rem
     btn-border-radius: 0.25rem
   
@@ -23,10 +23,13 @@ navbar:
   right:
     - icon: fa-twitter
       href: https://twitter.com/kisung_you
+      aria-label: "Twitter/X"
     - icon: fa-github
       href: https://github.com/kisungyou/T4transport
+      aria-label: "GitHub"
     - icon: fa-envelope
       href: mailto:kisung.you@outlook.com
+      aria-label: "Email"
 
 reference:
   - title: "[1] Distance"

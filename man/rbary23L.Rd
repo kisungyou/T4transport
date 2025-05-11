@@ -69,7 +69,7 @@ points(myatoms[[3]], col="gray90", pch=19, cex=0.5)
 points(myatoms[[4]], col="gray90", pch=19, cex=0.5)
 
 #  plot the barycenter
-points(fsbary$support, col="red", pch=19, cex=1.5)
+points(fsbary$support, col="red", cex=1.5)
 par(opar)
 }
 
