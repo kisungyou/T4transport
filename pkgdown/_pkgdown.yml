@@ -4,12 +4,12 @@ destination: docs
 
 template:
   bootstrap: 5
+  math-rendering: mathjax
   bslib:
-    border-radius: 0.5rem
-    btn-border-radius: 0.25rem
-  params:
     bootswatch: flatly
-
+    border-radius: 0.25rem
+    btn-border-radius: 0.25rem
+  
 home:
   strip_header: false
 
@@ -26,16 +26,12 @@ navbar:
     - icon: fa-github
       href: https://github.com/kisungyou/T4transport
     - icon: fa-envelope
-      href: mailto:kisungyou@outlook.com
+      href: mailto:kisung.you@outlook.com
 
 reference:
   - title: "[1] Distance"
-  - subtitle: "Wasserstein Distance"
     contents:
-      - has_concept("dist_wass")
-  - subtitle: "Others"
-    contents:
-      - has_concept("dist_others")
+      - has_concept("dist")
   - title: "[2] Wasserstein Barycenter"
   - subtitle: "Fixed Support"
     contents:

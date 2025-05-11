@@ -1,4 +1,4 @@
-#' Barycenter of Histograms by Cuturi & Doucet (2014)
+#' Barycenter of Histograms by Cuturi and Doucet (2014)
 #' 
 #' Given multiple histograms represented as \code{"histogram"} S3 objects, compute 
 #' Wasserstein barycenter. We need one requirement that all histograms in an 

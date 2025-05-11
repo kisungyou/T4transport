@@ -28,7 +28,7 @@
   packageStartupMessage("** ------------------------------------------------------- **")
   packageStartupMessage("**   T4transport || Computational Optimal Transport in R ")
   packageStartupMessage("**")
-  packageStartupMessage("** Maintainer : Kisung You  (kisungyou@outlook.com)")
+  packageStartupMessage("** Maintainer : Kisung You  (kisung.you@outlook.com)")
   packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
   packageStartupMessage("** Website    : https://kisungyou.com/T4transport/")
   packageStartupMessage("**")

@@ -17,9 +17,9 @@ gaussvis2d(mean, var, n = 500)
 an \eqn{(n\times 2)} matrix.
 }
 \description{
-This function samples points along the contour of an ellipse represented
-by mean and variance parameters for a 2-dimensional Gaussian distribution
-to help ease manipulating visualization of the specified distribution. For example,
+This function samples points along the contour of an ellipse represented 
+by mean and variance parameters for a 2-dimensional Gaussian distribution 
+to help ease manipulating visualization of the specified distribution. For example, 
 you can directly use a basic \code{plot()} function directly for drawing.
 }
 \examples{

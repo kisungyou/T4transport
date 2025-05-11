@@ -14,25 +14,24 @@ swdist(X, Y, p = 2, ...)
 \item{p}{an exponent for the order of the distance (default: 2).}
 
 \item{...}{extra parameters including \describe{
-\item{nproj}{the number of Monte Carlo samples for SW computation (default: 496).}
+\item{num_proj}{the number of Monte Carlo samples for SW computation (default: 496).}
 }}
 }
 \value{
 a named list containing\describe{
 \item{distance}{\eqn{\mathcal{SW}_p} distance value.}
-\item{projdist}{a length-\code{niter} vector of projected univariate distances.}
+\item{projdist}{a length-\code{num_proj} vector of projected univariate distances.}
 }
 }
 \description{
-Sliced Wasserstein (SW) Distance \insertCite{rabin_2012_WassersteinBarycenterIts}{T4transport}
-is a popular alternative to the standard Wasserstein distance due to its computational
-efficiency on top of nice theoretical properties. For the \eqn{d}-dimensional probability
-measures \eqn{\mu} and \eqn{\nu}, the SW distance is defined as
+Sliced Wasserstein (SW) Distance is a popular alternative to the standard Wasserstein distance due to its computational 
+efficiency on top of nice theoretical properties. For the \eqn{d}-dimensional probability 
+measures \eqn{\mu} and \eqn{\nu}, the SW distance is defined as 
 \deqn{\mathcal{SW}_p (\mu, \nu) = 
-\left( \int_{\mathbf{S}^{d-1}} \mathcal{W}_p^p (
-\langle \theta, \mu\rangle, \langle \theta, \nu \rangle d\lambda (\theta) \right)^{1/p},}
-where \eqn{\mathbf{S}^{d-1}} is the \eqn{(d-1)}-dimensional unit hypersphere and
-\eqn{\lambda} is the uniform distribution on \eqn{\mathbf{S}^{d-1}}. Practically,
+\left( \int_{\mathbb{S}^{d-1}} \mathcal{W}_p^p (
+\langle \theta, \mu\rangle, \langle \theta, \nu \rangle) d\lambda (\theta) \right)^{1/p},}
+where \eqn{\mathbb{S}^{d-1}} is the \eqn{(d-1)}-dimensional unit hypersphere and 
+\eqn{\lambda} is the uniform distribution on \eqn{\mathbb{S}^{d-1}}. Practically, 
 it is computed via Monte Carlo integration.
 }
 \examples{
@@ -51,7 +50,7 @@ X = matrix(rnorm(m*2, mean=-1),ncol=2) # m obs. for X
 Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 
 # COMPUTE THE SLICED-WASSERSTEIN DISTANCE
-outsw <- swdist(X, Y, nproj=100)
+outsw <- swdist(X, Y, num_proj=100)
 
 # VISUALIZE
 # prepare ingredients for plotting
@@ -71,6 +70,6 @@ par(opar)
 
 }
 \references{
-\insertAllCited{}
+\insertRef{rabin_2012_WassersteinBarycenterIts}{T4transport}
 }
-\concept{dist_others}
+\concept{dist}

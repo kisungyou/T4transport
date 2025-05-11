@@ -25,9 +25,9 @@ a named list containing \describe{
 }
 }
 \description{
-Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{\mathcal{N}(\mu_i, \Sigma_i^2)}
-for \eqn{i=1,\ldots,n}, compute the Wasserstein barycenter of order 2.
-For the barycenter computation of variance components, we use a fixed-point
+Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{N(\mu_i, \Sigma_i^2)} 
+for \eqn{i=1,\ldots,n}, compute the Wasserstein barycenter of order 2. 
+For the barycenter computation of variance components, we use a fixed-point 
 algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.
 }
 \examples{
@@ -67,6 +67,6 @@ par(opar)
 \insertAllCited{}
 }
 \seealso{
-\code{\link[=gaussbary1d]{gaussbary1d()}} for univariate case.
+[T4transport::gaussbary1d()] for univariate case.
 }
 \concept{gaussian}

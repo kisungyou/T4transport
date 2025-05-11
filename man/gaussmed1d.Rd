@@ -25,7 +25,7 @@ a named list containing \describe{
 }
 }
 \description{
-Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n},
+Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
 compute the Wasserstein median.
 }
 \examples{
@@ -73,6 +73,6 @@ par(opar)
 
 }
 \seealso{
-\code{\link[=gaussmedpd]{gaussmedpd()}} for multivariate case.
+[T4transport::gaussmedpd()] for multivariate case.
 }
 \concept{gaussian}

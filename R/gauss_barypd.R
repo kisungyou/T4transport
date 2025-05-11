@@ -1,6 +1,6 @@
 #' Barycenter of Gaussian Distributions in \eqn{\mathbf{R}^p}
 #' 
-#' Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{\mathcal{N}(\mu_i, \Sigma_i^2)} 
+#' Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{N(\mu_i, \Sigma_i^2)} 
 #' for \eqn{i=1,\ldots,n}, compute the Wasserstein barycenter of order 2. 
 #' For the barycenter computation of variance components, we use a fixed-point 
 #' algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.

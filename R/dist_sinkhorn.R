@@ -1,15 +1,18 @@
-#' Wasserstein Distance by Entropic Regularization
+#' Wasserstein Distance via Entropic Regularization and Sinkhorn Algorithm
 #' 
-#' Due to high computational cost for linear programming approaches to compute 
-#' Wasserstein distance, \insertCite{cuturi_sinkhorn_2013;textual}{T4transport} proposed an entropic regularization 
-#' scheme as an efficient approximation to the original problem. This comes with 
-#' a regularization parameter \eqn{\lambda > 0} in the term
-#' \deqn{\lambda h(\Gamma) = \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}).}
-#' As \eqn{\lambda\rightarrow 0}, 
-#' the solution to an approximation problem approaches to the solution of a 
-#' true problem. However, we have an issue with numerical underflow. Our 
-#' implementation returns an error when it happens, so please use a larger number 
-#' when necessary.
+#' @description
+#' To alleviate the computational burden of solving the exact optimal transport problem via linear programming,
+#' Cuturi (2013) introduced an entropic regularization scheme that yields a smooth approximation to the
+#' Wasserstein distance. Let \eqn{C:=\|X_m - Y_n\|^p} be the cost matrix, where \eqn{X_m} and \eqn{Y_n} are the observations from two distributions \eqn{\mu} and \eqn{nu}. 
+#' Then, the regularized problem adds a penalty term to the objective function:
+#' \deqn{
+#'   W_{p,\lambda}^p(\mu, \nu) = \min_{\Gamma \in \Pi(\mu, \nu)} \langle \Gamma, C \rangle + \lambda \sum_{m,n} \Gamma_{m,n} \log (\Gamma_{m,n}),
+#' }
+#' where \eqn{\lambda > 0} is the regularization parameter and \eqn{\Gamma} denotes a transport plan.
+#' As \eqn{\lambda \rightarrow 0}, the regularized solution converges to the exact Wasserstein solution,
+#' but small values of \eqn{\lambda} may cause numerical instability due to underflow.
+#' In such cases, the implementation halts with an error; users are advised to increase \eqn{\lambda}
+#' to maintain numerical stability.
 #' 
 #' @param X an \eqn{(M\times P)} matrix of row observations.
 #' @param Y an \eqn{(N\times P)} matrix of row observations.
@@ -47,15 +50,15 @@
 #' ## COMPARE WITH WASSERSTEIN 
 #' outw = wasserstein(X, Y)
 #' skh1 = sinkhorn(X, Y, lambda=0.05)
-#' skh2 = sinkhorn(X, Y, lambda=0.10)
+#' skh2 = sinkhorn(X, Y, lambda=0.25)
 #' 
 #' ## VISUALIZE : SHOW THE PLAN AND DISTANCE
-#' pm1 = paste0("wasserstein plan ; distance=",round(outw$distance,2))
-#' pm2 = paste0("sinkhorn lbd=0.05; distance=",round(skh1$distance,2))
-#' pm5 = paste0("sinkhorn lbd=0.1 ; distance=",round(skh2$distance,2))
+#' pm1 = paste0("Exact Wasserstein:\n distance=",round(outw$distance,2))
+#' pm2 = paste0("Sinkhorn (lbd=0.05):\n distance=",round(skh1$distance,2))
+#' pm5 = paste0("Sinkhorn (lbd=0.25):\n distance=",round(skh2$distance,2))
 #' 
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
+#' par(mfrow=c(1,3), pty="s")
 #' image(outw$plan, axes=FALSE, main=pm1)
 #' image(skh1$plan, axes=FALSE, main=pm2)
 #' image(skh2$plan, axes=FALSE, main=pm5)
@@ -63,9 +66,9 @@
 #' }
 #' 
 #' @references 
-#' \insertAllCited{}
+#' \insertRef{cuturi_sinkhorn_2013}{T4transport}
 #' 
-#' @concept dist_wass
+#' @concept dist
 #' @name sinkhorn
 #' @rdname sinkhorn
 NULL
@@ -164,4 +167,5 @@ sinkhornD <- function(D, p=2, wx=NULL, wy=NULL, lambda=0.1, ...){
 # sinkhorn(X, Y, lambda=10)$distance
 # sinkhorn(X, Y, lambda=100)$distance
 # sinkhorn(X, Y, lambda=1000)$distance
+
 

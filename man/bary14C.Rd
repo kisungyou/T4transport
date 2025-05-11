@@ -50,13 +50,13 @@ bary14Cdist(
 a length-\eqn{N} vector of probability vector.
 }
 \description{
-Given \eqn{K} empirical measures \eqn{\mu_1, \mu_2, \ldots, \mu_K} of possibly different cardinalities,
-wasserstein barycenter \eqn{\mu^*} is the solution to the following problem
+Given \eqn{K} empirical measures \eqn{\mu_1, \mu_2, \ldots, \mu_K} of possibly different cardinalities, 
+wasserstein barycenter \eqn{\mu^*} is the solution to the following problem 
 \deqn{\sum_{k=1}^K \pi_k \mathcal{W}_p^p (\mu, \mu_k)}
-where \eqn{\pi_k}'s are relative weights of empirical measures. Here we assume
-either (1) support atoms in Euclidean space are given, or (2) all pairwise distances between
-atoms of the fixed support and empirical measures are given.
-Algorithmically, it is a subgradient method where the each subgradient is
+where \eqn{\pi_k}'s are relative weights of empirical measures. Here we assume 
+either (1) support atoms in Euclidean space are given, or (2) all pairwise distances between 
+atoms of the fixed support and empirical measures are given. 
+Algorithmically, it is a subgradient method where the each subgradient is 
 approximated using the entropic regularization.
 }
 \examples{

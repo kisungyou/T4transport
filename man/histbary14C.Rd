@@ -2,7 +2,7 @@
 % Please edit documentation in R/hist_bary14C.R
 \name{histbary14C}
 \alias{histbary14C}
-\title{Barycenter of Histograms by Cuturi & Doucet (2014)}
+\title{Barycenter of Histograms by Cuturi and Doucet (2014)}
 \usage{
 histbary14C(hists, p = 2, weights = NULL, lambda = NULL, ...)
 }
@@ -11,10 +11,10 @@ histbary14C(hists, p = 2, weights = NULL, lambda = NULL, ...)
 
 \item{p}{an exponent for the order of the distance (default: 2).}
 
-\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise,
+\item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, 
 it should be a length-\eqn{N} vector of nonnegative weights.}
 
-\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion
+\item{lambda}{a regularization parameter; if \code{NULL} (default), a paper's suggestion 
 would be taken, or it should be a nonnegative real number.}
 
 \item{...}{extra parameters including \describe{
@@ -29,9 +29,9 @@ would be taken, or it should be a nonnegative real number.}
 a \code{"histogram"} object of barycenter.
 }
 \description{
-Given multiple histograms represented as \code{"histogram"} S3 objects, compute
-Wasserstein barycenter. We need one requirement that all histograms in an
-input list \code{hists} must have \bold{same breaks}. See the example on how to
+Given multiple histograms represented as \code{"histogram"} S3 objects, compute 
+Wasserstein barycenter. We need one requirement that all histograms in an 
+input list \code{hists} must have \bold{same breaks}. See the example on how to 
 construct a histogram on predefined breaks/bins.
 }
 \examples{

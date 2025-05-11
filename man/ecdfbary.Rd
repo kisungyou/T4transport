@@ -7,7 +7,7 @@
 ecdfbary(ecdfs, weights = NULL, ...)
 }
 \arguments{
-\item{ecdfs}{a length-\eqn{N} list of \code{"ecdf"} objects by \code{\link[stats:ecdf]{stats::ecdf()}}.}
+\item{ecdfs}{a length-\eqn{N} list of \code{"ecdf"} objects by [stats::ecdf()].}
 
 \item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{N} vector of nonnegative weights.}
 
@@ -20,9 +20,9 @@ ecdfbary(ecdfs, weights = NULL, ...)
 an \code{"ecdf"} object of the Wasserstein barycenter.
 }
 \description{
-Given a collection of empirical cumulative distribution functions
-\eqn{F^i (x)} for \eqn{i=1,\ldots,N}, compute the Wasserstein barycenter
-of order 2. This is obtained by taking a weighted average on a set of
+Given a collection of empirical cumulative distribution functions 
+\eqn{F^i (x)} for \eqn{i=1,\ldots,N}, compute the Wasserstein barycenter 
+of order 2. This is obtained by taking a weighted average on a set of 
 corresponding quantile functions.
 }
 \examples{

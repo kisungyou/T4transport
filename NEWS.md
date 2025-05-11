@@ -1,3 +1,7 @@
+# T4transport 0.1.3
+
+* Changed the structure of the package. 
+
 # T4transport 0.1.2
 
 * `gaussmed1d()` and `gaussmedpd()` now fully respects the product manifold perspective.

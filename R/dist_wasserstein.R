@@ -1,14 +1,19 @@
-#' Wasserstein Distance between Empirical Measures
+#' Wasserstein Distance via Linear Programming
 #' 
-#' Given two empirical measures \eqn{\mu, \nu} consisting of \eqn{M} and \eqn{N} observations on \eqn{\mathcal{X}}, \eqn{p}-Wasserstein distance for \eqn{p\geq 1} between two empirical measures 
-#' is defined as 
-#' \deqn{\mathcal{W}_p (\mu, \nu) = \left( \inf_{\gamma \in \Gamma(\mu, \nu)} \int_{\mathcal{X}\times \mathcal{X}} d(x,y)^p d \gamma(x,y) \right)^{1/p}}
-#' where \eqn{\Gamma(\mu, \nu)} denotes the collection of all measures/couplings on \eqn{\mathcal{X}\times \mathcal{X}} 
-#' whose marginals are \eqn{\mu} and \eqn{\nu} on the first and second factors, respectively. Please see the section 
+#' @description
+#' Given two empirical measures
+#' \deqn{\mu = \sum_{m=1}^M \mu_m \delta_{X_m}\quad\textrm{and}\quad \nu = \sum_{n=1}^N \nu_n \delta_{Y_n},}
+#' the \eqn{p}-Wasserstein distance for \eqn{p\geq 1} is posited as the following optimization problem
+#' \deqn{
+#'   W_p^p(\mu, \nu) = \min_{\pi \in \Pi(\mu, \nu)} \sum_{m=1}^M \sum_{n=1}^N \pi_{mn} \|X_m - Y_n\|^p,
+#' }
+#' where \eqn{\Pi(\mu, \nu)} denotes the set of joint distributions (transport plans) with marginals \eqn{\mu} and \eqn{\nu}. 
+#' This function solves the above problem with linear programming, which is a standard approach for 
+#' exact computation of the empirical Wasserstein distance. Please see the section 
 #' for detailed description on the usage of the function.
 #' 
 #' @section Using \code{wasserstein()} function:
-#' We assume empirical measures are defined on the Euclidean space \eqn{\mathcal{X}=\mathbf{R}^d},
+#' We assume empirical measures are defined on the Euclidean space \eqn{\mathcal{X}=\mathbb{R}^d},
 #' \deqn{\mu = \sum_{m=1}^M \mu_m \delta_{X_m}\quad\textrm{and}\quad \nu = \sum_{n=1}^N \nu_n \delta_{Y_n}} 
 #' and the distance metric used here is standard Euclidean norm \eqn{d(x,y) = \|x-y\|}. Here, the 
 #' marginals \eqn{(\mu_1,\mu_2,\ldots,\mu_M)} and \eqn{(\nu_1,\nu_2,\ldots,\nu_N)} correspond to 
@@ -18,7 +23,7 @@
 #' If other distance measures or underlying spaces are one's interests, we have an option for users to provide 
 #' a distance matrix \code{D} rather than vectors, where
 #' \deqn{D := D_{M\times N} = d(X_m, Y_n)}
-#' for flexible modeling.
+#' for arbitrary distance metrics beyond the \eqn{\ell_2} norm.
 #' 
 #' @param X an \eqn{(M\times P)} matrix of row observations.
 #' @param Y an \eqn{(N\times P)} matrix of row observations.
@@ -41,7 +46,7 @@
 #' #-------------------------------------------------------------------
 #' ## SMALL EXAMPLE
 #' m = 20
-#' n = 10
+#' n = 20
 #' X = matrix(rnorm(m*2, mean=-1),ncol=2) # m obs. for X
 #' Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 #' 
@@ -51,12 +56,12 @@
 #' out5 = wasserstein(X, Y, p=5)
 #' 
 #' ## VISUALIZE : SHOW THE PLAN AND DISTANCE
-#' pm1 = paste0("plan p=1; distance=",round(out1$distance,2))
-#' pm2 = paste0("plan p=2; distance=",round(out2$distance,2))
-#' pm5 = paste0("plan p=5; distance=",round(out5$distance,2))
+#' pm1 = paste0("Order p=1\n distance=",round(out1$distance,2))
+#' pm2 = paste0("Order p=2\n distance=",round(out2$distance,2))
+#' pm5 = paste0("Order p=5\n distance=",round(out5$distance,2))
 #' 
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
+#' par(mfrow=c(1,3), pty="s")
 #' image(out1$plan, axes=FALSE, main=pm1)
 #' image(out2$plan, axes=FALSE, main=pm2)
 #' image(out5$plan, axes=FALSE, main=pm5)
@@ -92,7 +97,7 @@
 #' @references 
 #' \insertRef{peyre_computational_2019}{T4transport}
 #' 
-#' @concept dist_wass
+#' @concept dist
 #' @name wasserstein
 #' @rdname wasserstein
 NULL
@@ -210,18 +215,18 @@ wass_lp <- function(dxy, p, wx, wy){
     cxy = (dxy^p)
     m   = nrow(cxy)
     n   = ncol(cxy)
-
+    
     c  = as.vector(cxy)
     A1 = base::kronecker(matrix(1,nrow=1,ncol=n), diag(m))
     A2 = base::kronecker(diag(n), matrix(1,nrow=1,ncol=m))
     A  = rbind(A1, A2)
-
+    
     f.obj = c
     f.con = A
     f.dir = rep("==",nrow(A))
     f.rhs = c(rep(1/m,m),rep(1/n,n))
     f.sol = (lpSolve::lp("min", f.obj, f.con, f.dir, f.rhs))
-
+    
     gamma = matrix(f.sol$solution, nrow=m)
     value = (sum(gamma*cxy)^(1/p))
     

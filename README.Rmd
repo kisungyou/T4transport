@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 
 
-# T4transport <a href='https://www.kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" width="130" /></a>
+# Computational Optimal Transport in R <a href='https://www.kisungyou.com/T4transport/'><img src='man/figures/logo.png' align="right" width="130" /></a>
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/T4transport)](https://CRAN.R-project.org/package=T4transport)
 <!-- badges: end -->

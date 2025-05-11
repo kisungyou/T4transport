@@ -14,11 +14,11 @@ a named list \code{"digits"} containing \describe{
 data(digits)
 }
 \description{
-\code{digits} contains 5000 images from the famous MNIST dataset of all digits,
-consisting of 500 images per digit class from 0 to 9.
-Each digit image is represented as an \eqn{(28\times 28)}
-matrix that sums to 1. This normalization is conventional and it does not
-hurt its visualization via a basic \code{image()} function.
+\code{digits} contains 5000 images from the famous MNIST dataset of all digits, 
+consisting of 500 images per digit class from 0 to 9. 
+Each digit image is represented as an \eqn{(28\times 28)} 
+matrix that sums to 1. This normalization is conventional and it does not 
+hurt its visualization via a basic `image()` function.
 }
 \examples{
 ## LOAD THE DATA

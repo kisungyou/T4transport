@@ -7,7 +7,7 @@
 ecdfmed(ecdfs, weights = NULL, ...)
 }
 \arguments{
-\item{ecdfs}{a length-\eqn{N} list of \code{"ecdf"} objects by \code{\link[stats:ecdf]{stats::ecdf()}}.}
+\item{ecdfs}{a length-\eqn{N} list of \code{"ecdf"} objects by [stats::ecdf()].}
 
 \item{weights}{a weight of each image; if \code{NULL} (default), uniform weight is set. Otherwise, it should be a length-\eqn{N} vector of nonnegative weights.}
 
@@ -20,9 +20,9 @@ ecdfmed(ecdfs, weights = NULL, ...)
 an \code{"ecdf"} object of the Wasserstein median.
 }
 \description{
-Given a collection of empirical cumulative distribution functions
-\eqn{F^i (x)} for \eqn{i=1,\ldots,N}, compute the Wasserstein median. This is
-obtained by a functional variant of the Weiszfeld algorithm on a set of
+Given a collection of empirical cumulative distribution functions 
+\eqn{F^i (x)} for \eqn{i=1,\ldots,N}, compute the Wasserstein median. This is 
+obtained by a functional variant of the Weiszfeld algorithm on a set of 
 quantile functions.
 }
 \examples{
