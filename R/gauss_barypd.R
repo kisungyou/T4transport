@@ -1,9 +1,9 @@
-#' Barycenter of Gaussian Distributions in \eqn{\mathbf{R}^p}
+#' Barycenter of Gaussian Distributions in \eqn{\mathbb{R}^p}
 #' 
 #' Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{N(\mu_i, \Sigma_i^2)} 
 #' for \eqn{i=1,\ldots,n}, compute the Wasserstein barycenter of order 2. 
 #' For the barycenter computation of variance components, we use a fixed-point 
-#' algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.
+#' algorithm by \insertCite{alvarez_2016_FixedpointApproachBarycenters;textual}{T4transport}.
 #' 
 #' @param means an \eqn{(n\times p)} matrix whose rows are mean vectors.
 #' @param vars a \eqn{(p\times p\times n)} array where each slice is covariance matrix.

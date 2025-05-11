@@ -116,6 +116,6 @@ par(opar)
 
 }
 \references{
-\insertRef{peyre_computational_2019}{T4transport}
+\insertRef{peyre_2019_ComputationalOptimalTransport}{T4transport}
 }
 \concept{dist}

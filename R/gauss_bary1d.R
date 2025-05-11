@@ -1,8 +1,8 @@
-#' Barycenter of Gaussian Distributions in \eqn{\mathbf{R}}
+#' Barycenter of Gaussian Distributions in \eqn{\mathbb{R}}
 #' 
 #' Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
 #' compute the Wasserstein barycenter of order 2. For the barycenter computation of 
-#' variance components, we use a fixed-point algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.
+#' variance components, we use a fixed-point algorithm by \insertCite{alvarez_2016_FixedpointApproachBarycenters;textual}{T4transport}.
 #' 
 #' @param means a length-\eqn{n} vector of mean parameters.
 #' @param vars a length-\eqn{n} vector of variance parameters.

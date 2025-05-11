@@ -72,6 +72,9 @@ par(opar)
 }
 
 }
+\references{
+\insertRef{you_2024_WassersteinMedianProbability}{T4transport}
+}
 \seealso{
 [T4transport::gaussmedpd()] for multivariate case.
 }

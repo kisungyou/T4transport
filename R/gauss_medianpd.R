@@ -62,6 +62,10 @@
 #' 
 #' @seealso [T4transport::gaussmed1d()] for univariate case.
 #' @concept gaussian
+#' 
+#' @references 
+#' \insertRef{you_2024_WassersteinMedianProbability}{T4transport}
+#' 
 #' @export
 gaussmedpd <- function(means, vars, weights=NULL, ...){
   # --------------------------------------------------------------------------

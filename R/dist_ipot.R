@@ -18,9 +18,6 @@
 #' solution. It is therefore more robust to numerical precision issues, especially for small regularization parameters,
 #' and provides a closer approximation to the true optimal transport cost with fewer artifacts.
 #' 
-#' 
-#' 
-#' 
 #' @param X an \eqn{(M\times P)} matrix of row observations.
 #' @param Y an \eqn{(N\times P)} matrix of row observations.
 #' @param D an \eqn{(M\times N)} distance matrix \eqn{d(x_m, y_n)} between two sets of observations.
@@ -36,7 +33,6 @@
 #' 
 #' @return a named list containing\describe{
 #' \item{distance}{\eqn{\mathcal{W}_p} distance value}
-#' \item{iteration}{the number of iterations it took to converge.}
 #' \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 #' }
 #' 
@@ -74,7 +70,7 @@
 #' }
 #' 
 #' @references 
-#' \insertRef{xie_fast_2020}{T4transport}
+#' \insertRef{xie_2020_FastProximalPoint}{T4transport}
 #' 
 #' @concept dist
 #' @name ipot

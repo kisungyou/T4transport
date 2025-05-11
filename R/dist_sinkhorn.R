@@ -28,7 +28,6 @@
 #' 
 #' @return a named list containing\describe{
 #' \item{distance}{\eqn{\mathcal{W}_p} distance value.}
-#' \item{iteration}{the number of iterations it took to converge.}
 #' \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 #' }
 #' 
@@ -66,7 +65,7 @@
 #' }
 #' 
 #' @references 
-#' \insertRef{cuturi_sinkhorn_2013}{T4transport}
+#' \insertRef{cuturi_2013_SinkhornDistancesLightspeed}{T4transport}
 #' 
 #' @concept dist
 #' @name sinkhorn

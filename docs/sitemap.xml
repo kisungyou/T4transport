@@ -7,12 +7,16 @@
 <url><loc>https://kisungyou.com/T4transport/news/index.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/T4transport.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/bary14C.html</loc></url>
+<url><loc>https://kisungyou.com/T4transport/reference/bary14Cdist.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/bary15B.html</loc></url>
+<url><loc>https://kisungyou.com/T4transport/reference/bary15Bdist.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/barysinkhorn14.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/digit3.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/digits.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/ecdfbary.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/ecdfmed.html</loc></url>
+<url><loc>https://kisungyou.com/T4transport/reference/fbary14C.html</loc></url>
+<url><loc>https://kisungyou.com/T4transport/reference/fbary15B.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/gaussbary1d.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/gaussbarynd.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/gaussbarypd.html</loc></url>
@@ -34,6 +38,7 @@
 <url><loc>https://kisungyou.com/T4transport/reference/index.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/install_pot.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/ipot.html</loc></url>
+<url><loc>https://kisungyou.com/T4transport/reference/rbary23L.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/sinkhorn.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/swdist.html</loc></url>
 <url><loc>https://kisungyou.com/T4transport/reference/wasserstein.html</loc></url>

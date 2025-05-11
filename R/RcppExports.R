@@ -5,20 +5,20 @@ compute_pdist2 <- function(X, Y) {
     .Call('_T4transport_compute_pdist2', PACKAGE = 'T4transport', X, Y)
 }
 
-cpp_barysinkhorn14 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
-    .Call('_T4transport_cpp_barysinkhorn14', PACKAGE = 'T4transport', listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
-}
-
-cpp_barybregman15 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
-    .Call('_T4transport_cpp_barybregman15', PACKAGE = 'T4transport', listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
+cpp_ipot20 <- function(a, b, dab, lambda, p, maxiter, abstol, L) {
+    .Call('_T4transport_cpp_ipot20', PACKAGE = 'T4transport', a, b, dab, lambda, p, maxiter, abstol, L)
 }
 
 cpp_sinkhorn13 <- function(a, b, dab, lambda, p, maxiter, abstol) {
     .Call('_T4transport_cpp_sinkhorn13', PACKAGE = 'T4transport', a, b, dab, lambda, p, maxiter, abstol)
 }
 
-cpp_ipot20 <- function(a, b, dab, lambda, p, maxiter, abstol, L) {
-    .Call('_T4transport_cpp_ipot20', PACKAGE = 'T4transport', a, b, dab, lambda, p, maxiter, abstol, L)
+cpp_barybregman15 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
+    .Call('_T4transport_cpp_barybregman15', PACKAGE = 'T4transport', listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
+}
+
+cpp_fixed_sinkhorn14 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
+    .Call('_T4transport_cpp_fixed_sinkhorn14', PACKAGE = 'T4transport', listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
 }
 
 gauss_weiszfeld <- function(X, weights, abstol, maxiter) {

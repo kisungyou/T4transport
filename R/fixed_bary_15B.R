@@ -1,13 +1,13 @@
-#' Barycenter by Cuturi & Doucet (2014)
+#' Fixed-Support Barycenter by Benamou et al. (2015)
 #' 
+#' @description
 #' Given \eqn{K} empirical measures \eqn{\mu_1, \mu_2, \ldots, \mu_K} of possibly different cardinalities, 
 #' wasserstein barycenter \eqn{\mu^*} is the solution to the following problem 
 #' \deqn{\sum_{k=1}^K \pi_k \mathcal{W}_p^p (\mu, \mu_k)}
 #' where \eqn{\pi_k}'s are relative weights of empirical measures. Here we assume 
 #' either (1) support atoms in Euclidean space are given, or (2) all pairwise distances between 
 #' atoms of the fixed support and empirical measures are given. 
-#' Algorithmically, it is a subgradient method where the each subgradient is 
-#' approximated using the entropic regularization.
+#' Authors proposed iterative Bregman projections in conjunction with entropic regularization.
 #' 
 #' @param support an \eqn{(N\times P)} matrix of rows being atoms for the fixed support.
 #' @param atoms a length-\eqn{K} list where each element is an \eqn{(N_k \times P)} matrix of atoms.
@@ -25,8 +25,8 @@
 #' 
 #' @return a length-\eqn{N} vector of probability vector.
 #' 
-#' 
-#' @examples 
+#' @examples
+#' \donttest{
 #' #-------------------------------------------------------------------
 #' #     Wasserstein Barycenter for Fixed Atoms with Two Gaussians
 #' #
@@ -38,7 +38,7 @@
 #' ## GENERATE DATA
 #' #  Empirical Measures
 #' set.seed(100)
-#' ndat = 100
+#' ndat = 500
 #' dat1 = matrix(rnorm(ndat*2, mean=-4, sd=0.5),ncol=2)
 #' dat2 = matrix(rnorm(ndat*2, mean=+4, sd=0.5),ncol=2) 
 #' 
@@ -51,31 +51,32 @@
 #' support = cbind(seq(from=-8,to=8,by=2),
 #'                 seq(from=-8,to=8,by=2))
 #' ## COMPUTE
-#' comp1 = bary14C(support, myatoms, lambda=0.5, maxiter=10)
-#' comp2 = bary14C(support, myatoms, lambda=1,   maxiter=10)
-#' comp3 = bary14C(support, myatoms, lambda=5,   maxiter=10)
+#' comp1 = fbary15B(support, myatoms, lambda=0.5, maxiter=10)
+#' comp2 = fbary15B(support, myatoms, lambda=1,   maxiter=10)
+#' comp3 = fbary15B(support, myatoms, lambda=10,  maxiter=10)
 #' 
 #' ## VISUALIZE
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
-#' barplot(comp1, main="lambda=0.5")
-#' barplot(comp2, main="lambda=1")
-#' barplot(comp3, main="lambda=5")
+#' par(mfrow=c(1,3), pty="s")
+#' barplot(comp1, ylim=c(0,1), main="Probability\n (lambda=0.5)")
+#' barplot(comp2, ylim=c(0,1), main="Probability\n (lambda=1)")
+#' barplot(comp3, ylim=c(0,1), main="Probability\n (lambda=10)")
 #' par(opar)
+#' }
 #' 
 #' @references 
-#' \insertRef{cuturi_fast_2014}{T4transport}
+#' \insertRef{benamou_2015_IterativeBregmanProjections}{T4transport}
 #' 
-#' @concept barycenter
-#' @name bary14C
-#' @rdname bary14C
+#' @concept fixed_bary
+#' @name fbary15B
+#' @rdname fbary15B
 NULL
 
-#' @rdname bary14C
+#' @rdname fbary15B
 #' @export
-bary14C <- function(support, atoms, marginals=NULL, weights=NULL, lambda=0.1, p=2, ...){
+fbary15B <- function(support, atoms, marginals=NULL, weights=NULL, lambda=0.1, p=2, ...){
   ## INPUT : EXPLICIT
-  name.f    = "bary14C"
+  name.f    = "fbary15B"
   par_support   = valid_matrixed(support, name.f)
   par_measures  = valid_multiple_measures(atoms, ncol(support), name.f)
   num_atoms     = unlist(lapply(atoms, nrow))
@@ -83,7 +84,7 @@ bary14C <- function(support, atoms, marginals=NULL, weights=NULL, lambda=0.1, p=
   par_weights   = valid_multiple_weight(weights, length(atoms), name.f)
   par_p    = max(1, as.double(p))
   # input is conventional lbd*h(P); following the notation of the paper (1/lbd)*h(P)
-  par_lbd  = 1/max(sqrt(.Machine$double.eps), as.double(lambda)) 
+  par_lbd  = max(sqrt(.Machine$double.eps), as.double(lambda)) 
   
   ## INPUT : IMPLICIT
   K = length(atoms)
@@ -97,7 +98,7 @@ bary14C <- function(support, atoms, marginals=NULL, weights=NULL, lambda=0.1, p=
     par_init = params$init.vec
     par_init = par_init/base::sum(par_init)
     if ((length(par_init)!=nsupport)||(any(par_init < 0))){
-      stop(paste0("* bary14C : 'init.vec' should be a vector of length ",nsupport," with nonnegative values."))
+      stop(paste0("* fbary15B : 'init.vec' should be a vector of length ",nsupport," with nonnegative values."))
     }
   } else {
     par_init = rep(1/nsupport, nsupport)
@@ -110,22 +111,22 @@ bary14C <- function(support, atoms, marginals=NULL, weights=NULL, lambda=0.1, p=
   }
   
   ## COMPUTE
-  output = cpp_barysinkhorn14(par_listdxy, par_marginals, par_weights, par_p, par_lbd, par_iter, par_tol, par_show, par_init)
+  output = cpp_barybregman15(par_listdxy, par_marginals, par_weights, par_p, par_lbd, par_iter, par_tol, par_show, par_init)
   return(as.vector(output))
 }
 
-#' @rdname bary14C
+#' @rdname fbary15B
 #' @export
-bary14Cdist <- function(distances, marginals=NULL, weights=NULL, lambda=0.1, p=2, ...){
+fbary15Bdist <- function(distances, marginals=NULL, weights=NULL, lambda=0.1, p=2, ...){
   ## INPUT : EXPLICIT
-  name.f      = "bary14Cdist"
+  name.f      = "fbary15Bdist"
   par_listdxy = valid_multiple_distance(distances, name.f)
   num_atoms   = unlist(lapply(par_listdxy, ncol))
   par_marginals = valid_multiple_marginal(marginals, num_atoms, name.f)
   par_weights   = valid_multiple_weight(weights, length(par_marginals), name.f)
   par_p    = max(1, as.double(p))
   # input is conventional lbd*h(P); following the notation of the paper (1/lbd)*h(P)
-  par_lbd  = 1/max(sqrt(.Machine$double.eps), as.double(lambda)) 
+  par_lbd  = max(sqrt(.Machine$double.eps), as.double(lambda)) 
   
   ## INPUT : IMPLICIT
   K = length(par_weights)
@@ -139,13 +140,13 @@ bary14Cdist <- function(distances, marginals=NULL, weights=NULL, lambda=0.1, p=2
     par_init = params$init.vec
     par_init = par_init/base::sum(par_init)
     if ((length(par_init)!=nsupport)||(any(par_init < 0))){
-      stop(paste0("* bary14Cdist : 'init.vec' should be a vector of length ",nsupport," with nonnegative values."))
+      stop(paste0("* fbary15Bdist : 'init.vec' should be a vector of length ",nsupport," with nonnegative values."))
     }
   } else {
     par_init = rep(1/nsupport, nsupport)
   }
   
   ## COMPUTE
-  output = cpp_barysinkhorn14(par_listdxy, par_marginals, par_weights, par_p, par_lbd, par_iter, par_tol, par_show, par_init)
+  output = cpp_barybregman15(par_listdxy, par_marginals, par_weights, par_p, par_lbd, par_iter, par_tol, par_show, par_init)
   return(as.vector(output))
 }

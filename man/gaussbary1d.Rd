@@ -2,7 +2,7 @@
 % Please edit documentation in R/gauss_bary1d.R
 \name{gaussbary1d}
 \alias{gaussbary1d}
-\title{Barycenter of Gaussian Distributions in \eqn{\mathbf{R}}}
+\title{Barycenter of Gaussian Distributions in \eqn{\mathbb{R}}}
 \usage{
 gaussbary1d(means, vars, weights = NULL, ...)
 }
@@ -27,7 +27,7 @@ a named list containing \describe{
 \description{
 Given a collection of Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
 compute the Wasserstein barycenter of order 2. For the barycenter computation of 
-variance components, we use a fixed-point algorithm by \insertCite{AlvarezEsteban;textual}{T4transport}.
+variance components, we use a fixed-point algorithm by \insertCite{alvarez_2016_FixedpointApproachBarycenters;textual}{T4transport}.
 }
 \examples{
 #----------------------------------------------------------------------

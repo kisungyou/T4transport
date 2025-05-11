@@ -35,7 +35,6 @@ arma::vec routine_bary14C(arma::mat& dxy, arma::field<arma::vec>& marginals, arm
   double t0 = 2.0;
   double beta = 0.0;
   double a_hat_inc = 0.0;
-  int k;
   
   // MAIN ITERATION
   for (int it=0; it<maxiter; it++){

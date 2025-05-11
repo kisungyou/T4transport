@@ -69,7 +69,7 @@ par(opar)
 
 }
 \references{
-\insertRef{cuturi_fast_2014}{T4transport}
+\insertRef{cuturi_2014_FastComputationWasserstein}{T4transport}
 }
 \seealso{
 \code{\link{bary14C}}

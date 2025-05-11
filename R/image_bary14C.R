@@ -22,7 +22,7 @@
 #' @return an \eqn{(m\times n)} matrix of the barycentric image.
 #' 
 #' @references 
-#' \insertRef{cuturi_fast_2014}{T4transport}
+#' \insertRef{cuturi_2014_FastComputationWasserstein}{T4transport}
 #' 
 #' @examples 
 #' \dontrun{

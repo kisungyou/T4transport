@@ -18,8 +18,10 @@ arma::mat compute_pdist2(arma::mat& X, arma::mat& Y){
 // (02) cpp_subgrad_weight =====================================================
 arma::vec cpp_subgrad_weight(arma::vec a, arma::vec b, arma::mat M, double lambda){
   int n = a.n_elem; double nn = static_cast<double>(n);
+  
+  arma::vec a_clamped = arma::clamp(a, 1e-12, 1.0);  // avoids division by 0
   arma::mat K = arma::exp(-lambda*M);
-  arma::mat Ktil = arma::diagmat(1.0/a)*K;
+  arma::mat Ktil = arma::diagmat(1.0/a_clamped)*K;
   
   arma::vec uold(n,fill::zeros); uold.fill(1.0/nn);
   arma::vec unew(n,fill::zeros); unew.fill(1.0/nn);

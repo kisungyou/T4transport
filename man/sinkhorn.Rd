@@ -32,7 +32,6 @@ sinkhornD(D, p = 2, wx = NULL, wy = NULL, lambda = 0.1, ...)
 \value{
 a named list containing\describe{
 \item{distance}{\eqn{\mathcal{W}_p} distance value.}
-\item{iteration}{the number of iterations it took to converge.}
 \item{plan}{an \eqn{(M\times N)} nonnegative matrix for the optimal transport plan.}
 }
 }
@@ -85,6 +84,6 @@ par(opar)
 
 }
 \references{
-\insertRef{cuturi_sinkhorn_2013}{T4transport}
+\insertRef{cuturi_2013_SinkhornDistancesLightspeed}{T4transport}
 }
 \concept{dist}

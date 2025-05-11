@@ -1,6 +1,9 @@
 # T4transport 0.1.3
 
 * Changed the structure of the package. 
+* Applied the `log-sum-exp` trick for numerical stability.
+* `rbary23L()` added for simple free-support Wasserstein barycenter computation.
+* Two ad hoc median routines for images and histograms are removed.
 
 # T4transport 0.1.2
 

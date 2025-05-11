@@ -32,10 +32,13 @@ reference:
   - title: "[1] Distance"
     contents:
       - has_concept("dist")
-  - title: "[2] Wasserstein Barycenter"
+  - title: "[2] Barycenter"
   - subtitle: "Fixed Support"
     contents:
-      - has_concept("barycenter")
+      - has_concept("fixed_bary")
+  - subtitle: "Free Support"
+    contents:
+      - has_concept("free_bary")
   - title: "[3] Special Cases"
   - subtitle: "Cumulative Distribution Functions"
     contents:

@@ -101,10 +101,8 @@ arma::mat gauss_spdbary16A(arma::cube array3d, arma::vec weight, double abstol, 
   arma::vec S_weight = weight/arma::accu(weight);
   
   // MAIN
-  int itcount = 0;
   for (int it=0; it<maxiter; it++){
     // MAIN-1. initialize 'tmp' and compute auxiliary ones
-    itcount += 1;
     S_tmp.fill(0.0);
     S0_half = arma::sqrtmat_sympd(S_old);
     S0_hinv = arma::inv_sympd(S0_half);
