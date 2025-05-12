@@ -11,7 +11,7 @@
 #' @importFrom stats rnorm median dnorm quantile
 #' @importFrom utils packageVersion
 #' @importFrom Rcpp evalCpp
-#' @useDynLib T4transport
+#' @useDynLib T4transport, .registration = TRUE
 "_PACKAGE"
 # pack <- "T4transport"
 # path <- find.package(pack)

@@ -56,7 +56,7 @@
 #' par(opar)
 #' }
 #' 
-#' @seealso \code{\link{bary15B}}
+#' @seealso \code{\link{fbary15B}}
 #' 
 #' @references 
 #' \insertRef{benamou_2015_IterativeBregmanProjections}{T4transport}

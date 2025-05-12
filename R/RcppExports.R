@@ -2,46 +2,46 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 compute_pdist2 <- function(X, Y) {
-    .Call('_T4transport_compute_pdist2', PACKAGE = 'T4transport', X, Y)
+    .Call(`_T4transport_compute_pdist2`, X, Y)
 }
 
 cpp_ipot20 <- function(a, b, dab, lambda, p, maxiter, abstol, L) {
-    .Call('_T4transport_cpp_ipot20', PACKAGE = 'T4transport', a, b, dab, lambda, p, maxiter, abstol, L)
+    .Call(`_T4transport_cpp_ipot20`, a, b, dab, lambda, p, maxiter, abstol, L)
 }
 
 cpp_sinkhorn13 <- function(a, b, dab, lambda, p, maxiter, abstol) {
-    .Call('_T4transport_cpp_sinkhorn13', PACKAGE = 'T4transport', a, b, dab, lambda, p, maxiter, abstol)
+    .Call(`_T4transport_cpp_sinkhorn13`, a, b, dab, lambda, p, maxiter, abstol)
 }
 
 cpp_barybregman15 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
-    .Call('_T4transport_cpp_barybregman15', PACKAGE = 'T4transport', listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
+    .Call(`_T4transport_cpp_barybregman15`, listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
 }
 
 cpp_fixed_sinkhorn14 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
-    .Call('_T4transport_cpp_fixed_sinkhorn14', PACKAGE = 'T4transport', listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
+    .Call(`_T4transport_cpp_fixed_sinkhorn14`, listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
 }
 
 gauss_weiszfeld <- function(X, weights, abstol, maxiter) {
-    .Call('_T4transport_gauss_weiszfeld', PACKAGE = 'T4transport', X, weights, abstol, maxiter)
+    .Call(`_T4transport_gauss_weiszfeld`, X, weights, abstol, maxiter)
 }
 
 gauss_spdbary16A <- function(array3d, weight, abstol, maxiter) {
-    .Call('_T4transport_gauss_spdbary16A', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
+    .Call(`_T4transport_gauss_spdbary16A`, array3d, weight, abstol, maxiter)
 }
 
 gauss_median_general <- function(mean2d, array3d, weight, abstol, maxiter) {
-    .Call('_T4transport_gauss_median_general', PACKAGE = 'T4transport', mean2d, array3d, weight, abstol, maxiter)
+    .Call(`_T4transport_gauss_median_general`, mean2d, array3d, weight, abstol, maxiter)
 }
 
 gauss_median_centered <- function(array3d, weight, abstol, maxiter) {
-    .Call('_T4transport_gauss_median_centered', PACKAGE = 'T4transport', array3d, weight, abstol, maxiter)
+    .Call(`_T4transport_gauss_median_centered`, array3d, weight, abstol, maxiter)
 }
 
 routine_bary14C <- function(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread) {
-    .Call('_T4transport_routine_bary14C', PACKAGE = 'T4transport', dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
+    .Call(`_T4transport_routine_bary14C`, dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
 }
 
 routine_bary15B <- function(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread) {
-    .Call('_T4transport_routine_bary15B', PACKAGE = 'T4transport', dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
+    .Call(`_T4transport_routine_bary15B`, dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
 }
 

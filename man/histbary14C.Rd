@@ -72,6 +72,6 @@ par(opar)
 \insertRef{cuturi_2014_FastComputationWasserstein}{T4transport}
 }
 \seealso{
-\code{\link{bary14C}}
+\code{\link{fbary14C}}
 }
 \concept{histogram}

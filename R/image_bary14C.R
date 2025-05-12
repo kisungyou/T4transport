@@ -59,7 +59,7 @@
 #' par(opar)
 #' }
 #' 
-#' @seealso \code{\link{bary14C}}
+#' @seealso \code{\link{fbary14C}}
 #' 
 #' @concept image
 #' @export

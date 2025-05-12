@@ -57,7 +57,7 @@
 #' @references 
 #' \insertRef{cuturi_2014_FastComputationWasserstein}{T4transport}
 #' 
-#' @seealso \code{\link{bary14C}}
+#' @seealso \code{\link{fbary14C}}
 #' 
 #' @concept histogram
 #' @export

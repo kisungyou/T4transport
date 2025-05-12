@@ -6,7 +6,7 @@ Authors@R: person("Kisung", "You", role = c("aut", "cre"),email = "kisung.you@ou
 Description: Transport theory has seen much success in many fields of statistics and machine learning. We provide a variety of algorithms to compute Wasserstein distance, barycenter, and others. See Peyré and Cuturi (2019) <doi:10.1561/2200000073> for the general exposition to the study of computational optimal transport.
 License: MIT + file LICENSE
 Imports: CVXR, Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo, BH
 Encoding: UTF-8
 URL: https://kisungyou.com/T4transport
 RoxygenNote: 7.3.2

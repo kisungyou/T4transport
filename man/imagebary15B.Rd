@@ -74,6 +74,6 @@ par(opar)
 \insertRef{benamou_2015_IterativeBregmanProjections}{T4transport}
 }
 \seealso{
-\code{\link{bary15B}}
+\code{\link{fbary15B}}
 }
 \concept{image}

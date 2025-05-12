@@ -1,5 +1,5 @@
 #include "RcppArmadillo.h"
-#include "utility.hpp"
+#include "utility.h"
 #include <cmath>
 
 // [[Rcpp::depends(RcppArmadillo)]]

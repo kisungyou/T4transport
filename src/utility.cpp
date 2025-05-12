@@ -1,5 +1,5 @@
 #include <RcppArmadillo.h>
-#include "utility.hpp"
+#include "utility.h"
 
 /* UTILITY FUNCTIONS
  * util_entropic_plan : compute the entropic-regularized plan using Sinkhorn algorithm
