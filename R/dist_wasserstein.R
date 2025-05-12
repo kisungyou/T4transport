@@ -46,7 +46,7 @@
 #' #-------------------------------------------------------------------
 #' ## SMALL EXAMPLE
 #' m = 20
-#' n = 20
+#' n = 10
 #' X = matrix(rnorm(m*2, mean=-1),ncol=2) # m obs. for X
 #' Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 #' 
@@ -121,7 +121,7 @@ wasserstein <- function(X, Y, p=2, wx=NULL, wy=NULL){
   m = base::nrow(X)
   n = base::nrow(Y)
   
-  wxname =  paste0("'",deparse(substitute(wx)),"'")
+  wxname = paste0("'",deparse(substitute(wx)),"'")
   wyname = paste0("'",deparse(substitute(wy)),"'")
   fname  = "wasserstein"
   

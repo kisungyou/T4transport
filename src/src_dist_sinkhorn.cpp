@@ -17,7 +17,7 @@ Rcpp::List cpp_sinkhorn13(const arma::vec a, const arma::vec b,
   arma::mat costm = arma::pow(dab, p);
   
   // compute the plan
-  arma::mat plan = util_entropic_plan(costm, a, b, lambda, maxiter, abstol);
+  arma::mat plan = util_plan_entropic(costm, a, b, lambda, maxiter, abstol);
   
   // compute the total cost
   double cost = arma::accu(plan % costm);

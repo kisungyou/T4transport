@@ -66,7 +66,7 @@ for arbitrary distance metrics beyond the \eqn{\ell_2} norm.
 #-------------------------------------------------------------------
 ## SMALL EXAMPLE
 m = 20
-n = 20
+n = 10
 X = matrix(rnorm(m*2, mean=-1),ncol=2) # m obs. for X
 Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 
