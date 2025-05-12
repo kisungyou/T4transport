@@ -129,7 +129,6 @@ wasserstein <- function(X, Y, p=2, wx=NULL, wy=NULL){
   par_wy = valid_single_marginal(wy, n, fname) #valid_weight(wy, n, wyname, fname)
   par_p  = max(1, as.double(p))
   par_D  = as.matrix(compute_pdist2(X, Y))
-  
   output = wass_lp(par_D, par_p, par_wx, par_wy)
   return(output)
 }
@@ -199,8 +198,9 @@ wass_lp <- function(dxy, p, wx, wy){
   ones_m = matrix(rep(1,n),ncol=1)
   ones_n = matrix(rep(1,m),nrow=1)
   plan   = CVXR::Variable(m,n)
-  
-  wd.obj    <- CVXR::Minimize(CVXR::matrix_trace(t(cxy)%*%plan))
+
+  #wd.obj    <- CVXR::Minimize(CVXR::matrix_trace(t(cxy)%*%plan))
+  wd.obj    <- CVXR::Minimize(CVXR::sum_entries(CVXR::multiply(cxy, plan)))
   wd.const1 <- list(plan >= 0)
   wd.const2 <- list(plan%*%ones_m==ww_m, ones_n%*%plan==ww_n)
   wd.prob   <- CVXR::Problem(wd.obj, c(wd.const1, wd.const2))

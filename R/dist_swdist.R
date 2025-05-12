@@ -84,7 +84,7 @@ swdist <- function(X, Y, p=2, ...){
   pnames = names(params)
   
   if ("num_proj"%in%pnames){
-    par_niter = max(1, round(params$nproj))
+    par_niter = max(1, round(params$num_proj))
   } else {
     par_niter = 496
   }

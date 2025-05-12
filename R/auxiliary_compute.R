@@ -9,6 +9,6 @@
 # aux_emd -----------------------------------------------------------------
 #' @keywords internal
 #' @noRd
-aux_emd <- function(C, a, b){
-  return(wass_lp(C, 1, a, b)$plan)
+aux_emd <- function(a,b,C){
+  return(as.matrix(wass_lp(C, 1, a, b)$plan))
 }

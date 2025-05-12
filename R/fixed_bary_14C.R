@@ -51,14 +51,14 @@
 #' support = cbind(seq(from=-8,to=8,by=2),
 #'                 seq(from=-8,to=8,by=2))
 #' ## COMPUTE
-#' comp1 = fbary14C(support, myatoms, lambda=0.1, maxiter=10)
+#' comp1 = fbary14C(support, myatoms, lambda=0.5, maxiter=10)
 #' comp2 = fbary14C(support, myatoms, lambda=1,   maxiter=10)
 #' comp3 = fbary14C(support, myatoms, lambda=10,  maxiter=10)
 #' 
 #' ## VISUALIZE
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3), pty="s")
-#' barplot(comp1, ylim=c(0,1), main="Probability\n (lambda=0.1)")
+#' barplot(comp1, ylim=c(0,1), main="Probability\n (lambda=0.5)")
 #' barplot(comp2, ylim=c(0,1), main="Probability\n (lambda=1)")
 #' barplot(comp3, ylim=c(0,1), main="Probability\n (lambda=10)")
 #' par(opar)

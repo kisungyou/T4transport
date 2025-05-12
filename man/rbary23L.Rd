@@ -43,11 +43,11 @@ This version implements `reference` algorithm with \eqn{p=2}.
 ## GENERATE DATA
 #  Empirical Measures
 set.seed(100)
-ndat = 100
-dat1 = matrix(rnorm(ndat*2, mean=-4, sd=0.5),ncol=2)
-dat2 = matrix(rnorm(ndat*2, mean=+4, sd=0.5),ncol=2) 
-dat3 = cbind(rnorm(ndat, mean=+4, sd=0.5), rnorm(ndat, mean=-4, sd=0.5))
-dat4 = cbind(rnorm(ndat, mean=-4, sd=0.5), rnorm(ndat, mean=+4, sd=0.5))
+unif4 = round(runif(4, 100, 200))
+dat1 = matrix(rnorm(unif4[1]*2, mean=-4, sd=0.5),ncol=2)
+dat2 = matrix(rnorm(unif4[2]*2, mean=+4, sd=0.5),ncol=2) 
+dat3 = cbind(rnorm(unif4[3], mean=+4, sd=0.5), rnorm(unif4[3], mean=-4, sd=0.5))
+dat4 = cbind(rnorm(unif4[4], mean=-4, sd=0.5), rnorm(unif4[4], mean=+4, sd=0.5))
 
 myatoms = list()
 myatoms[[1]] = dat1

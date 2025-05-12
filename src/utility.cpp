@@ -27,7 +27,7 @@ static double logsumexp(const arma::vec& x) {
   return xmax + std::log(arma::sum(arma::exp(x - xmax)));
 }
 
-arma::mat util_plan_entropic(const arma::mat& C, const arma::vec& a, const arma::vec& b,
+arma::mat util_plan_entropic(const arma::vec& a, const arma::vec& b, const arma::mat& C,
                              double lambda, int maxiter, double abstol){
   int M = C.n_rows;
   int N = C.n_cols;
@@ -125,7 +125,7 @@ void addEdge(int from, int to, long capacity, long cost,
     transportEdges->push_back({from, to, e});
 }
 
-arma::mat util_plan_emd_BH(const arma::mat& C, const arma::vec& a, const arma::vec& b) {
+arma::mat util_plan_emd_BH(const arma::vec& a, const arma::vec& b, const arma::mat& C) {
   int n = a.n_elem, m = b.n_elem;
   int N = n + m + 2, src = n + m, sink = n + m + 1;
   long scale = 1e6;
@@ -182,8 +182,8 @@ arma::mat util_plan_emd_BH(const arma::mat& C, const arma::vec& a, const arma::v
   return P;
 }
 // util_plan_emd_R ==========================================================
-arma::mat util_plan_emd_R(const arma::mat& C, const arma::vec& a, const arma::vec& b){
+arma::mat util_plan_emd_R(const arma::vec& a, const arma::vec& b, const arma::mat& C){
   Function aux_emd("aux_emd");
-  SEXP result = aux_emd(wrap(C), wrap(a), wrap(b));
+  SEXP result = aux_emd(wrap(a), wrap(b), wrap(C));
   return(Rcpp::as<arma::mat>(result));
 }
