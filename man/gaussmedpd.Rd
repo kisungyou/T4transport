@@ -2,7 +2,7 @@
 % Please edit documentation in R/gauss_medianpd.R
 \name{gaussmedpd}
 \alias{gaussmedpd}
-\title{Wasserstein Median of Gaussian Distributions in \eqn{\mathbf{R}^p}}
+\title{Wasserstein Median of Gaussian Distributions in \eqn{\mathbb{R}^p}}
 \usage{
 gaussmedpd(means, vars, weights = NULL, ...)
 }
