@@ -8,7 +8,7 @@ License: MIT + file LICENSE
 Imports: CVXR, Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
 LinkingTo: Rcpp, RcppArmadillo, BH
 Encoding: UTF-8
-URL: https://kisungyou.com/T4transport
+URL: https://www.kisungyou.com/T4transport/
 RoxygenNote: 7.3.2
 RdMacros: Rdpack
 Suggests: 

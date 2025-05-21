@@ -30,7 +30,7 @@
   packageStartupMessage("**")
   packageStartupMessage("** Maintainer : Kisung You  (kisung.you@outlook.com)")
   packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
-  packageStartupMessage("** Website    : https://kisungyou.com/T4transport/")
+  packageStartupMessage("** Website    : https://www.kisungyou.com/T4transport/")
   packageStartupMessage("**")
   packageStartupMessage("** Please share any bugs or suggestions to the maintainer.")
   packageStartupMessage("** ------------------------------------------------------- **")
