@@ -5,6 +5,10 @@ compute_pdist2 <- function(X, Y) {
     .Call(`_T4transport_compute_pdist2`, X, Y)
 }
 
+cpp_mvrnorm <- function(n, mu, cov) {
+    .Call(`_T4transport_cpp_mvrnorm`, n, mu, cov)
+}
+
 cpp_ipot20 <- function(a, b, dab, lambda, p, maxiter, abstol, L) {
     .Call(`_T4transport_cpp_ipot20`, a, b, dab, lambda, p, maxiter, abstol, L)
 }
@@ -19,6 +23,10 @@ cpp_barybregman15 <- function(listdXY, marginals, weights, p, lambda, maxiter, a
 
 cpp_fixed_sinkhorn14 <- function(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec) {
     .Call(`_T4transport_cpp_fixed_sinkhorn14`, listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
+}
+
+cpp_free_bary_gradient <- function(measures, marginals, weights, num_support, maxiter, abstol) {
+    .Call(`_T4transport_cpp_free_bary_gradient`, measures, marginals, weights, num_support, maxiter, abstol)
 }
 
 gauss_weiszfeld <- function(X, weights, abstol, maxiter) {

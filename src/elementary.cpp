@@ -147,3 +147,10 @@ arma::mat cpp_sinkhorn_getmap(arma::mat c, arma::mat p, arma::mat q, double lamb
   arma::mat output = arma::diagmat(a_old)*K*arma::diagmat(b_old);
   return(output);
 }
+ 
+// (04) cpp_mvrnorm ============================================================
+// [[Rcpp::export]]
+arma::mat cpp_mvrnorm(int n, const arma::vec& mu, const arma::mat& cov){
+  arma::mat X = arma::mvnrnd(mu, cov, n);
+  return(arma::trans(X));
+}

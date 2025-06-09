@@ -23,6 +23,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_mvrnorm
+arma::mat cpp_mvrnorm(int n, const arma::vec& mu, const arma::mat& cov);
+RcppExport SEXP _T4transport_cpp_mvrnorm(SEXP nSEXP, SEXP muSEXP, SEXP covSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type cov(covSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_mvrnorm(n, mu, cov));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_ipot20
 Rcpp::List cpp_ipot20(const arma::vec a, const arma::vec b, const arma::mat& dab, double lambda, double p, int maxiter, double abstol, int L);
 RcppExport SEXP _T4transport_cpp_ipot20(SEXP aSEXP, SEXP bSEXP, SEXP dabSEXP, SEXP lambdaSEXP, SEXP pSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP LSEXP) {
@@ -93,6 +106,22 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type printer(printerSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type initvec(initvecSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_fixed_sinkhorn14(listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_free_bary_gradient
+Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, int num_support, int maxiter, double abstol);
+RcppExport SEXP _T4transport_cpp_free_bary_gradient(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP num_supportSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::field<arma::mat>& >::type measures(measuresSEXP);
+    Rcpp::traits::input_parameter< const arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< int >::type num_support(num_supportSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_free_bary_gradient(measures, marginals, weights, num_support, maxiter, abstol));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -196,10 +225,12 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_compute_pdist2", (DL_FUNC) &_T4transport_compute_pdist2, 2},
+    {"_T4transport_cpp_mvrnorm", (DL_FUNC) &_T4transport_cpp_mvrnorm, 3},
     {"_T4transport_cpp_ipot20", (DL_FUNC) &_T4transport_cpp_ipot20, 8},
     {"_T4transport_cpp_sinkhorn13", (DL_FUNC) &_T4transport_cpp_sinkhorn13, 7},
     {"_T4transport_cpp_barybregman15", (DL_FUNC) &_T4transport_cpp_barybregman15, 9},
     {"_T4transport_cpp_fixed_sinkhorn14", (DL_FUNC) &_T4transport_cpp_fixed_sinkhorn14, 9},
+    {"_T4transport_cpp_free_bary_gradient", (DL_FUNC) &_T4transport_cpp_free_bary_gradient, 6},
     {"_T4transport_gauss_weiszfeld", (DL_FUNC) &_T4transport_gauss_weiszfeld, 4},
     {"_T4transport_gauss_spdbary16A", (DL_FUNC) &_T4transport_gauss_spdbary16A, 4},
     {"_T4transport_gauss_median_general", (DL_FUNC) &_T4transport_gauss_median_general, 5},

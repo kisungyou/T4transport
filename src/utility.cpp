@@ -183,7 +183,9 @@ arma::mat util_plan_emd_BH(const arma::vec& a, const arma::vec& b, const arma::m
 }
 // util_plan_emd_R ==========================================================
 arma::mat util_plan_emd_R(const arma::vec& a, const arma::vec& b, const arma::mat& C){
-  Function aux_emd("aux_emd");
+  Rcpp::Environment pkg = Rcpp::Environment::namespace_env("T4transport");
+  Rcpp::Function aux_emd = pkg["aux_emd"];
+  //Function aux_emd("aux_emd");
   SEXP result = aux_emd(wrap(a), wrap(b), wrap(C));
   return(Rcpp::as<arma::mat>(result));
 }

@@ -1,3 +1,7 @@
+# T4transport 0.1.4
+
+* `rbarygd()` for a Riemannian gradient descent to compute the free-support barycenter is added.
+
 # T4transport 0.1.3
 
 * Changed the structure of the package. 

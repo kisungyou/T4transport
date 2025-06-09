@@ -8,7 +8,7 @@
 #' @import CVXR
 #' @importFrom lpSolve lp
 #' @importFrom CVXR Variable Minimize matrix_trace Problem solve
-#' @importFrom stats rnorm median dnorm quantile
+#' @importFrom stats rnorm median dnorm quantile cov
 #' @importFrom utils packageVersion
 #' @importFrom Rcpp evalCpp
 #' @useDynLib T4transport, .registration = TRUE
