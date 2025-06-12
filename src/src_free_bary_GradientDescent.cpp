@@ -34,7 +34,7 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
                                  double abstol // absolute tolerance for convergence
 ){
   // TEMPORARY PARAM
-  bool printer = true;
+  bool printer = false;
   
   // PARAMETERS
   int N = measures.n_elem;    // number of measures

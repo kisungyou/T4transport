@@ -1,4 +1,4 @@
-#' Free-Support Barycenter by a Riemannian gradient descent
+#' Free-Support Barycenter by Riemannian gradient descent
 #' 
 #' @description
 #' For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 
@@ -50,7 +50,7 @@
 #' myatoms[[4]] = dat4
 #' 
 #' ## COMPUTE
-#' fsbary = rbarygd(myatoms)
+#' fsbary = rbaryGD(myatoms)
 #' 
 #' ## VISUALIZE
 #' #  aligned with CRAN convention
@@ -59,10 +59,10 @@
 #' #  plot the input measures and the barycenter
 #' plot(myatoms[[1]], col="gray90", pch=19, cex=0.5, xlim=c(-6,6), ylim=c(-6,6), 
 #'      main="Inputs and Barycenter", xlab="Dimension 1", ylab="Dimension 2")
-#' points(myatoms[[2]], col="gray90", pch=19, cex=0.5)
-#' points(myatoms[[3]], col="gray90", pch=19, cex=0.5)
-#' points(myatoms[[4]], col="gray90", pch=19, cex=0.5)
-#' points(fsbary$support, col="red", cex=1.25)
+#' points(myatoms[[2]], col="gray90", pch=19, cex=0.25)
+#' points(myatoms[[3]], col="gray90", pch=19, cex=0.25)
+#' points(myatoms[[4]], col="gray90", pch=19, cex=0.25)
+#' points(fsbary$support, col="red", cex=0.5, pch=19)
 #' 
 #' #  plot the cost history with only integer ticks
 #' plot(seq_along(fsbary$history), fsbary$history, type="b", lwd=2, pch=19,
@@ -76,9 +76,9 @@
 #' 
 #' @concept free_bary
 #' @export
-rbarygd <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
+rbaryGD <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   ## INPUT : EXPLICIT
-  name.f    = "rbarygd"
+  name.f    = "rbaryGD"
   par_measures   = valid_multiple_measures(atoms, base::ncol(atoms[[1]]), name.f)
   num_atoms      = unlist(lapply(atoms, nrow))
   par_marginals  = valid_multiple_marginal(marginals, num_atoms, name.f)

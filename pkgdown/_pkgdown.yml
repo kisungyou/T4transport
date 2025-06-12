@@ -35,13 +35,16 @@ reference:
   - title: "[1] Distance"
     contents:
       - has_concept("dist")
-  - title: "[2] Barycenter"
-  - subtitle: "Fixed Support"
+  - title: "[2] Centroid"
+  - subtitle: "Fixed-Support Barycenter"
     contents:
       - has_concept("fixed_bary")
-  - subtitle: "Free Support"
+  - subtitle: "Free-Support Barycenter"
     contents:
       - has_concept("free_bary")
+  - subtitle: "Free-Support Median"
+    contents:
+      - has_concept("free_median")
   - title: "[3] Special Cases"
   - subtitle: "Cumulative Distribution Functions"
     contents:

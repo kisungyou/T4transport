@@ -55,12 +55,12 @@
 #' #  plot the input measures
 #' plot(myatoms[[1]], col="gray90", pch=19, cex=0.5, xlim=c(-6,6), ylim=c(-6,6), 
 #'      main="Input Measures", xlab="Dimension 1", ylab="Dimension 2")
-#' points(myatoms[[2]], col="gray90", pch=19, cex=0.5)
-#' points(myatoms[[3]], col="gray90", pch=19, cex=0.5)
-#' points(myatoms[[4]], col="gray90", pch=19, cex=0.5)
+#' points(myatoms[[2]], col="gray90", pch=19, cex=0.25)
+#' points(myatoms[[3]], col="gray90", pch=19, cex=0.25)
+#' points(myatoms[[4]], col="gray90", pch=19, cex=0.25)
 #' 
 #' #  plot the barycenter
-#' points(fsbary$support, col="red", cex=1.25)
+#' points(fsbary$support, col="red", cex=0.5, pch=19)
 #' par(opar)
 #' }
 #' 
