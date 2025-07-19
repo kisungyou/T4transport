@@ -1,9 +1,9 @@
 pandoc: '3.4'
-pkgdown: 2.1.2
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   basic_compute_distance: basic_compute_distance.html
-last_built: 2025-07-19T02:11Z
+last_built: 2025-07-19T16:06Z
 urls:
   reference: https://www.kisungyou.com/T4transport/reference
   article: https://www.kisungyou.com/T4transport/articles

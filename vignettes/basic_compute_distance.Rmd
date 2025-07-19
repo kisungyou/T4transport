@@ -23,7 +23,7 @@ set.seed(10)
 # Introduction
 
 
-The Wasserstein distance [@villani_2003_TopicsOptimalTransportation] provides a natural and geometrically meaningful way to compare probability distributions. Unlike traditional dissimilarities such as Kullback–Leibler divergence or total variation, it reflects the minimal ``cost'' of transporting one distribution to another, with respect to an underlying geometry of the sample space.
+The Wasserstein distance [@villani_2003_TopicsOptimalTransportation] provides a natural and geometrically meaningful way to compare probability distributions. Unlike traditional dissimilarities such as Kullback–Leibler divergence or total variation, it reflects the minimal "cost" of transporting one distribution to another, with respect to an underlying geometry of the sample space.
 
 Formally, the \( p \)-Wasserstein distance between two probability measures \( \mu \) and \( \nu \) on a metric space \( (\mathcal{X}, d) \) is defined as:
 
@@ -80,13 +80,10 @@ print(paste0("2-wasserstein distance: ",round(output$distance, 4)))
 ```
 
 The computed Wasserstein distance of order 2 between the two empirical measures is `r round(output$distance,4)`. Another benefit of the Kantrovich formulation is that it returns 
-an optimal coupling matrix that matches elements from two sets. In below, we visualize 
-the attained coupling $\hat{\Gamma}$ and its overlay as a bipartite graph.
+an optimal coupling matrix that matches elements from two sets. The attained coupling matrix $\hat{\Gamma}$ is given as follows.
 
-```{r compute2, echo=FALSE, eval=TRUE, fig.alt="Optimal matching visualization", fig.keep="high", fig.show="hold"}
-# initialize and explicitly create an image to ensure figure capture
-par(mfrow=c(1,2))
-
+```{r compute2a, echo=FALSE, eval=TRUE, fig.alt="Optimal coupling matrix", fig.align="center"}
+par(pty="s")
 ## --- Plot 1: Optimal coupling matrix
 P = output$plan
 image(
@@ -101,7 +98,12 @@ image(
 )
 axis(1, at = 1:nrow(P), labels = 1:nrow(P), las = 2, cex.axis = 0.6, tick=FALSE)
 axis(2, at = 1:ncol(P), labels = rev(1:ncol(P)), las = 2, cex.axis = 0.6, tick=FALSE)
+```
 
+Furthermore, this coupling can be shown within the original scatterplot of the two datasets 
+by considering the bipartite graph representation. 
+
+```{r compute2b, echo=FALSE, eval=TRUE, fig.alt="Optimal coupling scatterplot", fig.align="center"}
 ## --- Plot 2: Bipartite graph
 plot(data1, col="blue", pch=19, cex=0.5, main="Bipartite Graph", 
      xlim=c(-2, 7), xlab="x", ylab="y")
@@ -120,8 +122,7 @@ for (i in 1:nrow(data1)){
 }
 ```
 
-
-On the right figure, the edges connecting the dots represent the optimal coupling between the two empirical measures. The thickness of the edges is proportional to the amount of mass transported between the points, which can be interpreted as the "flow" in the transportation problem.
+In the figure, edges connecting the dots represent the optimal coupling between the two empirical measures. The thickness of the edges is proportional to the amount of mass transported between the points, which can be interpreted as the "flow" in the transportation problem.
 
 # Alternative input
 

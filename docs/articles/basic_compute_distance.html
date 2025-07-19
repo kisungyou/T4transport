@@ -84,7 +84,7 @@
 provides a natural and geometrically meaningful way to compare
 probability distributions. Unlike traditional dissimilarities such as
 Kullback–Leibler divergence or total variation, it reflects the minimal
-``cost’’ of transporting one distribution to another, with respect to an
+“cost” of transporting one distribution to another, with respect to an
 underlying geometry of the sample space.</p>
 <p>Formally, the <span class="math inline">\(p\)</span>-Wasserstein
 distance between two probability measures <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\nu\)</span> on a metric space <span class="math inline">\((\mathcal{X}, d)\)</span> is defined as:</p>
@@ -153,14 +153,16 @@ simplest case of order 2.</p>
 <p>The computed Wasserstein distance of order 2 between the two
 empirical measures is 5.0194. Another benefit of the Kantrovich
 formulation is that it returns an optimal coupling matrix that matches
-elements from two sets. In below, we visualize the attained coupling
-<span class="math inline">\(\hat{\Gamma}\)</span> and its overlay as a
-bipartite graph.</p>
-<p><img src="basic_compute_distance_files/figure-html/compute2-1.png" alt="Optimal matching visualization" width="700"></p>
-<p>On the right figure, the edges connecting the dots represent the
-optimal coupling between the two empirical measures. The thickness of
-the edges is proportional to the amount of mass transported between the
-points, which can be interpreted as the “flow” in the transportation
+elements from two sets. The attained coupling matrix <span class="math inline">\(\hat{\Gamma}\)</span> is given as follows.</p>
+<p><img src="basic_compute_distance_files/figure-html/compute2a-1.png" alt="Optimal coupling matrix" width="700" style="display: block; margin: auto;"></p>
+<p>Furthermore, this coupling can be shown within the original
+scatterplot of the two datasets by considering the bipartite graph
+representation.</p>
+<p><img src="basic_compute_distance_files/figure-html/compute2b-1.png" alt="Optimal coupling scatterplot" width="700" style="display: block; margin: auto;"></p>
+<p>In the figure, edges connecting the dots represent the optimal
+coupling between the two empirical measures. The thickness of the edges
+is proportional to the amount of mass transported between the points,
+which can be interpreted as the “flow” in the transportation
 problem.</p>
 </div>
 <div class="section level2">
@@ -236,7 +238,7 @@ in <span>Mathematics</span>. S.l.: American Mathematical Society.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
