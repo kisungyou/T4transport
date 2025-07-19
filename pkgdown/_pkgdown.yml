@@ -18,6 +18,12 @@ navbar:
   left:
     - text: "Functions"
       href: reference/index.html
+    - text: "Articles"
+      menu:
+        - text: "Basics"
+        - text: "Computing the Wasserstein distance"
+          href: "articles/basic_compute_distance.html"
+        - text: -------
     - text: "News"
       href: news/index.html
   right:
@@ -42,9 +48,6 @@ reference:
   - subtitle: "Free-Support Barycenter"
     contents:
       - has_concept("free_bary")
-  - subtitle: "Free-Support Median"
-    contents:
-      - has_concept("free_median")
   - title: "[3] Special Cases"
   - subtitle: "Cumulative Distribution Functions"
     contents:
