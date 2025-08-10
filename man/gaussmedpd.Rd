@@ -25,7 +25,7 @@ a named list containing \describe{
 }
 }
 \description{
-Given a collection of \eqn{p}-dimensional Gaussian distributions \eqn{\mathcal{N}(\mu_i, \sigma_i^2)} for \eqn{i=1,\ldots,n}, 
+Given a collection of \eqn{p}-dimensional Gaussian distributions \eqn{N(\mu_i, \Sigma_i)} for \eqn{i=1,\ldots,n}, 
 compute the Wasserstein median.
 }
 \examples{

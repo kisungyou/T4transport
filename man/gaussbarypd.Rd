@@ -25,7 +25,7 @@ a named list containing \describe{
 }
 }
 \description{
-Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{N(\mu_i, \Sigma_i^2)} 
+Given a collection of \eqn{n}-dimensional Gaussian distributions \eqn{N(\mu_i, \Sigma_i)} 
 for \eqn{i=1,\ldots,n}, compute the Wasserstein barycenter of order 2. 
 For the barycenter computation of variance components, we use a fixed-point 
 algorithm by \insertCite{alvarez_2016_FixedpointApproachBarycenters;textual}{T4transport}.
