@@ -30,7 +30,12 @@ a list with three elements:
 }
 \description{
 For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 
-the free-support barycenter of order 2 is computed using the Riemannian 
+the free-support barycenter of order 2, defined as a minimizer of the following 
+functional,
+\deqn{
+\mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2^2 (\nu, \mu_k ),
+}
+is computed using the Riemannian 
 gradient descent algorithm. The algorithm is based on the formal Riemannian 
 geometric view of the 2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}.
 }

@@ -11,7 +11,7 @@ Encoding: UTF-8
 URL: https://www.kisungyou.com/T4transport/
 RoxygenNote: 7.3.2
 RdMacros: Rdpack
-Suggests: 
-    ggplot2
 Depends: 
     R (>= 2.10)
+Suggests: knitr, rmarkdown, ggplot2, mlbench
+VignetteBuilder: knitr

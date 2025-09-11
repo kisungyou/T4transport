@@ -33,9 +33,6 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
                                  int maxiter, // maximum number of iterations
                                  double abstol // absolute tolerance for convergence
 ){
-  // TEMPORARY PARAM
-  bool printer = false;
-  
   // PARAMETERS
   int N = measures.n_elem;    // number of measures
   int P = measures(0).n_cols; // problem dimensionality
@@ -50,7 +47,8 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
     par_mean += (1.0/NN)*arma::mean(measures(n), 0);
     par_cov  += (1.0/NN)*arma::cov(measures(n)); 
   }
-  par_cov = arma::diagmat(par_cov)*2.0; // zero-out off-diagonals and make it dispersed
+  //par_cov = arma::diagmat(par_cov)*2.0; // zero-out off-diagonals and make it dispersed
+  par_cov = arma::diagmat(par_cov)*2.0 + 1e-8 * arma::eye(P,P); // jitter added
   arma::mat X_old = arma::trans(arma::mvnrnd(par_mean.t(), par_cov, num_support));
   arma::mat X_new(num_support, P, fill::zeros);
   
@@ -119,25 +117,34 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
     }
     
     // updating : if cost increased? stop it as an invalid update.
-    if (new_cost >= old_cost){
+    if (new_cost > old_cost * (1.0 + 1e-12)){
       break;
-    } 
+    }
+    // if (new_cost >= old_cost){
+    //   break;
+    // } 
     
     // updating : if decreased? replace and stop conditionally
-    if ((std::abs(old_cost - new_cost)/std::abs(old_cost)) < abstol){
+    auto rel_change = [](double a, double b){
+      double denom = std::max(1.0, std::abs(a));
+      return std::abs(a - b)/denom;
+    };
+    if (rel_change(old_cost, new_cost) < abstol){
       X_old = X_new;
       record_cost(it+1) = new_cost;
       break;
-    }  
+    }
+    
+    // if ((std::abs(old_cost - new_cost)/std::abs(old_cost)) < abstol){
+    //   X_old = X_new;
+    //   record_cost(it+1) = new_cost;
+    //   break;
+    // }  
     
     // updating : for the rest of the case, just update
     record_cost(it+1) = new_cost;
     X_old = X_new;
     old_cost = new_cost;
-    
-    if (printer){
-      Rcpp::Rcout << "iteration " << it+1 << " complete with cost=" << old_cost << std::endl;
-    }
   }
   
   // return

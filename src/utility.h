@@ -9,4 +9,8 @@ arma::mat util_plan_entropic(const arma::vec& a, const arma::vec& b, const arma:
 arma::mat util_plan_emd_BH(const arma::vec& a, const arma::vec& b, const arma::mat& C);
 arma::mat util_plan_emd_R(const arma::vec& a, const arma::vec& b, const arma::mat& C);
 
+arma::mat util_mvrnorm(const arma::vec& par_mean, 
+                       const arma::mat& par_cov,
+                       int num_samples);
+
 #endif // T4TRANSPORT_UTILITY_H

@@ -48,6 +48,9 @@ reference:
   - subtitle: "Free-Support Barycenter"
     contents:
       - has_concept("free_bary")
+  - subtitle: "Free-Support Median"
+    contents:
+      - has_concept("free_median")
   - title: "[3] Special Cases"
   - subtitle: "Cumulative Distribution Functions"
     contents:

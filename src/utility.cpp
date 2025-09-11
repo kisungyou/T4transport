@@ -12,6 +12,8 @@
  * util_plan_entropic : compute the entropic-regularized plan using Sinkhorn algorithm
  * util_plan_emd_BH   : compute the exact EMD plan using Boost
  * util_plan_emd_R    : compute the exact EMD plan using lpSolve
+ * 
+ * util_mvrnorm       : generate multivariate normal random variables with given mean and covariance
  */
 
 
@@ -188,4 +190,13 @@ arma::mat util_plan_emd_R(const arma::vec& a, const arma::vec& b, const arma::ma
   //Function aux_emd("aux_emd");
   SEXP result = aux_emd(wrap(a), wrap(b), wrap(C));
   return(Rcpp::as<arma::mat>(result));
+}
+
+// util_mvrnorm  ============================================================
+// [[Rcpp::export]]
+arma::mat util_mvrnorm(const arma::vec& par_mean, 
+                       const arma::mat& par_cov,
+                       int num_samples){
+  arma::mat X = arma::trans(arma::mvnrnd(par_mean, par_cov, num_samples));
+  return(X);
 }

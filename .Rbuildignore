@@ -5,3 +5,10 @@
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
+^vignettes/.+_cache/        # knitr cache dirs
+^vignettes/.+_files/        # rmarkdown resource dirs
+^vignettes/.*/figure/       
+^vignettes/.*/html/
+^vignettes/.*\.(html|pdf|RData|rdb|rdx)$
+^doc$
+^Meta$

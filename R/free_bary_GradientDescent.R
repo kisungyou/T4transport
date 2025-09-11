@@ -2,7 +2,12 @@
 #' 
 #' @description
 #' For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 
-#' the free-support barycenter of order 2 is computed using the Riemannian 
+#' the free-support barycenter of order 2, defined as a minimizer of the following 
+#' functional,
+#' \deqn{
+#' \mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2^2 (\nu, \mu_k ),
+#' }
+#' is computed using the Riemannian 
 #' gradient descent algorithm. The algorithm is based on the formal Riemannian 
 #' geometric view of the 2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}.
 #' 
@@ -101,13 +106,29 @@ rbaryGD <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   }
   
   ## COMPUTE
-  #  run the algorithm
-  cpprun = cpp_free_bary_gradient(par_measures, 
-                                  par_marginals, 
-                                  par_weights,
-                                  par_numsupport,
-                                  par_maxiter,
-                                  par_abstol)
+  #  conditionally
+  run_R_init <- TRUE
+  
+  if (run_R_init){
+    # initialize using R
+    init_measure = aux_ginit(par_measures, par_numsupport)
+    cpprun = cpp_free_bary_gradient_init(
+      par_measures,
+      par_marginals,
+      par_weights,
+      par_maxiter,
+      par_abstol,
+      init_measure
+    )
+  } else {
+    #  run the algorithm
+    cpprun = cpp_free_bary_gradient(par_measures, 
+                                    par_marginals, 
+                                    par_weights,
+                                    par_numsupport,
+                                    par_maxiter,
+                                    par_abstol) 
+  }
   
   # manipulate the cost history
   vec_history = as.vector(cpprun$cost_history)
@@ -119,7 +140,4 @@ rbaryGD <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   output[["weight"]]  = rep(1/par_numsupport, par_numsupport)
   output[["history"]] = vec_history
   return(output)
-  
-  ## WRAP AND RETURN
-  return(cpprun)
 }

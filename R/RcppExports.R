@@ -29,6 +29,14 @@ cpp_free_bary_gradient <- function(measures, marginals, weights, num_support, ma
     .Call(`_T4transport_cpp_free_bary_gradient`, measures, marginals, weights, num_support, maxiter, abstol)
 }
 
+cpp_single_barycenter <- function(measures, marginals, weights, init_support) {
+    .Call(`_T4transport_cpp_single_barycenter`, measures, marginals, weights, init_support)
+}
+
+cpp_free_bary_gradient_init <- function(measures, marginals, weights, maxiter, abstol, init_support) {
+    .Call(`_T4transport_cpp_free_bary_gradient_init`, measures, marginals, weights, maxiter, abstol, init_support)
+}
+
 gauss_weiszfeld <- function(X, weights, abstol, maxiter) {
     .Call(`_T4transport_gauss_weiszfeld`, X, weights, abstol, maxiter)
 }
@@ -51,5 +59,9 @@ routine_bary14C <- function(dxy, marginals, weights, p, lambda, maxiter, abstol,
 
 routine_bary15B <- function(dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread) {
     .Call(`_T4transport_routine_bary15B`, dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
+}
+
+util_mvrnorm <- function(par_mean, par_cov, num_samples) {
+    .Call(`_T4transport_util_mvrnorm`, par_mean, par_cov, num_samples)
 }
 

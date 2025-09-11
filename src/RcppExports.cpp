@@ -125,6 +125,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_single_barycenter
+arma::mat cpp_single_barycenter(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, arma::mat& init_support);
+RcppExport SEXP _T4transport_cpp_single_barycenter(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP init_supportSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::field<arma::mat>& >::type measures(measuresSEXP);
+    Rcpp::traits::input_parameter< const arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type init_support(init_supportSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_single_barycenter(measures, marginals, weights, init_support));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_free_bary_gradient_init
+Rcpp::List cpp_free_bary_gradient_init(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, int maxiter, double abstol, arma::mat& init_support);
+RcppExport SEXP _T4transport_cpp_free_bary_gradient_init(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP init_supportSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::field<arma::mat>& >::type measures(measuresSEXP);
+    Rcpp::traits::input_parameter< const arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type init_support(init_supportSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_free_bary_gradient_init(measures, marginals, weights, maxiter, abstol, init_support));
+    return rcpp_result_gen;
+END_RCPP
+}
 // gauss_weiszfeld
 arma::rowvec gauss_weiszfeld(arma::mat& X, arma::vec& weights, double abstol, int maxiter);
 RcppExport SEXP _T4transport_gauss_weiszfeld(SEXP XSEXP, SEXP weightsSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
@@ -222,6 +252,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// util_mvrnorm
+arma::mat util_mvrnorm(const arma::vec& par_mean, const arma::mat& par_cov, int num_samples);
+RcppExport SEXP _T4transport_util_mvrnorm(SEXP par_meanSEXP, SEXP par_covSEXP, SEXP num_samplesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type par_mean(par_meanSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type par_cov(par_covSEXP);
+    Rcpp::traits::input_parameter< int >::type num_samples(num_samplesSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_mvrnorm(par_mean, par_cov, num_samples));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_compute_pdist2", (DL_FUNC) &_T4transport_compute_pdist2, 2},
@@ -231,12 +274,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_cpp_barybregman15", (DL_FUNC) &_T4transport_cpp_barybregman15, 9},
     {"_T4transport_cpp_fixed_sinkhorn14", (DL_FUNC) &_T4transport_cpp_fixed_sinkhorn14, 9},
     {"_T4transport_cpp_free_bary_gradient", (DL_FUNC) &_T4transport_cpp_free_bary_gradient, 6},
+    {"_T4transport_cpp_single_barycenter", (DL_FUNC) &_T4transport_cpp_single_barycenter, 4},
+    {"_T4transport_cpp_free_bary_gradient_init", (DL_FUNC) &_T4transport_cpp_free_bary_gradient_init, 6},
     {"_T4transport_gauss_weiszfeld", (DL_FUNC) &_T4transport_gauss_weiszfeld, 4},
     {"_T4transport_gauss_spdbary16A", (DL_FUNC) &_T4transport_gauss_spdbary16A, 4},
     {"_T4transport_gauss_median_general", (DL_FUNC) &_T4transport_gauss_median_general, 5},
     {"_T4transport_gauss_median_centered", (DL_FUNC) &_T4transport_gauss_median_centered, 4},
     {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
     {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
+    {"_T4transport_util_mvrnorm", (DL_FUNC) &_T4transport_util_mvrnorm, 3},
     {NULL, NULL, 0}
 };
 

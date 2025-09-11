@@ -13,6 +13,12 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+```{r init, eval=TRUE, echo=FALSE}
+if (!requireNamespace("mlbench", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+  message("Install 'mlbench' to run the code in this vignette.")
+}
+```
 ```{r setup, include=FALSE, echo=FALSE}
 knitr::opts_chunk$set(cache = TRUE)
 library(mlbench)
@@ -47,8 +53,8 @@ translated by +5 in the $x$-direction.
 library(mlbench)
 
 # generate two datasets
-data1 = mlbench.cassini(n=100)$x
-data2 = mlbench.smiley(n=100)$x
+data1 = mlbench::mlbench.cassini(n=100)$x
+data2 = mlbench::mlbench.smiley(n=100)$x
 
 # normalize the datasets
 data1 = as.matrix(scale(data1))
