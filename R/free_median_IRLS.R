@@ -80,7 +80,7 @@
 #' @references 
 #' \insertAllCited{}
 #' 
-#' @concept free_median
+#' @concept free_centroid
 #' @export
 rmedIRLS <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   ## INPUT : EXPLICIT

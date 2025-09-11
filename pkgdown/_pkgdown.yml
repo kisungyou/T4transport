@@ -42,15 +42,12 @@ reference:
     contents:
       - has_concept("dist")
   - title: "[2] Centroid"
-  - subtitle: "Fixed-Support Barycenter"
+  - subtitle: "Fixed-Support Centroids"
     contents:
-      - has_concept("fixed_bary")
-  - subtitle: "Free-Support Barycenter"
+      - has_concept("fixed_centroid")
+  - subtitle: "Free-Support Centroids"
     contents:
-      - has_concept("free_bary")
-  - subtitle: "Free-Support Median"
-    contents:
-      - has_concept("free_median")
+      - has_concept("free_centroid")
   - title: "[3] Special Cases"
   - subtitle: "Cumulative Distribution Functions"
     contents:

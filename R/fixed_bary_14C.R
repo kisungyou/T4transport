@@ -67,7 +67,7 @@
 #' @references 
 #' \insertRef{cuturi_2014_FastComputationWasserstein}{T4transport}
 #' 
-#' @concept fixed_bary
+#' @concept fixed_centroid
 #' @name fbary14C
 #' @rdname fbary14C
 NULL

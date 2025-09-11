@@ -78,4 +78,4 @@ par(opar)
 \references{
 \insertAllCited{}
 }
-\concept{free_bary}
+\concept{free_centroid}

@@ -67,7 +67,7 @@
 #' @references 
 #' \insertAllCited{}
 #' 
-#' @concept free_bary
+#' @concept free_centroid
 #' @export
 rbary23L <- function(atoms, marginals=NULL, weights=NULL){
   ## INPUT : EXPLICIT

@@ -67,7 +67,7 @@
 #' @references 
 #' \insertRef{benamou_2015_IterativeBregmanProjections}{T4transport}
 #' 
-#' @concept fixed_bary
+#' @concept fixed_centroid
 #' @name fbary15B
 #' @rdname fbary15B
 NULL

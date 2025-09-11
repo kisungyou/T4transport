@@ -93,4 +93,4 @@ par(opar)
 \references{
 \insertAllCited{}
 }
-\concept{free_median}
+\concept{free_centroid}

@@ -102,4 +102,4 @@ par(opar)
 \references{
 \insertRef{cuturi_2014_FastComputationWasserstein}{T4transport}
 }
-\concept{fixed_bary}
+\concept{fixed_centroid}

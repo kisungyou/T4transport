@@ -79,7 +79,7 @@
 #' @references 
 #' \insertAllCited{}
 #' 
-#' @concept free_bary
+#' @concept free_centroid
 #' @export
 rbaryGD <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   ## INPUT : EXPLICIT

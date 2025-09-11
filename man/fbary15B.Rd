@@ -101,4 +101,4 @@ par(opar)
 \references{
 \insertRef{benamou_2015_IterativeBregmanProjections}{T4transport}
 }
-\concept{fixed_bary}
+\concept{fixed_centroid}
