@@ -155,6 +155,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_free_median_PF
+Rcpp::List cpp_free_median_PF(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, int maxiter, double abstol, arma::mat& init_support);
+RcppExport SEXP _T4transport_cpp_free_median_PF(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP init_supportSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::field<arma::mat>& >::type measures(measuresSEXP);
+    Rcpp::traits::input_parameter< const arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type init_support(init_supportSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_free_median_PF(measures, marginals, weights, maxiter, abstol, init_support));
+    return rcpp_result_gen;
+END_RCPP
+}
 // gauss_weiszfeld
 arma::rowvec gauss_weiszfeld(arma::mat& X, arma::vec& weights, double abstol, int maxiter);
 RcppExport SEXP _T4transport_gauss_weiszfeld(SEXP XSEXP, SEXP weightsSEXP, SEXP abstolSEXP, SEXP maxiterSEXP) {
@@ -276,6 +292,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_cpp_free_bary_gradient", (DL_FUNC) &_T4transport_cpp_free_bary_gradient, 6},
     {"_T4transport_cpp_single_barycenter", (DL_FUNC) &_T4transport_cpp_single_barycenter, 4},
     {"_T4transport_cpp_free_bary_gradient_init", (DL_FUNC) &_T4transport_cpp_free_bary_gradient_init, 6},
+    {"_T4transport_cpp_free_median_PF", (DL_FUNC) &_T4transport_cpp_free_median_PF, 6},
     {"_T4transport_gauss_weiszfeld", (DL_FUNC) &_T4transport_gauss_weiszfeld, 4},
     {"_T4transport_gauss_spdbary16A", (DL_FUNC) &_T4transport_gauss_spdbary16A, 4},
     {"_T4transport_gauss_median_general", (DL_FUNC) &_T4transport_gauss_median_general, 5},

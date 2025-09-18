@@ -37,6 +37,10 @@ cpp_free_bary_gradient_init <- function(measures, marginals, weights, maxiter, a
     .Call(`_T4transport_cpp_free_bary_gradient_init`, measures, marginals, weights, maxiter, abstol, init_support)
 }
 
+cpp_free_median_PF <- function(measures, marginals, weights, maxiter, abstol, init_support) {
+    .Call(`_T4transport_cpp_free_median_PF`, measures, marginals, weights, maxiter, abstol, init_support)
+}
+
 gauss_weiszfeld <- function(X, weights, abstol, maxiter) {
     .Call(`_T4transport_gauss_weiszfeld`, X, weights, abstol, maxiter)
 }

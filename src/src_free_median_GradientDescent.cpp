@@ -249,3 +249,127 @@ Rcpp::List cpp_free_bary_gradient_init(const arma::field<arma::mat>& measures, /
       Rcpp::Named("cost_history") = record_cost
   ));
 }
+
+// [[Rcpp::export]]
+Rcpp::List cpp_free_median_PF(const arma::field<arma::mat>& measures,   // X_n: (m_n x P)
+                              const arma::field<arma::vec>& marginals,  // b_n: (m_n)
+                              const arma::vec& weights,                 // pi_n (size N, sum to 1)
+                              int maxiter,
+                              double abstol,
+                              arma::mat& init_support)
+{
+  // OPTINAL CONSTANTS
+  const double irls_eps = 1e-12; // distance clip
+  const double damping = 1.0;    // damping factor
+  const bool verbose = false;     // print the progress
+  
+  // BASIC SIZES
+  const int N = measures.n_elem;             // number of input measures
+  const int P = init_support.n_cols;         // dimension
+  const int m = init_support.n_rows;         // number of median support points
+  
+  // TARGET WEIGHTS v (uniform free-support by default)
+  arma::vec v = arma::ones(m) / static_cast<double>(m);
+  
+  // STATE
+  arma::mat Z_old = init_support;            // (m x P)
+  arma::mat Z_new(m, P, fill::zeros);
+  
+  // scratch containers per measure
+  arma::field<arma::mat> dist2(N);           // cost matrices C_n (m x m_n)
+  arma::field<arma::mat> plans(N);           // optimal plans Γ_n (m x m_n)
+  arma::vec distances(N, fill::zeros);       // d_n = W2(ν, μ_n)
+  arma::vec irls_w(N, fill::zeros);          // w_n = π_n / max(d_n, δ)
+  arma::vec tilde_w(N, fill::zeros);         // normalized IRLS weights
+  
+  // INITIAL: compute costs, plans, distances, objective
+  for (int n = 0; n < N; ++n) {
+    dist2(n) = aux_freemedian_sqdist(Z_old, measures(n));                 // m x m_n
+    plans(n) = util_plan_emd_R(v, marginals(n), dist2(n));                // m x m_n
+    distances(n) = std::sqrt(arma::accu(plans(n) % dist2(n)));            // W2 via plan & cost
+  }
+  double old_cost = arma::dot(weights, distances);                        // Φ(ν)
+  
+  arma::vec cost_hist(maxiter + 1, fill::zeros);
+  cost_hist(0) = old_cost;
+  
+  // MAIN LOOP
+  double wsum = 0.0;
+
+  for (int it = 0; it < maxiter; ++it) {
+    // (1) IRLS WEIGHTS: w_n = π_n / max(d_n, δ), normalize to sum 1
+    wsum = 0.0;
+    for (int n = 0; n < N; ++n) {
+      irls_w(n) = weights(n)/std::max(distances(n), irls_eps);
+      wsum += irls_w(n);
+    }
+    tilde_w = irls_w / wsum;   // sum_n tilde_w(n) = 1
+    
+    // (Optional "capture" rule): if any d_n < δ, give it all the weight.
+    // This prevents divide-by-zero and follows Weiszfeld capture.
+    for (int n = 0; n < N; ++n) {
+      if (distances(n) <= irls_eps) {
+        tilde_w.zeros();
+        tilde_w(n) = 1.0;
+        break;
+      }
+    }
+    
+    // (2) WEISZFELD UPDATE VIA BARYCENTRIC PROJECTIONS
+    //    Z_tmp(i,:) = sum_n tilde_w(n) * (1/v_i) * sum_j Γ_{ij}^{(n)} x_{n,j}
+    Z_new.zeros();
+    for (int i = 0; i < m; ++i) {
+      // accumulate the weighted barycentric projections across n
+      arma::rowvec Zi_new(P, fill::zeros);
+      
+      for (int n = 0; n < N; ++n) {
+        const arma::mat& Xn = measures(n);    // (m_n x P)
+        const arma::mat& Gn = plans(n);       // (m x m_n)
+        
+        // barycentric projection T_n(z_i): (1/v_i) * sum_j Γ_{ij} x_{n,j}
+        arma::rowvec Tn_i = (Gn.row(i) * Xn) / v(i);  // (1 x P)
+        
+        Zi_new += tilde_w(n) * Tn_i;
+      }
+      
+      // optional damping: z^{+} = (1-α) z + α * Zi_new
+      Z_new.row(i) = (1.0 - damping) * Z_old.row(i) + damping * Zi_new;
+    }
+    
+    // (3) RE-SOLVE PLANS FROM UPDATED SUPPORT, RECOMPUTE DISTANCES & COST
+    for (int n = 0; n < N; ++n) {
+      dist2(n)    = aux_freemedian_sqdist(Z_new, measures(n));            // m x m_n
+      plans(n)    = util_plan_emd_R(v, marginals(n), dist2(n));           // m x m_n
+      distances(n)= std::sqrt(arma::accu(plans(n) % dist2(n)));
+    }
+    double new_cost = arma::dot(weights, distances);
+    
+    // (4) ACCEPT/REJECT + STOPPING
+    if (new_cost >= old_cost) {
+      // no descent => reject and stop
+      if (verbose) Rcpp::Rcout << "iteration " << it+1 << " rejected (no descent). "
+                               << "cost=" << new_cost << " >= " << old_cost << "\n";
+      break;
+    }
+    
+    cost_hist(it + 1) = new_cost;
+    
+    // relative improvement
+    double rel = std::abs(old_cost - new_cost) / std::max(old_cost, 1e-16);
+    Z_old = Z_new;
+    old_cost = new_cost;
+    
+    if (verbose) {
+      Rcpp::Rcout << "iteration " << it+1
+                  << " complete; cost=" << old_cost
+                  << ", rel.decr=" << rel << "\n";
+    }
+    
+    if (rel < abstol) break;
+  }
+  
+  return Rcpp::List::create(
+    Rcpp::Named("support") = Z_old,
+    Rcpp::Named("cost_history") = cost_hist
+  );
+}
