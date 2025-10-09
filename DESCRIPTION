@@ -9,7 +9,7 @@ Imports: CVXR, Rcpp (>= 1.0.5), Rdpack, lpSolve, stats, utils
 LinkingTo: Rcpp, RcppArmadillo, BH
 Encoding: UTF-8
 URL: https://www.kisungyou.com/T4transport/
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 RdMacros: Rdpack
 Depends: 
     R (>= 2.10)
