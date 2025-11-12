@@ -74,7 +74,6 @@
 #' par(opar)
 #' }
 #' 
-
 #' @concept free_centroid
 #' @export
 rmedPF <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){

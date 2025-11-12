@@ -54,6 +54,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_pwdist
+Rcpp::List cpp_pwdist(const arma::mat& X, const arma::vec& p, const arma::mat& Y, const arma::vec& q, int maxiter, double abstol);
+RcppExport SEXP _T4transport_cpp_pwdist(SEXP XSEXP, SEXP pSEXP, SEXP YSEXP, SEXP qSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type q(qSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_pwdist(X, p, Y, q, maxiter, abstol));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_sinkhorn13
 Rcpp::List cpp_sinkhorn13(const arma::vec a, const arma::vec b, const arma::mat& dab, double lambda, double p, int maxiter, double abstol);
 RcppExport SEXP _T4transport_cpp_sinkhorn13(SEXP aSEXP, SEXP bSEXP, SEXP dabSEXP, SEXP lambdaSEXP, SEXP pSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
@@ -286,6 +302,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_compute_pdist2", (DL_FUNC) &_T4transport_compute_pdist2, 2},
     {"_T4transport_cpp_mvrnorm", (DL_FUNC) &_T4transport_cpp_mvrnorm, 3},
     {"_T4transport_cpp_ipot20", (DL_FUNC) &_T4transport_cpp_ipot20, 8},
+    {"_T4transport_cpp_pwdist", (DL_FUNC) &_T4transport_cpp_pwdist, 6},
     {"_T4transport_cpp_sinkhorn13", (DL_FUNC) &_T4transport_cpp_sinkhorn13, 7},
     {"_T4transport_cpp_barybregman15", (DL_FUNC) &_T4transport_cpp_barybregman15, 9},
     {"_T4transport_cpp_fixed_sinkhorn14", (DL_FUNC) &_T4transport_cpp_fixed_sinkhorn14, 9},

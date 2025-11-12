@@ -200,3 +200,18 @@ arma::mat util_mvrnorm(const arma::vec& par_mean,
   arma::mat X = arma::trans(arma::mvnrnd(par_mean, par_cov, num_samples));
   return(X);
 }
+
+// util_pairwise_sqdist =====================================================
+arma::mat util_pairwise_sqdist(const arma::mat& X, const arma::mat& Y){
+  int N = X.n_rows;
+  int M = Y.n_rows;
+  arma::mat D(N,M,fill::zeros);
+  
+  for (int n=0; n<N; n++){
+    for (int m=0; m<M; m++){
+      D(n,m) = arma::accu(arma::square(X.row(n)-Y.row(m)));
+    }
+  }
+  
+  return(D);
+}

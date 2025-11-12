@@ -13,6 +13,10 @@ cpp_ipot20 <- function(a, b, dab, lambda, p, maxiter, abstol, L) {
     .Call(`_T4transport_cpp_ipot20`, a, b, dab, lambda, p, maxiter, abstol, L)
 }
 
+cpp_pwdist <- function(X, p, Y, q, maxiter, abstol) {
+    .Call(`_T4transport_cpp_pwdist`, X, p, Y, q, maxiter, abstol)
+}
+
 cpp_sinkhorn13 <- function(a, b, dab, lambda, p, maxiter, abstol) {
     .Call(`_T4transport_cpp_sinkhorn13`, a, b, dab, lambda, p, maxiter, abstol)
 }
