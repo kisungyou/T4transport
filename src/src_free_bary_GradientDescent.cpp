@@ -134,12 +134,6 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
       break;
     }
     
-    // if ((std::abs(old_cost - new_cost)/std::abs(old_cost)) < abstol){
-    //   X_old = X_new;
-    //   record_cost(it+1) = new_cost;
-    //   break;
-    // }  
-    
     // updating : for the rest of the case, just update
     record_cost(it+1) = new_cost;
     X_old = X_new;
