@@ -73,3 +73,7 @@ util_mvrnorm <- function(par_mean, par_cov, num_samples) {
     .Call(`_T4transport_util_mvrnorm`, par_mean, par_cov, num_samples)
 }
 
+util_pairwise_dist <- function(X) {
+    .Call(`_T4transport_util_pairwise_dist`, X)
+}
+

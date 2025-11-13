@@ -5,7 +5,19 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Procrustes-Wasserstein Distance — pwdist"><meta name="description" content="Procrustes-Wasserstein Distance"><meta property="og:description" content="Procrustes-Wasserstein Distance"></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Procrustes-Wasserstein Distance — pwdist"><meta name="description" content="Given two empirical measures
+$$\mu = \sum_{m=1}^M \mu_m \delta_{X_m}\quad\textrm{and}\quad \nu = \sum_{n=1}^N \nu_n \delta_{Y_n}$$ in
+\(\mathbb{R}^P\), the Procrustes-Wasserstein (PW) distance is defined as follows:
+$$
+  PW_2^2(\mu, \nu) = \min_{Q\in \mathcal{O}(P)} W_2^2(\mu, Q_\# \nu),
+$$
+where \(\mathcal{O}(P)\) is the orthogonal group and \(Q_\#\nu\) is the pushforward via \(Q\)."><meta property="og:description" content="Given two empirical measures
+$$\mu = \sum_{m=1}^M \mu_m \delta_{X_m}\quad\textrm{and}\quad \nu = \sum_{n=1}^N \nu_n \delta_{Y_n}$$ in
+\(\mathbb{R}^P\), the Procrustes-Wasserstein (PW) distance is defined as follows:
+$$
+  PW_2^2(\mu, \nu) = \min_{Q\in \mathcal{O}(P)} W_2^2(\mu, Q_\# \nu),
+$$
+where \(\mathcal{O}(P)\) is the orthogonal group and \(Q_\#\nu\) is the pushforward via \(Q\)."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -46,7 +58,13 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>Procrustes-Wasserstein Distance</p>
+    <p>Given two empirical measures
+$$\mu = \sum_{m=1}^M \mu_m \delta_{X_m}\quad\textrm{and}\quad \nu = \sum_{n=1}^N \nu_n \delta_{Y_n}$$ in
+\(\mathbb{R}^P\), the Procrustes-Wasserstein (PW) distance is defined as follows:
+$$
+  PW_2^2(\mu, \nu) = \min_{Q\in \mathcal{O}(P)} W_2^2(\mu, Q_\# \nu),
+$$
+where \(\mathcal{O}(P)\) is the orthogonal group and \(Q_\#\nu\) is the pushforward via \(Q\).</p>
     </div>
 
     <div class="section level2">
@@ -54,8 +72,114 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pwdist</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, wx <span class="op">=</span> <span class="cn">NULL</span>, wy <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
-  </main></div>
+
+<dl><dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
+<dd><p>an \((M\times P)\) matrix of row observations.</p></dd>
+
+
+<dt id="arg-y">Y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
+<dd><p>an \((N\times P)\) matrix of row observations.</p></dd>
+
+
+<dt id="arg-wx">wx<a class="anchor" aria-label="anchor" href="#arg-wx"></a></dt>
+<dd><p>a length-\(M\) marginal density that sums to \(1\). If <code>NULL</code> (default), uniform weight is set.</p></dd>
+
+
+<dt id="arg-wy">wy<a class="anchor" aria-label="anchor" href="#arg-wy"></a></dt>
+<dd><p>a length-\(N\) marginal density that sums to \(1\). If <code>NULL</code> (default), uniform weight is set.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>extra parameters including</p><dl><dt>maxiter</dt>
+<dd><p>maximum number of iterations (default: 496).</p></dd>
+
+<dt>abstol</dt>
+<dd><p>stopping criterion for iterations (default: 1e-10).</p></dd>
+
+
+</dl></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a named list containing</p><dl><dt>distance</dt>
+<dd><p>the computed PW distance value.</p></dd>
+
+<dt>plan</dt>
+<dd><p>an \((M\times N)\) nonnegative matrix for the optimal transport plan.</p></dd>
+
+<dt>alignment</dt>
+<dd><p>an optimal alignment matrix of size  \((P\times P)\) in \(\mathcal{O}(P)\).</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Adamo D, Corneli M, Vuillien M, Vila E (2025).
+“An in Depth Look at the Procrustes-Wasserstein Distance: Properties and Barycenters.”
+In <em>Forty-Second International Conference on Machine Learning</em>.</p>
+    </div>
+
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">#                           Description</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># * class 1 : samples from N((0,0),  diag(c(4,1/4)))</span></span></span>
+<span class="r-in"><span><span class="co"># * class 2 : samples from N((10,0), diag(c(1/4,4)))</span></span></span>
+<span class="r-in"><span><span class="co"># * class 3 : samples from N((10,0), diag(c(1/4,4))) randomly rotated</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co">#  We draw 10 empirical measures from each and compare </span></span></span>
+<span class="r-in"><span><span class="co">#  the regular Wasserstein and PW distance.</span></span></span>
+<span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## GENERATE DATA</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#  prepare empty lists</span></span></span>
+<span class="r-in"><span><span class="va">inputs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">vector</a></span><span class="op">(</span><span class="st">"list"</span>, length<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#  generate</span></span></span>
+<span class="r-in"><span><span class="va">random_rot</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/qraux.html" class="external-link">qr.Q</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/qr.html" class="external-link">qr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">inputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">base_draw</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">base_draw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">base_draw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span>  <span class="va">inputs</span><span class="op">[[</span><span class="va">j</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">base_draw</span></span></span>
+<span class="r-in"><span>  <span class="va">inputs</span><span class="op">[[</span><span class="va">j</span><span class="op">+</span><span class="fl">10</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">base_draw</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span><span class="va">random_rot</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## COMPUTE</span></span></span>
+<span class="r-in"><span><span class="co">#  empty arrays</span></span></span>
+<span class="r-in"><span><span class="va">dist_RW</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dist_PW</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#  compute pairwise distances</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">29</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="kw">for</span> <span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="op">(</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_RW</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">dist_RW</span><span class="op">[</span><span class="va">j</span>,<span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="wasserstein.html">wasserstein</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, <span class="va">inputs</span><span class="op">[[</span><span class="va">j</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">distance</span></span></span>
+<span class="r-in"><span>  <span class="va">dist_PW</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">dist_PW</span><span class="op">[</span><span class="va">j</span>,<span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu">pwdist</span><span class="op">(</span><span class="va">inputs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, <span class="va">inputs</span><span class="op">[[</span><span class="va">j</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">distance</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## VISUALIZE</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dist_RW</span>, xaxt<span class="op">=</span><span class="st">"n"</span>, yaxt<span class="op">=</span><span class="st">"n"</span>, main<span class="op">=</span><span class="st">"Regular Wasserstein distance"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">dist_PW</span>, xaxt<span class="op">=</span><span class="st">"n"</span>, yaxt<span class="op">=</span><span class="st">"n"</span>, main<span class="op">=</span><span class="st">"PW distance"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

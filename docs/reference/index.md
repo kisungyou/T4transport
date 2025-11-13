@@ -32,6 +32,8 @@
 
 ### Free-Support Centroids
 
+- [`pwbary()`](https://www.kisungyou.com/T4transport/reference/pwbary.md)
+  : Procrustes-Wasserstein Barycenter
 - [`rbary23L()`](https://www.kisungyou.com/T4transport/reference/rbary23L.md)
   : Free-Support Barycenter by von Lindheim (2023)
 - [`rbaryGD()`](https://www.kisungyou.com/T4transport/reference/rbaryGD.md)
@@ -84,5 +86,7 @@
 
 ## \[5\] Others
 
+- [`fiedler()`](https://www.kisungyou.com/T4transport/reference/fiedler.md)
+  : Compute the fiedler vector of a point cloud
 - [`gaussvis2d()`](https://www.kisungyou.com/T4transport/reference/gaussvis2d.md)
   : Sampling from a Bivariate Gaussian Distribution for Visualization

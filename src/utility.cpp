@@ -215,3 +215,19 @@ arma::mat util_pairwise_sqdist(const arma::mat& X, const arma::mat& Y){
   
   return(D);
 }
+
+// compute the pairwise distance
+// [[Rcpp::export]]
+arma::mat util_pairwise_dist(const arma::mat& X){
+  int N = X.n_rows;
+  arma::mat D(N,N,fill::zeros);
+  
+  for (int n=0; n<(N-1); n++){
+    for (int m=(n+1); m<N; m++){
+      D(n,m) = std::sqrt(arma::accu(arma::square(X.row(n)-X.row(m))));
+      D(m,n) = D(n,m);
+    }
+  }
+  
+  return(D);
+}

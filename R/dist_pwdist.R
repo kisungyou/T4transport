@@ -32,7 +32,7 @@
 #' #
 #' # * class 1 : samples from N((0,0),  diag(c(4,1/4)))
 #' # * class 2 : samples from N((10,0), diag(c(1/4,4)))
-#' # * class 3 : samples from N((10,0), Id) randomly rotated
+#' # * class 3 : samples from N((10,0), diag(c(1/4,4))) randomly rotated
 #' #
 #' #  We draw 10 empirical measures from each and compare 
 #' #  the regular Wasserstein and PW distance.
@@ -41,15 +41,15 @@
 #' set.seed(10)
 #' 
 #' #  prepare empty lists
-#' inputs = vector("list", length=30L)
+#' inputs = vector("list", length=30)
 #' 
 #' #  generate
 #' random_rot = qr.Q(qr(matrix(runif(4), ncol=2)))
 #' for (i in 1:10){
-#'   inputs[[i]] = cbind(rnorm(50, sd=2), rnorm(50, sd=0.5))
+#'   inputs[[i]] = matrix(rnorm(50*2), ncol=2)
 #' }
-#' for (j in 11:30){
-#'   base_draw = cbind(rnorm(50, sd=0.5), rnorm(50, sd=2))
+#' for (j in 11:20){
+#'   base_draw = matrix(rnorm(50*2), ncol=2)
 #'   base_draw[,1] = base_draw[,1] + 10
 #'   
 #'   inputs[[j]] = base_draw

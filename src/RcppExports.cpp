@@ -297,6 +297,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// util_pairwise_dist
+arma::mat util_pairwise_dist(const arma::mat& X);
+RcppExport SEXP _T4transport_util_pairwise_dist(SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_pairwise_dist(X));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_compute_pdist2", (DL_FUNC) &_T4transport_compute_pdist2, 2},
@@ -317,6 +328,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
     {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
     {"_T4transport_util_mvrnorm", (DL_FUNC) &_T4transport_util_mvrnorm, 3},
+    {"_T4transport_util_pairwise_dist", (DL_FUNC) &_T4transport_util_pairwise_dist, 1},
     {NULL, NULL, 0}
 };
 
