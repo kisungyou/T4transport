@@ -235,17 +235,33 @@ namespace lemon {
 		/// mixed order in the internal data structure.
 		/// In special cases, it could lead to better overall performance,
 		/// but it is usually slower. Therefore it is disabled by default.
-		NetworkSimplexSimple(const GR& graph, bool arc_mixing, int nbnodes, ArcsType nb_arcs, size_t maxiters = 0) :
-			_graph(graph),  //_arc_id(graph),
-			_arc_mixing(arc_mixing), _init_nb_nodes(nbnodes), _init_nb_arcs(nb_arcs),
-			MAX(std::numeric_limits<Value>::max()),
-			INF(std::numeric_limits<Value>::has_infinity ?
-				std::numeric_limits<Value>::infinity() : MAX)
-		{
-			// Reset data structures
-			reset();
-			max_iter = maxiters;
-		}
+		// NetworkSimplexSimple(const GR& graph, bool arc_mixing, int nbnodes, ArcsType nb_arcs, size_t maxiters = 0) :
+		// 	_graph(graph),  //_arc_id(graph),
+		// 	_arc_mixing(arc_mixing), _init_nb_nodes(nbnodes), _init_nb_arcs(nb_arcs),
+		// 	MAX(std::numeric_limits<Value>::max()),
+		// 	INF(std::numeric_limits<Value>::has_infinity ?
+		// 		std::numeric_limits<Value>::infinity() : MAX)
+		// {
+		// 	// Reset data structures
+		// 	reset();
+		// 	max_iter = maxiters;
+		// }
+	  NetworkSimplexSimple(const GR& graph, bool arc_mixing,
+                        int nbnodes, ArcsType nb_arcs,
+                        size_t maxiters = 0)
+	    : _graph(graph),  //_arc_id(graph),
+       _arc_mixing(arc_mixing),
+       MAX(std::numeric_limits<Value>::max()),
+       INF(std::numeric_limits<Value>::has_infinity
+             ? std::numeric_limits<Value>::infinity()
+               : MAX),
+                 _init_nb_nodes(nbnodes),
+                 _init_nb_arcs(nb_arcs)
+	  {
+	    // Reset data structures
+	    reset();
+	    max_iter = maxiters;
+	  }
 
 		/// The type of the flow amounts, capacity bounds and supply values
 		typedef V Value;
