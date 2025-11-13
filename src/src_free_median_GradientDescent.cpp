@@ -1,6 +1,7 @@
 #include "RcppArmadillo.h"
 #include "elementary.h"
 #include "utility.h"
+#include "utility_EMD.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -61,8 +62,8 @@ arma::mat cpp_single_barycenter(const arma::field<arma::mat>& measures, // suppo
   // compute all plans
   for (int n=0; n<N; n++){
     now_plans(n).reset();
-    now_plans(n) = util_plan_emd_R(target_weights, 
-              marginals(n), now_dist2(n));
+    //now_plans(n) = util_plan_emd_R(target_weights, marginals(n), now_dist2(n));
+    now_plans(n) = util_plan_emd_C(target_weights, marginals(n), now_dist2(n));
   }
   
   // cost
@@ -100,8 +101,8 @@ arma::mat cpp_single_barycenter(const arma::field<arma::mat>& measures, // suppo
     // compute all plans
     for (int n=0; n<N; n++){
       now_plans(n).reset();
-      now_plans(n) = util_plan_emd_R(target_weights, 
-                marginals(n), now_dist2(n));
+      //now_plans(n) = util_plan_emd_R(target_weights, marginals(n), now_dist2(n));
+      now_plans(n) = util_plan_emd_C(target_weights, marginals(n), now_dist2(n));
     }
     
     // compute the updated cost
@@ -172,8 +173,8 @@ Rcpp::List cpp_free_bary_gradient_init(const arma::field<arma::mat>& measures, /
   // compute all plans
   for (int n=0; n<N; n++){
     now_plans(n).reset();
-    now_plans(n) = util_plan_emd_R(target_weights, 
-              marginals(n), now_dist2(n));
+    //now_plans(n) = util_plan_emd_R(target_weights, marginals(n), now_dist2(n));
+    now_plans(n) = util_plan_emd_C(target_weights, marginals(n), now_dist2(n));
   }
   
   // cost
@@ -211,8 +212,8 @@ Rcpp::List cpp_free_bary_gradient_init(const arma::field<arma::mat>& measures, /
     // compute all plans
     for (int n=0; n<N; n++){
       now_plans(n).reset();
-      now_plans(n) = util_plan_emd_R(target_weights, 
-                marginals(n), now_dist2(n));
+      //now_plans(n) = util_plan_emd_R(target_weights, marginals(n), now_dist2(n));
+      now_plans(n) = util_plan_emd_C(target_weights, marginals(n), now_dist2(n));
     }
     
     // compute the updated cost
@@ -285,7 +286,8 @@ Rcpp::List cpp_free_median_PF(const arma::field<arma::mat>& measures,   // X_n: 
   // INITIAL: compute costs, plans, distances, objective
   for (int n = 0; n < N; ++n) {
     dist2(n) = aux_freemedian_sqdist(Z_old, measures(n));                 // m x m_n
-    plans(n) = util_plan_emd_R(v, marginals(n), dist2(n));                // m x m_n
+    //plans(n) = util_plan_emd_R(v, marginals(n), dist2(n));                // m x m_n
+    plans(n) = util_plan_emd_C(v, marginals(n), dist2(n));                // m x m_n
     distances(n) = std::sqrt(arma::accu(plans(n) % dist2(n)));            // W2 via plan & cost
   }
   double old_cost = arma::dot(weights, distances);                        // Φ(ν)
@@ -339,7 +341,8 @@ Rcpp::List cpp_free_median_PF(const arma::field<arma::mat>& measures,   // X_n: 
     // (3) RE-SOLVE PLANS FROM UPDATED SUPPORT, RECOMPUTE DISTANCES & COST
     for (int n = 0; n < N; ++n) {
       dist2(n)    = aux_freemedian_sqdist(Z_new, measures(n));            // m x m_n
-      plans(n)    = util_plan_emd_R(v, marginals(n), dist2(n));           // m x m_n
+      //plans(n)    = util_plan_emd_R(v, marginals(n), dist2(n));           // m x m_n
+      plans(n)    = util_plan_emd_C(v, marginals(n), dist2(n));           // m x m_n
       distances(n)= std::sqrt(arma::accu(plans(n) % dist2(n)));
     }
     double new_cost = arma::dot(weights, distances);

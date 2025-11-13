@@ -11,7 +11,8 @@
 #' @keywords internal
 #' @noRd
 aux_emd <- function(a,b,C){
-  return(as.matrix(wass_lp(C, 1, a, b)$plan))
+  #return(as.matrix(wass_lp(C, 1, a, b)$plan))
+  return(util_plan_emd_C(a,b,C))
 }
 
 # aux_ginit ---------------------------------------------------------------

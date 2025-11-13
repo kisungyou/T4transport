@@ -73,7 +73,15 @@ util_mvrnorm <- function(par_mean, par_cov, num_samples) {
     .Call(`_T4transport_util_mvrnorm`, par_mean, par_cov, num_samples)
 }
 
+util_pairwise_sqdist <- function(X, Y) {
+    .Call(`_T4transport_util_pairwise_sqdist`, X, Y)
+}
+
 util_pairwise_dist <- function(X) {
     .Call(`_T4transport_util_pairwise_dist`, X)
+}
+
+util_plan_emd_C <- function(a, b, C) {
+    .Call(`_T4transport_util_plan_emd_C`, a, b, C)
 }
 

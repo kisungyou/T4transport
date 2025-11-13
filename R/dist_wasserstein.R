@@ -158,78 +158,85 @@ wassersteinD <- function(D, p=2, wx=NULL, wy=NULL){
 #' @keywords internal
 #' @noRd
 wass_lp <- function(dxy, p, wx, wy){
-  # # OLDER VERSION : LPSOLVE
-  # cxy = (dxy^p)
-  # m   = nrow(cxy)
-  # n   = ncol(cxy)
-  # 
-  # c  = as.vector(cxy)
-  # A1 = base::kronecker(matrix(1,nrow=1,ncol=n), diag(m))
-  # A2 = base::kronecker(diag(n), matrix(1,nrow=1,ncol=m))
-  # A  = rbind(A1, A2)
-  # 
-  # f.obj = c
-  # f.con = A
-  # f.dir = rep("==",nrow(A))
-  # f.rhs = c(rep(1/m,m),rep(1/n,n))
-  # f.sol = (lpSolve::lp("min", f.obj, f.con, f.dir, f.rhs))
-  # 
-  # gamma = matrix(f.sol$solution, nrow=m)
-  # value = (sum(gamma*cxy)^(1/p))
-  
-  # NEW VERSION : CVXR
-  # mm = sample(30:50, 1)
-  # nn = sample(30:50, 1)
-  # X = matrix(rnorm(mm*2, mean=-1),ncol=2)
-  # Y = matrix(rnorm(nn*2, mean=+1),ncol=2)
-  # dxy = array(0,c(mm,nn))
-  # for (i in 1:mm){
-  #   for (j in 1:nn){
-  #     dxy[i,j] <- sqrt(sum((as.vector(X[i,])-as.vector(Y[j,]))^2))
-  #   }
-  # }
-  # wx = rep(1/mm, mm)
-  # wy = rep(1/nn, nn)
-  # p  = 2
-  
+  # use the optimized version of Bonneel
   cxy = (dxy^p)
-  m   = length(wx); ww_m = matrix(wx, ncol=1)
-  n   = length(wy); ww_n = matrix(wy, nrow=1)
-  ones_m = matrix(rep(1,n),ncol=1)
-  ones_n = matrix(rep(1,m),nrow=1)
-  plan   = CVXR::Variable(m,n)
-
-  #wd.obj    <- CVXR::Minimize(CVXR::matrix_trace(t(cxy)%*%plan))
-  wd.obj    <- CVXR::Minimize(CVXR::sum_entries(CVXR::multiply(cxy, plan)))
-  wd.const1 <- list(plan >= 0)
-  wd.const2 <- list(plan%*%ones_m==ww_m, ones_n%*%plan==ww_n)
-  wd.prob   <- CVXR::Problem(wd.obj, c(wd.const1, wd.const2))
-  wd.solve  <- CVXR::solve(wd.prob, solver="OSQP")
-  
-  if (all(wd.solve$status=="optimal")){ # successful
-    gamma <- wd.solve$getValue(plan)
-    value <- (base::sum(gamma*cxy)^(1/p))
-    
-    return(list(distance=value, plan=gamma))
-  } else {                              # failed : use lpsolve
-    cxy = (dxy^p)
-    m   = nrow(cxy)
-    n   = ncol(cxy)
-    
-    c  = as.vector(cxy)
-    A1 = base::kronecker(matrix(1,nrow=1,ncol=n), diag(m))
-    A2 = base::kronecker(diag(n), matrix(1,nrow=1,ncol=m))
-    A  = rbind(A1, A2)
-    
-    f.obj = c
-    f.con = A
-    f.dir = rep("==",nrow(A))
-    f.rhs = c(rep(1/m,m),rep(1/n,n))
-    f.sol = (lpSolve::lp("min", f.obj, f.con, f.dir, f.rhs))
-    
-    gamma = matrix(f.sol$solution, nrow=m)
-    value = (sum(gamma*cxy)^(1/p))
-    
-    return(list(distance=value, plan=gamma))
-  }
+  est_plan = util_plan_emd_C(wx, wy, cxy)
+  est_cost = sum(est_plan*cxy)^(1/p)
+  return(list(distance=est_cost, plan=est_plan))
 }
+# wass_lp <- function(dxy, p, wx, wy){
+#   # # OLDER VERSION : LPSOLVE
+#   # cxy = (dxy^p)
+#   # m   = nrow(cxy)
+#   # n   = ncol(cxy)
+#   # 
+#   # c  = as.vector(cxy)
+#   # A1 = base::kronecker(matrix(1,nrow=1,ncol=n), diag(m))
+#   # A2 = base::kronecker(diag(n), matrix(1,nrow=1,ncol=m))
+#   # A  = rbind(A1, A2)
+#   # 
+#   # f.obj = c
+#   # f.con = A
+#   # f.dir = rep("==",nrow(A))
+#   # f.rhs = c(rep(1/m,m),rep(1/n,n))
+#   # f.sol = (lpSolve::lp("min", f.obj, f.con, f.dir, f.rhs))
+#   # 
+#   # gamma = matrix(f.sol$solution, nrow=m)
+#   # value = (sum(gamma*cxy)^(1/p))
+#   
+#   # NEW VERSION : CVXR
+#   # mm = sample(30:50, 1)
+#   # nn = sample(30:50, 1)
+#   # X = matrix(rnorm(mm*2, mean=-1),ncol=2)
+#   # Y = matrix(rnorm(nn*2, mean=+1),ncol=2)
+#   # dxy = array(0,c(mm,nn))
+#   # for (i in 1:mm){
+#   #   for (j in 1:nn){
+#   #     dxy[i,j] <- sqrt(sum((as.vector(X[i,])-as.vector(Y[j,]))^2))
+#   #   }
+#   # }
+#   # wx = rep(1/mm, mm)
+#   # wy = rep(1/nn, nn)
+#   # p  = 2
+#   
+#   cxy = (dxy^p)
+#   m   = length(wx); ww_m = matrix(wx, ncol=1)
+#   n   = length(wy); ww_n = matrix(wy, nrow=1)
+#   ones_m = matrix(rep(1,n),ncol=1)
+#   ones_n = matrix(rep(1,m),nrow=1)
+#   plan   = CVXR::Variable(m,n)
+# 
+#   #wd.obj    <- CVXR::Minimize(CVXR::matrix_trace(t(cxy)%*%plan))
+#   wd.obj    <- CVXR::Minimize(CVXR::sum_entries(CVXR::multiply(cxy, plan)))
+#   wd.const1 <- list(plan >= 0)
+#   wd.const2 <- list(plan%*%ones_m==ww_m, ones_n%*%plan==ww_n)
+#   wd.prob   <- CVXR::Problem(wd.obj, c(wd.const1, wd.const2))
+#   wd.solve  <- CVXR::solve(wd.prob, solver="OSQP")
+#   
+#   if (all(wd.solve$status=="optimal")){ # successful
+#     gamma <- wd.solve$getValue(plan)
+#     value <- (base::sum(gamma*cxy)^(1/p))
+#     
+#     return(list(distance=value, plan=gamma))
+#   } else {                              # failed : use lpsolve
+#     cxy = (dxy^p)
+#     m   = nrow(cxy)
+#     n   = ncol(cxy)
+#     
+#     c  = as.vector(cxy)
+#     A1 = base::kronecker(matrix(1,nrow=1,ncol=n), diag(m))
+#     A2 = base::kronecker(diag(n), matrix(1,nrow=1,ncol=m))
+#     A  = rbind(A1, A2)
+#     
+#     f.obj = c
+#     f.con = A
+#     f.dir = rep("==",nrow(A))
+#     f.rhs = c(rep(1/m,m),rep(1/n,n))
+#     f.sol = (lpSolve::lp("min", f.obj, f.con, f.dir, f.rhs))
+#     
+#     gamma = matrix(f.sol$solution, nrow=m)
+#     value = (sum(gamma*cxy)^(1/p))
+#     
+#     return(list(distance=value, plan=gamma))
+#   }
+# }

@@ -297,6 +297,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// util_pairwise_sqdist
+arma::mat util_pairwise_sqdist(const arma::mat& X, const arma::mat& Y);
+RcppExport SEXP _T4transport_util_pairwise_sqdist(SEXP XSEXP, SEXP YSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_pairwise_sqdist(X, Y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // util_pairwise_dist
 arma::mat util_pairwise_dist(const arma::mat& X);
 RcppExport SEXP _T4transport_util_pairwise_dist(SEXP XSEXP) {
@@ -305,6 +317,19 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
     rcpp_result_gen = Rcpp::wrap(util_pairwise_dist(X));
+    return rcpp_result_gen;
+END_RCPP
+}
+// util_plan_emd_C
+arma::mat util_plan_emd_C(const arma::vec& a, const arma::vec& b, const arma::mat& C);
+RcppExport SEXP _T4transport_util_plan_emd_C(SEXP aSEXP, SEXP bSEXP, SEXP CSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_plan_emd_C(a, b, C));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -328,7 +353,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
     {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
     {"_T4transport_util_mvrnorm", (DL_FUNC) &_T4transport_util_mvrnorm, 3},
+    {"_T4transport_util_pairwise_sqdist", (DL_FUNC) &_T4transport_util_pairwise_sqdist, 2},
     {"_T4transport_util_pairwise_dist", (DL_FUNC) &_T4transport_util_pairwise_dist, 1},
+    {"_T4transport_util_plan_emd_C", (DL_FUNC) &_T4transport_util_plan_emd_C, 3},
     {NULL, NULL, 0}
 };
 

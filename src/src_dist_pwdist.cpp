@@ -1,6 +1,7 @@
 #include "RcppArmadillo.h"
 #include <cmath>
 #include "utility.h"
+#include "utility_EMD.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -194,7 +195,8 @@ Rcpp::List cpp_pwdist(const arma::mat& X, const arma::vec& p,
   arma::mat cross_sqdist = util_pairwise_sqdist(X, Y*init_P);
   cross_sqdist.elem(arma::find_nonfinite(cross_sqdist)).zeros();
   cross_sqdist.elem(arma::find(cross_sqdist < 0.0)).zeros(); // paranoia guard
-  arma::mat iter_Gamma = util_plan_emd_R(p, q, cross_sqdist);
+  //arma::mat iter_Gamma = util_plan_emd_R(p, q, cross_sqdist);
+  arma::mat iter_Gamma = util_plan_emd_C(p, q, cross_sqdist);
   clip_nonneg_inplace(iter_Gamma);
   arma::mat iter_P(d,d,fill::zeros);
   arma::mat iter_YP(M,d,fill::zeros);
@@ -221,7 +223,8 @@ Rcpp::List cpp_pwdist(const arma::mat& X, const arma::vec& p,
     }
     cross_sqdist.elem(arma::find_nonfinite(cross_sqdist)).zeros();
     cross_sqdist.elem(arma::find(cross_sqdist < 0.0)).zeros(); // paranoia guard
-    iter_Gamma = util_plan_emd_R(p, q, cross_sqdist);
+    //iter_Gamma = util_plan_emd_R(p, q, cross_sqdist);
+    iter_Gamma = util_plan_emd_C(p, q, cross_sqdist);
     clip_nonneg_inplace(iter_Gamma);
     
     // cost

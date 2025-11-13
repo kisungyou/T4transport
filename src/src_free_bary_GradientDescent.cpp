@@ -1,6 +1,7 @@
 #include "RcppArmadillo.h"
 #include "elementary.h"
 #include "utility.h"
+#include "utility_EMD.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -37,15 +38,13 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
   int N = measures.n_elem;    // number of measures
   int P = measures(0).n_cols; // problem dimensionality
   
-  double NN = static_cast<double>(N);
-  
-  // INITIALIZE 
+  // INITIALIZE
   // free-support target measure by gaussian sampling
   arma::rowvec par_mean(P, fill::zeros);
   arma::mat par_cov(P,P,fill::zeros);
   for (int n=0; n<N; n++){
-    par_mean += (1.0/NN)*arma::mean(measures(n), 0);
-    par_cov  += (1.0/NN)*arma::cov(measures(n)); 
+    par_mean += (1.0/static_cast<double>(N))*arma::mean(measures(n), 0);
+    par_cov  += (1.0/static_cast<double>(N))*arma::cov(measures(n)); 
   }
   //par_cov = arma::diagmat(par_cov)*2.0; // zero-out off-diagonals and make it dispersed
   par_cov = arma::diagmat(par_cov)*2.0 + 1e-8 * arma::eye(P,P); // jitter added
@@ -67,8 +66,8 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
   // compute all plans
   for (int n=0; n<N; n++){
     now_plans(n).reset();
-    now_plans(n) = util_plan_emd_R(target_weights, 
-              marginals(n), now_dist2(n));
+    //now_plans(n) = util_plan_emd_R(target_weights, marginals(n), now_dist2(n));
+    now_plans(n) = util_plan_emd_C(target_weights, marginals(n), now_dist2(n));
   }
   
   // cost
@@ -106,8 +105,8 @@ Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, // sup
     // compute all plans
     for (int n=0; n<N; n++){
       now_plans(n).reset();
-      now_plans(n) = util_plan_emd_R(target_weights, 
-                marginals(n), now_dist2(n));
+      //now_plans(n) = util_plan_emd_R(target_weights, marginals(n), now_dist2(n));
+      now_plans(n) = util_plan_emd_C(target_weights, marginals(n), now_dist2(n));
     }
     
     // compute the updated cost

@@ -1,3 +1,8 @@
+# T4transport 0.1.5
+
+* Replaced `lpSolve` package's EMD solver with Nicolas Bonneel's highly-optimized [C library](https://github.com/nbonneel/network_simplex/).
+* Added functions for Procrustes-Wasserstein geometry; `pwdist()` and `pwbary()`.
+
 # T4transport 0.1.4
 
 * `rbarygd()` for a Riemannian gradient descent to compute the free-support barycenter is added.
