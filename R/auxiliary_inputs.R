@@ -9,7 +9,9 @@
 #  (8) check_images             : for barycenter of images
 #  (9) check_hists              : for barycenter of histograms
 #  (10) valid_single_marginal   : check single marginal 
-#  (11) valid_single_similarity : kernel/distance in the Gromow-Wasserstein setting 
+#  (11) valid_single_similarity : kernel/distance in the Gromow-Wasserstein setting - deprecated
+#  (12) valid_gromov_single     : succeeds (2) + (11)
+#  (13) valid_gromov_list       : check a list of gromov distances
 
 
 # (1) valid_weight --------------------------------------------------------
@@ -293,4 +295,57 @@ valid_single_similarity <- function(matC, error_message){
     }
     return(distmat)
   }
+}
+
+
+
+
+
+# (12) valid_gromov_single ------------------------------------------------
+#' @keywords internal
+#' @noRd
+valid_gromov_single <- function(D) {
+  
+  # Case 1: direct dist object
+  if (inherits(D, "dist")) {
+    return(TRUE)
+  }
+  
+  # Case 2: matrix check
+  if (is.matrix(D)) {
+    
+    # square?
+    if (nrow(D) != ncol(D)) return(FALSE)
+    
+    # nonnegative?
+    if (any(D < 0, na.rm = TRUE)) return(FALSE)
+    
+    # zero diagonal?
+    if (!all(diag(D) == 0)) return(FALSE)
+    
+    # symmetric?
+    if (!all.equal(D, t(D))) return(FALSE)
+    
+    return(TRUE)
+  }
+  
+  # Otherwise not a distance specification
+  return(FALSE)
+}
+
+
+# (13) valid_gromov_list --------------------------------------------------
+#' @keywords internal
+#' @noRd
+valid_gromov_list <- function(list_D){
+  if (!is.list(list_D)){
+    return(FALSE)
+  }
+  K = length(list_D)
+  for (k in 1:K){
+    if (!valid_gromov_single(list_D[[k]])){
+      return(FALSE)
+    }
+  }
+  return(TRUE)
 }

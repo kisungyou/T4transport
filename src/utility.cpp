@@ -125,3 +125,74 @@ arma::mat util_pairwise_dist(const arma::mat& X){
   
   return(D);
 }
+
+
+// [[Rcpp::export]]
+arma::mat util_cmds(const arma::mat &D, int k) {
+  // D: n x n distance matrix (symmetric, zeros on diagonal)
+  // k: target dimension
+  
+  const arma::uword n = D.n_rows;
+  if (D.n_cols != n) {
+    stop("D must be a square matrix.");
+  }
+  if (k <= 0) {
+    stop("k must be positive.");
+  }
+  
+  // 1. Squared distances
+  arma::mat D2 = arma::square(D);  // elementwise square
+  
+  // 2. Double-centering: B = -0.5 * J * D2 * J
+  arma::mat I = arma::eye<arma::mat>(n, n);
+  arma::mat Ones = arma::ones<arma::mat>(n, n) / static_cast<double>(n);
+  arma::mat J = I - Ones;
+  
+  arma::mat B = -0.5 * J * D2 * J;
+  
+  // 3. Eigen-decomposition of symmetric Gram matrix
+  arma::vec eigval;
+  arma::mat eigvec;
+  bool ok = arma::eig_sym(eigval, eigvec, B);
+  if (!ok) {
+    stop("Eigen decomposition failed.");
+  }
+  
+  // arma::eig_sym returns eigenvalues in ascending order.
+  // We want the largest positive ones.
+  
+  // 4. Count how many positive eigenvalues we have (within numerical tolerance)
+  const double tol = 1e-12;
+  arma::uword n_pos = 0;
+  for (arma::uword i = 0; i < n; ++i) {
+    if (eigval(i) > tol) n_pos++;
+  }
+  
+  if (n_pos == 0) {
+    stop("No positive eigenvalues found; check your distance matrix.");
+  }
+  
+  // Effective output dimension: cannot exceed the number of positive eigenvalues
+  arma::uword k_eff = std::min<arma::uword>(k, n_pos);
+  
+  arma::mat X(n, k_eff);  // coordinate matrix
+  
+  // 5. Fill X with sqrt(lambda) * eigenvector, using largest positive eigenvalues
+  arma::uword col = 0;
+  for (arma::uword i = 0; i < n && col < k_eff; ++i) {
+    arma::uword idx = n - 1 - i;       // index from largest to smallest
+    double lambda = eigval(idx);
+    if (lambda > tol) {
+      arma::vec v = eigvec.col(idx);
+      X.col(col) = std::sqrt(lambda) * v;
+      col++;
+    }
+  }
+  
+  // If numerical issues gave us fewer than k_eff columns, truncate
+  if (col < k_eff) {
+    X = X.cols(0, col - 1);
+  }
+  
+  return X;
+}

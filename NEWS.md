@@ -1,3 +1,8 @@
+# T4transport 0.1.6
+
+* Added `img2measure()` to extract a discrete measure from a gray-scale image matrix.
+* New family of routines for Gromov-Wasserstein geometry, `gwdist()` and `gwbary()`, added.
+
 # T4transport 0.1.5
 
 * Replaced `lpSolve` package's EMD solver with Nicolas Bonneel's highly-optimized [C library](https://github.com/nbonneel/network_simplex/).

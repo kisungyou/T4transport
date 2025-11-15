@@ -244,6 +244,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_gwdist
+Rcpp::List cpp_gwdist(const arma::mat& Dx, const arma::mat& Dy, const arma::vec& p, const arma::vec& q, int maxiter, double abstol, std::string method);
+RcppExport SEXP _T4transport_cpp_gwdist(SEXP DxSEXP, SEXP DySEXP, SEXP pSEXP, SEXP qSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type Dx(DxSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type Dy(DySEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type p(pSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type q(qSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< std::string >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_gwdist(Dx, Dy, p, q, maxiter, abstol, method));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_gwbary
+arma::mat cpp_gwbary(const arma::field<arma::mat>& Ds, const arma::field<arma::vec>& marginals, const arma::vec& weights, const arma::mat& init_D, int maxiter, double abstol, std::string method);
+RcppExport SEXP _T4transport_cpp_gwbary(SEXP DsSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP init_DSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::field<arma::mat>& >::type Ds(DsSEXP);
+    Rcpp::traits::input_parameter< const arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type init_D(init_DSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< std::string >::type method(methodSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_gwbary(Ds, marginals, weights, init_D, maxiter, abstol, method));
+    return rcpp_result_gen;
+END_RCPP
+}
 // routine_bary14C
 arma::vec routine_bary14C(arma::mat& dxy, arma::field<arma::vec>& marginals, arma::vec weights, double p, double lambda, int maxiter, double abstol, bool printer, arma::vec initvec, int nthread);
 RcppExport SEXP _T4transport_routine_bary14C(SEXP dxySEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP pSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP printerSEXP, SEXP initvecSEXP, SEXP nthreadSEXP) {
@@ -320,6 +354,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// util_cmds
+arma::mat util_cmds(const arma::mat& D, int k);
+RcppExport SEXP _T4transport_util_cmds(SEXP DSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type D(DSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_cmds(D, k));
+    return rcpp_result_gen;
+END_RCPP
+}
 // util_plan_emd_C
 arma::mat util_plan_emd_C(const arma::vec& a, const arma::vec& b, const arma::mat& C);
 RcppExport SEXP _T4transport_util_plan_emd_C(SEXP aSEXP, SEXP bSEXP, SEXP CSEXP) {
@@ -350,11 +396,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_gauss_spdbary16A", (DL_FUNC) &_T4transport_gauss_spdbary16A, 4},
     {"_T4transport_gauss_median_general", (DL_FUNC) &_T4transport_gauss_median_general, 5},
     {"_T4transport_gauss_median_centered", (DL_FUNC) &_T4transport_gauss_median_centered, 4},
+    {"_T4transport_cpp_gwdist", (DL_FUNC) &_T4transport_cpp_gwdist, 7},
+    {"_T4transport_cpp_gwbary", (DL_FUNC) &_T4transport_cpp_gwbary, 7},
     {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
     {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
     {"_T4transport_util_mvrnorm", (DL_FUNC) &_T4transport_util_mvrnorm, 3},
     {"_T4transport_util_pairwise_sqdist", (DL_FUNC) &_T4transport_util_pairwise_sqdist, 2},
     {"_T4transport_util_pairwise_dist", (DL_FUNC) &_T4transport_util_pairwise_dist, 1},
+    {"_T4transport_util_cmds", (DL_FUNC) &_T4transport_util_cmds, 2},
     {"_T4transport_util_plan_emd_C", (DL_FUNC) &_T4transport_util_plan_emd_C, 3},
     {NULL, NULL, 0}
 };

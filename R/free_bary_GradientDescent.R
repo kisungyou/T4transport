@@ -12,7 +12,7 @@
 #' geometric view of the 2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}.
 #' 
 #' @param atoms a length-\eqn{K} list where each element is an \eqn{(N_k \times P)} matrix of atoms.
-#' @param marginals marginal distributions for empirical measures; if \code{NULL} (default), uniform weights are set for all measures. Otherwise, it should be a length-\eqn{K} list where each element is a length-\eqn{N_i} vector of nonnegative weights that sum to 1.
+#' @param marginals marginal distributions for empirical measures; if \code{NULL} (default), uniform weights are set for all measures. Otherwise, it should be a length-\eqn{K} list where each element is a length-\eqn{N_k} vector of nonnegative weights that sum to 1.
 #' @param weights weights for each individual measure; if \code{NULL} (default), each measure is considered equally. Otherwise, it should be a length-\eqn{K} vector.
 #' @param num_support the number of support points \eqn{M} for the barycenter (default: 100).
 #' @param ... extra parameters including \describe{

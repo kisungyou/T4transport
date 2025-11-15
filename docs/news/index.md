@@ -1,5 +1,23 @@
 # Changelog
 
+## T4transport 0.1.6
+
+- Added
+  [`img2measure()`](https://www.kisungyou.com/T4transport/reference/img2measure.md)
+  to extract a discrete measure from a gray-scale image matrix.
+
+## T4transport 0.1.5
+
+CRAN release: 2025-11-13
+
+- Replaced `lpSolve` package’s EMD solver with Nicolas Bonneel’s
+  highly-optimized [C
+  library](https://github.com/nbonneel/network_simplex/).
+- Added functions for Procrustes-Wasserstein geometry;
+  [`pwdist()`](https://www.kisungyou.com/T4transport/reference/pwdist.md)
+  and
+  [`pwbary()`](https://www.kisungyou.com/T4transport/reference/pwbary.md).
+
 ## T4transport 0.1.4
 
 - `rbarygd()` for a Riemannian gradient descent to compute the
@@ -23,7 +41,8 @@ CRAN release: 2023-04-11
   and
   [`gaussmedpd()`](https://www.kisungyou.com/T4transport/reference/gaussmedpd.md)
   now fully respects the product manifold perspective.
-- `gwdist()` added for Sliced-Wasserstein distance computation.
+- [`gwdist()`](https://www.kisungyou.com/T4transport/reference/gwdist.md)
+  added for Sliced-Wasserstein distance computation.
 
 ## T4transport 0.1.1
 

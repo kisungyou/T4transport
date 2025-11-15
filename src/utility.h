@@ -13,5 +13,6 @@ arma::mat util_mvrnorm(const arma::vec& par_mean,
                        int num_samples);
 arma::mat util_pairwise_sqdist(const arma::mat& X, const arma::mat& Y);
 arma::mat util_pairwise_dist(const arma::mat& X);
+arma::mat util_cmds(const arma::mat& X, int k);
 
 #endif // T4TRANSPORT_UTILITY_H

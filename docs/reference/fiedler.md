@@ -52,7 +52,8 @@ fied_vec = fiedler(X2d, normalize=TRUE)
 
 # plot 
 opar <- par(no.readonly=TRUE)
-plot(X2d, col=rainbow(150)[as.numeric(cut(fied_vec, breaks=150))], pch=19,
+plot(X2d, col=rainbow(150)[as.numeric(cut(fied_vec, breaks=150))], 
+     pch=19, xlab="PC 1", ylab="PC 2",
      main="Fiedler vector on Iris dataset (PCA-reduced)")
 
 par(opar)

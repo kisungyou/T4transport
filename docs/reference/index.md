@@ -43,7 +43,14 @@
 - [`rmedPF()`](https://www.kisungyou.com/T4transport/reference/rmedPF.md)
   : Free-Support Median by Particle-Flow Algorithm
 
-## \[3\] Special Cases
+## \[3\] Gromov-Wasserstein
+
+- [`gwbary()`](https://www.kisungyou.com/T4transport/reference/gwbary.md)
+  : Gromov-Wasserstein Barycenter
+- [`gwdist()`](https://www.kisungyou.com/T4transport/reference/gwdist.md)
+  : Gromov-Wasserstein Distance
+
+## \[4\] Special Cases
 
 ### Cumulative Distribution Functions
 
@@ -77,16 +84,18 @@
 - [`imagebary15B()`](https://www.kisungyou.com/T4transport/reference/imagebary15B.md)
   : Barycenter of Images according to Benamou et al. (2015)
 
-## \[4\] Data
+## \[5\] Data
 
 - [`digit3`](https://www.kisungyou.com/T4transport/reference/digit3.md)
   : MNIST Images of Digit 3
 - [`digits`](https://www.kisungyou.com/T4transport/reference/digits.md)
   : MNIST Images of All Digits
 
-## \[5\] Others
+## \[6\] Others
 
 - [`fiedler()`](https://www.kisungyou.com/T4transport/reference/fiedler.md)
   : Compute the fiedler vector of a point cloud
 - [`gaussvis2d()`](https://www.kisungyou.com/T4transport/reference/gaussvis2d.md)
   : Sampling from a Bivariate Gaussian Distribution for Visualization
+- [`img2measure()`](https://www.kisungyou.com/T4transport/reference/img2measure.md)
+  : Extract a discrete measure from a gray-scale image matrix
