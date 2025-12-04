@@ -2,7 +2,7 @@
 % Please edit documentation in R/free_bary_GradientDescent.R
 \name{rbaryGD}
 \alias{rbaryGD}
-\title{Free-Support Barycenter by Riemannian gradient descent}
+\title{Free-Support Barycenter by Riemannian Gradient Descent}
 \usage{
 rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
 }

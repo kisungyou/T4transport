@@ -1,7 +1,7 @@
 # Gromov-Wasserstein Distance
 
 Computes the Gromov-Wasserstein (GW) distance between two metric measure
-spaces. Given two distance matrices \\D_x\\ and \\D_y\\ along with their
+spaces. Given two distance matrices \\D_X\\ and \\D_Y\\ along with their
 respective marginal distributions, the function solves the GW
 optimization problem to obtain both the distance value and an associated
 optimal transport plan.
@@ -46,11 +46,11 @@ gwdist(Dx, Dy, wx = NULL, wy = NULL, ...)
 
   maxiter
 
-  :   maximum number of iterations (default: 496).
+  :   maximum number of iterations (default: 10).
 
   abstol
 
-  :   stopping criterion for iterations (default: 1e-10).
+  :   stopping criterion for iterations (default: 1e-6).
 
   method
 

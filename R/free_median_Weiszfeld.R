@@ -1,4 +1,4 @@
-#' Free-Support Median by Particle-Flow Algorithm
+#' Free-Support Median by Weiszfeld Update with Barycentric Projection
 #' 
 #' @description
 #' For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 
@@ -7,7 +7,8 @@
 #' \deqn{
 #' \mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2 (\nu, \mu_k ),
 #' }
-#' is computed using the particle-flow algorithm.
+#' is computed using the OT-adapted version of the Weiszfeld algorithm using 
+#' the barycentric projection as a means to recover an optimal displacement map.
 #' 
 #' @param atoms a length-\eqn{K} list where each element is an \eqn{(N_k \times P)} matrix of atoms.
 #' @param marginals marginal distributions for empirical measures; if \code{NULL} (default), uniform weights are set for all measures. Otherwise, it should be a length-\eqn{K} list where each element is a length-\eqn{N_i} vector of nonnegative weights that sum to 1.
@@ -50,7 +51,7 @@
 #' 
 #' ## COMPUTE
 #' #  compute the Wasserstein median
-#' run_median = rmedPF(input_measures, num_support = 50)
+#' run_median = rmedWB(input_measures, num_support = 50)
 #' #  compute the Wasserstein barycenter
 #' run_bary   = rbaryGD(input_measures, num_support = 50)
 #' 
@@ -76,9 +77,9 @@
 #' 
 #' @concept free_centroid
 #' @export
-rmedPF <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
+rmedWB <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   ## INPUT : EXPLICIT
-  name.f    = "rmedPF"
+  name.f    = "rmedWB"
   par_measures   = valid_multiple_measures(atoms, base::ncol(atoms[[1]]), name.f)
   num_atoms      = unlist(lapply(atoms, nrow))
   par_marginals  = valid_multiple_marginal(marginals, num_atoms, name.f)
@@ -178,7 +179,7 @@ rmedPF <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
 # microbenchmark::microbenchmark(
 #   run_bary = rbaryGD(input_measures, num_support = n_pts),
 #   run_medIRLS = rmedIRLS(input_measures, num_support = n_pts),
-#   run_medPF = rmedPF(input_measures, num_support = n_pts),
+#   run_medPF = rmedWB(input_measures, num_support = n_pts),
 #   times=3
 # )
 # 

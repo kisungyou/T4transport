@@ -1,4 +1,4 @@
-#' Free-Support Barycenter by Riemannian gradient descent
+#' Free-Support Barycenter by Riemannian Gradient Descent
 #' 
 #' @description
 #' For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 

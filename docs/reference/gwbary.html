@@ -5,7 +5,25 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Gromov-Wasserstein Barycenter — gwbary"><meta name="description" content="Gromov-Wasserstein Barycenter"><meta property="og:description" content="Gromov-Wasserstein Barycenter"></head><body>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Gromov-Wasserstein Barycenter — gwbary"><meta name="description" content="Computes the Gromov–Wasserstein (GW) barycenter of a collection of metric
+measure spaces. Given a list of distance matrices \({D^{(k)}}{k=1}^K\)
+and their corresponding marginal distributions, the function estimates a
+synthetic metric space whose intrinsic geometry best represents the input
+collection under the GW criterion.
+The GW barycenter is defined as the minimizer of a multi-measure
+Gromov–Wasserstein objective, where each dataset contributes according to a
+user-specified barycentric weight. Since the problem is jointly non-convex in
+the barycenter metric and the coupling matrices, the algorithm proceeds
+through an outer–inner iterative procedure."><meta property="og:description" content="Computes the Gromov–Wasserstein (GW) barycenter of a collection of metric
+measure spaces. Given a list of distance matrices \({D^{(k)}}{k=1}^K\)
+and their corresponding marginal distributions, the function estimates a
+synthetic metric space whose intrinsic geometry best represents the input
+collection under the GW criterion.
+The GW barycenter is defined as the minimizer of a multi-measure
+Gromov–Wasserstein objective, where each dataset contributes according to a
+user-specified barycentric weight. Since the problem is jointly non-convex in
+the barycenter metric and the coupling matrices, the algorithm proceeds
+through an outer–inner iterative procedure."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -46,16 +64,106 @@
     </div>
 
     <div class="ref-description section level2">
-    <p>Gromov-Wasserstein Barycenter</p>
+    <p>Computes the Gromov–Wasserstein (GW) barycenter of a collection of metric
+measure spaces. Given a list of distance matrices \({D^{(k)}}{k=1}^K\)
+and their corresponding marginal distributions, the function estimates a
+synthetic metric space whose intrinsic geometry best represents the input
+collection under the GW criterion.</p>
+<p>The GW barycenter is defined as the minimizer of a multi-measure
+Gromov–Wasserstein objective, where each dataset contributes according to a
+user-specified barycentric weight. Since the problem is jointly non-convex in
+the barycenter metric and the coupling matrices, the algorithm proceeds
+through an outer–inner iterative procedure.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gwbary</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gwbary</span><span class="op">(</span><span class="va">distances</span>, marginals <span class="op">=</span> <span class="cn">NULL</span>, weights <span class="op">=</span> <span class="cn">NULL</span>, num_support <span class="op">=</span> <span class="fl">100</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
-  </main></div>
+
+<dl><dt id="arg-distances">distances<a class="anchor" aria-label="anchor" href="#arg-distances"></a></dt>
+<dd><p>a length-\(K\) list where each element is either an \((N_k \times N_k)\) distance matrix or an object of class <code>dist</code> representing the pairwise distances for each empirical measure.</p></dd>
+
+
+<dt id="arg-marginals">marginals<a class="anchor" aria-label="anchor" href="#arg-marginals"></a></dt>
+<dd><p>marginal distributions for empirical measures; if <code>NULL</code> (default), uniform weights are set for all measures. Otherwise, it should be a length-\(K\) list where each element is a length-\(N_k\) vector of nonnegative weights that sum to 1.</p></dd>
+
+
+<dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
+<dd><p>weights for each individual measure; if <code>NULL</code> (default), each measure is considered equally. Otherwise, it should be a length-\(K\) vector.</p></dd>
+
+
+<dt id="arg-num-support">num_support<a class="anchor" aria-label="anchor" href="#arg-num-support"></a></dt>
+<dd><p>the number of support points \(M\) for the barycenter (default: 100).</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>extra parameters including</p><dl><dt>maxiter</dt>
+<dd><p>maximum number of iterations (default: 10).</p></dd>
+
+<dt>abstol</dt>
+<dd><p>stopping criterion for iterations (default: 1e-6).</p></dd>
+
+<dt>method</dt>
+<dd><p>optimization method to use; can be one of <code>"mm"</code>, <code>"pg"</code>, or <code>"fw"</code> (default).</p></dd>
+
+
+</dl></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A named list containing</p><dl><dt>dist</dt>
+<dd><p>an object of class <code>dist</code> representing the GW barycenter.</p></dd>
+
+<dt>weight</dt>
+<dd><p>a length-\(M\) vector of barycenter weights with all entries being \(1/M\).</p></dd>
+
+
+</dl></div>
+
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">#                           Description</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># GW barycenter computation is quite expensive. In this example, </span></span></span>
+<span class="r-in"><span><span class="co"># we draw a small set of empirical measures from the digit '3'</span></span></span>
+<span class="r-in"><span><span class="co"># images and compute their GW barycenter with a small number of </span></span></span>
+<span class="r-in"><span><span class="co"># support points. The attained barycenter distance matrix is then </span></span></span>
+<span class="r-in"><span><span class="co"># passed onto the classical MDS algorithm for visualization.</span></span></span>
+<span class="r-in"><span><span class="co">#-------------------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co">## GENERATE DATA</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">digits</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data_D</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">vector</a></span><span class="op">(</span><span class="st">"list"</span>, length<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data_W</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">vector</a></span><span class="op">(</span><span class="st">"list"</span>, length<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">img_now</span> <span class="op">=</span> <span class="fu"><a href="img2measure.html">img2measure</a></span><span class="op">(</span><span class="va">digits3</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">data_D</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">img_now</span><span class="op">$</span><span class="va">support</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">data_W</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">img_now</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## COMPUTE</span></span></span>
+<span class="r-in"><span><span class="va">bary_dist</span> <span class="op">&lt;-</span> <span class="fu">gwbary</span><span class="op">(</span><span class="va">data_D</span>, marginals<span class="op">=</span><span class="va">data_W</span>, num_support<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bary_cmd2</span> <span class="op">&lt;-</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/cmdscale.html" class="external-link">cmdscale</a></span><span class="op">(</span><span class="va">bary_dist</span><span class="op">$</span><span class="va">dist</span>, k<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## VISUALIZE</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bary_cmd2</span>, main<span class="op">=</span><span class="st">"GW Barycenter Embedding"</span>,</span></span>
+<span class="r-in"><span>     xaxt<span class="op">=</span><span class="st">"n"</span>, yaxt<span class="op">=</span><span class="st">"n"</span>, pch<span class="op">=</span><span class="fl">19</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

@@ -1,4 +1,4 @@
-# Free-Support Barycenter by Riemannian gradient descent
+# Free-Support Barycenter by Riemannian Gradient Descent
 
 For a collection of empirical measures \\\lbrace
 \mu_k\rbrace\_{k=1}^K\\, the free-support barycenter of order 2, defined
@@ -25,7 +25,7 @@ rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
 
   marginal distributions for empirical measures; if `NULL` (default),
   uniform weights are set for all measures. Otherwise, it should be a
-  length-\\K\\ list where each element is a length-\\N_i\\ vector of
+  length-\\K\\ list where each element is a length-\\N_k\\ vector of
   nonnegative weights that sum to 1.
 
 - weights:

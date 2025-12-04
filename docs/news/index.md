@@ -5,6 +5,11 @@
 - Added
   [`img2measure()`](https://www.kisungyou.com/T4transport/reference/img2measure.md)
   to extract a discrete measure from a gray-scale image matrix.
+- New family of routines for Gromov-Wasserstein geometry,
+  [`gwdist()`](https://www.kisungyou.com/T4transport/reference/gwdist.md)
+  and
+  [`gwbary()`](https://www.kisungyou.com/T4transport/reference/gwbary.md),
+  added.
 
 ## T4transport 0.1.5
 
