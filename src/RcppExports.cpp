@@ -318,6 +318,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// util_plan_entropic
+arma::mat util_plan_entropic(const arma::vec& a, const arma::vec& b, const arma::mat& C, double lambda, int maxiter, double abstol);
+RcppExport SEXP _T4transport_util_plan_entropic(SEXP aSEXP, SEXP bSEXP, SEXP CSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_plan_entropic(a, b, C, lambda, maxiter, abstol));
+    return rcpp_result_gen;
+END_RCPP
+}
 // util_mvrnorm
 arma::mat util_mvrnorm(const arma::vec& par_mean, const arma::mat& par_cov, int num_samples);
 RcppExport SEXP _T4transport_util_mvrnorm(SEXP par_meanSEXP, SEXP par_covSEXP, SEXP num_samplesSEXP) {
@@ -400,6 +416,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_cpp_gwbary", (DL_FUNC) &_T4transport_cpp_gwbary, 7},
     {"_T4transport_routine_bary14C", (DL_FUNC) &_T4transport_routine_bary14C, 10},
     {"_T4transport_routine_bary15B", (DL_FUNC) &_T4transport_routine_bary15B, 10},
+    {"_T4transport_util_plan_entropic", (DL_FUNC) &_T4transport_util_plan_entropic, 6},
     {"_T4transport_util_mvrnorm", (DL_FUNC) &_T4transport_util_mvrnorm, 3},
     {"_T4transport_util_pairwise_sqdist", (DL_FUNC) &_T4transport_util_pairwise_sqdist, 2},
     {"_T4transport_util_pairwise_dist", (DL_FUNC) &_T4transport_util_pairwise_dist, 1},

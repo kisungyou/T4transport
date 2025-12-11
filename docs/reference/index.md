@@ -1,7 +1,11 @@
 # Package index
 
-## \[1\] Distance
+## \[1\] Core OT for Empirical Measures
 
+### Distances
+
+- [`hdist()`](https://www.kisungyou.com/T4transport/reference/hdist.md)
+  : Distance between Histograms
 - [`ipot()`](https://www.kisungyou.com/T4transport/reference/ipot.md)
   [`ipotD()`](https://www.kisungyou.com/T4transport/reference/ipot.md) :
   Wasserstein Distance via Inexact Proximal Point Method
@@ -19,17 +23,6 @@
   [`wassersteinD()`](https://www.kisungyou.com/T4transport/reference/wasserstein.md)
   : Wasserstein Distance via Linear Programming
 
-## \[2\] Centroid
-
-### Fixed-Support Centroids
-
-- [`fbary14C()`](https://www.kisungyou.com/T4transport/reference/fbary14C.md)
-  [`fbary14Cdist()`](https://www.kisungyou.com/T4transport/reference/fbary14C.md)
-  : Fixed-Support Barycenter by Cuturi & Doucet (2014)
-- [`fbary15B()`](https://www.kisungyou.com/T4transport/reference/fbary15B.md)
-  [`fbary15Bdist()`](https://www.kisungyou.com/T4transport/reference/fbary15B.md)
-  : Fixed-Support Barycenter by Benamou et al. (2015)
-
 ### Free-Support Centroids
 
 - [`pwbary()`](https://www.kisungyou.com/T4transport/reference/pwbary.md)
@@ -43,14 +36,16 @@
 - [`rmedWB()`](https://www.kisungyou.com/T4transport/reference/rmedWB.md)
   : Free-Support Median by Weiszfeld Update with Barycentric Projection
 
-## \[3\] Gromov-Wasserstein
+### Fixed-Support Centroids
 
-- [`gwbary()`](https://www.kisungyou.com/T4transport/reference/gwbary.md)
-  : Gromov-Wasserstein Barycenter
-- [`gwdist()`](https://www.kisungyou.com/T4transport/reference/gwdist.md)
-  : Gromov-Wasserstein Distance
+- [`fbary14C()`](https://www.kisungyou.com/T4transport/reference/fbary14C.md)
+  [`fbary14Cdist()`](https://www.kisungyou.com/T4transport/reference/fbary14C.md)
+  : Fixed-Support Barycenter by Cuturi & Doucet (2014)
+- [`fbary15B()`](https://www.kisungyou.com/T4transport/reference/fbary15B.md)
+  [`fbary15Bdist()`](https://www.kisungyou.com/T4transport/reference/fbary15B.md)
+  : Fixed-Support Barycenter by Benamou et al. (2015)
 
-## \[4\] Special Cases
+## \[2\] Modality-Specific
 
 ### Cumulative Distribution Functions
 
@@ -59,7 +54,7 @@
 - [`ecdfmed()`](https://www.kisungyou.com/T4transport/reference/ecdfmed.md)
   : Wasserstein Median of Empirical CDFs
 
-### Gaussian Distributions
+### Gaussian Measures
 
 - [`gaussbary1d()`](https://www.kisungyou.com/T4transport/reference/gaussbary1d.md)
   : Barycenter of Gaussian Distributions in \\\mathbb{R}\\
@@ -72,10 +67,16 @@
 
 ### Histograms
 
+- [`histbary()`](https://www.kisungyou.com/T4transport/reference/histbary.md)
+  : Barycenter of Histograms
 - [`histbary14C()`](https://www.kisungyou.com/T4transport/reference/histbary14C.md)
   : Barycenter of Histograms by Cuturi and Doucet (2014)
 - [`histbary15B()`](https://www.kisungyou.com/T4transport/reference/histbary15B.md)
   : Barycenter of Histograms by Benamou et al. (2015)
+- [`histinterp()`](https://www.kisungyou.com/T4transport/reference/histinterp.md)
+  : Interpolation between Histograms
+- [`histmed()`](https://www.kisungyou.com/T4transport/reference/histmed.md)
+  : Wasserstein Median of Histograms
 
 ### Images
 
@@ -84,14 +85,21 @@
 - [`imagebary15B()`](https://www.kisungyou.com/T4transport/reference/imagebary15B.md)
   : Barycenter of Images according to Benamou et al. (2015)
 
-## \[5\] Data
+## \[3\] Gromov–Wasserstein
+
+- [`gwbary()`](https://www.kisungyou.com/T4transport/reference/gwbary.md)
+  : Gromov-Wasserstein Barycenter
+- [`gwdist()`](https://www.kisungyou.com/T4transport/reference/gwdist.md)
+  : Gromov-Wasserstein Distance
+
+## \[4\] Data Sets
 
 - [`digit3`](https://www.kisungyou.com/T4transport/reference/digit3.md)
   : MNIST Images of Digit 3
 - [`digits`](https://www.kisungyou.com/T4transport/reference/digits.md)
   : MNIST Images of All Digits
 
-## \[6\] Others
+## \[5\] Utilities
 
 - [`fiedler()`](https://www.kisungyou.com/T4transport/reference/fiedler.md)
   : Compute the fiedler vector of a point cloud

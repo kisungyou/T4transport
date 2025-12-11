@@ -19,7 +19,7 @@
 #' \item{print.progress}{a logical to show current iteration (default: \code{TRUE}).}
 #' }
 #' 
-#' @return a \code{"histogram"} object of barycenter.
+#' @return a \code{"histogram"} object representing the Wasserstein barycenter.
 #' 
 #' @examples 
 #' \donttest{

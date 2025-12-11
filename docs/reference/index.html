@@ -44,8 +44,13 @@
     </div>
 
     <div class="section level2">
-      <h2 id="-distance">[1] Distance<a class="anchor" aria-label="anchor" href="#-distance"></a></h2>
+      <h2 id="-core-ot-for-empirical-measures">[1] Core OT for Empirical Measures<a class="anchor" aria-label="anchor" href="#-core-ot-for-empirical-measures"></a></h2>
 
+
+
+      <dl></dl></div><div class="section level2">
+
+      <h3 id="distances">Distances<a class="anchor" aria-label="anchor" href="#distances"></a></h3>
 
 
       <dl></dl></div><div class="section level2">
@@ -54,6 +59,13 @@
 
 
       <dl><dt>
+
+          <code><a href="hdist.html">hdist()</a></code>
+
+        </dt>
+        <dd>Distance between Histograms</dd>
+
+        <dt>
 
           <code><a href="ipot.html">ipot()</a></code> <code><a href="ipot.html">ipotD()</a></code>
 
@@ -94,34 +106,6 @@
 
         </dt>
         <dd>Wasserstein Distance via Linear Programming</dd>
-      </dl></div><div class="section level2">
-      <h2 id="-centroid">[2] Centroid<a class="anchor" aria-label="anchor" href="#-centroid"></a></h2>
-
-
-
-      <dl></dl></div><div class="section level2">
-
-      <h3 id="fixed-support-centroids">Fixed-Support Centroids<a class="anchor" aria-label="anchor" href="#fixed-support-centroids"></a></h3>
-
-
-      <dl></dl></div><div class="section level2">
-
-
-
-
-      <dl><dt>
-
-          <code><a href="fbary14C.html">fbary14C()</a></code> <code><a href="fbary14C.html">fbary14Cdist()</a></code>
-
-        </dt>
-        <dd>Fixed-Support Barycenter by Cuturi &amp; Doucet (2014)</dd>
-
-        <dt>
-
-          <code><a href="fbary15B.html">fbary15B()</a></code> <code><a href="fbary15B.html">fbary15Bdist()</a></code>
-
-        </dt>
-        <dd>Fixed-Support Barycenter by Benamou et al. (2015)</dd>
       </dl></div><div class="section level2">
 
       <h3 id="free-support-centroids">Free-Support Centroids<a class="anchor" aria-label="anchor" href="#free-support-centroids"></a></h3>
@@ -167,8 +151,8 @@
         </dt>
         <dd>Free-Support Median by Weiszfeld Update with Barycentric Projection</dd>
       </dl></div><div class="section level2">
-      <h2 id="-gromov-wasserstein">[3] Gromov-Wasserstein<a class="anchor" aria-label="anchor" href="#-gromov-wasserstein"></a></h2>
 
+      <h3 id="fixed-support-centroids">Fixed-Support Centroids<a class="anchor" aria-label="anchor" href="#fixed-support-centroids"></a></h3>
 
 
       <dl></dl></div><div class="section level2">
@@ -178,19 +162,19 @@
 
       <dl><dt>
 
-          <code><a href="gwbary.html">gwbary()</a></code>
+          <code><a href="fbary14C.html">fbary14C()</a></code> <code><a href="fbary14C.html">fbary14Cdist()</a></code>
 
         </dt>
-        <dd>Gromov-Wasserstein Barycenter</dd>
+        <dd>Fixed-Support Barycenter by Cuturi &amp; Doucet (2014)</dd>
 
         <dt>
 
-          <code><a href="gwdist.html">gwdist()</a></code>
+          <code><a href="fbary15B.html">fbary15B()</a></code> <code><a href="fbary15B.html">fbary15Bdist()</a></code>
 
         </dt>
-        <dd>Gromov-Wasserstein Distance</dd>
+        <dd>Fixed-Support Barycenter by Benamou et al. (2015)</dd>
       </dl></div><div class="section level2">
-      <h2 id="-special-cases">[4] Special Cases<a class="anchor" aria-label="anchor" href="#-special-cases"></a></h2>
+      <h2 id="-modality-specific">[2] Modality-Specific<a class="anchor" aria-label="anchor" href="#-modality-specific"></a></h2>
 
 
 
@@ -219,7 +203,7 @@
         <dd>Wasserstein Median of Empirical CDFs</dd>
       </dl></div><div class="section level2">
 
-      <h3 id="gaussian-distributions">Gaussian Distributions<a class="anchor" aria-label="anchor" href="#gaussian-distributions"></a></h3>
+      <h3 id="gaussian-measures">Gaussian Measures<a class="anchor" aria-label="anchor" href="#gaussian-measures"></a></h3>
 
 
       <dl></dl></div><div class="section level2">
@@ -266,6 +250,13 @@
 
       <dl><dt>
 
+          <code><a href="histbary.html">histbary()</a></code>
+
+        </dt>
+        <dd>Barycenter of Histograms</dd>
+
+        <dt>
+
           <code><a href="histbary14C.html">histbary14C()</a></code>
 
         </dt>
@@ -277,6 +268,20 @@
 
         </dt>
         <dd>Barycenter of Histograms by Benamou et al. (2015)</dd>
+
+        <dt>
+
+          <code><a href="histinterp.html">histinterp()</a></code>
+
+        </dt>
+        <dd>Interpolation between Histograms</dd>
+
+        <dt>
+
+          <code><a href="histmed.html">histmed()</a></code>
+
+        </dt>
+        <dd>Wasserstein Median of Histograms</dd>
       </dl></div><div class="section level2">
 
       <h3 id="images">Images<a class="anchor" aria-label="anchor" href="#images"></a></h3>
@@ -301,7 +306,30 @@
         </dt>
         <dd>Barycenter of Images according to Benamou et al. (2015)</dd>
       </dl></div><div class="section level2">
-      <h2 id="-data">[5] Data<a class="anchor" aria-label="anchor" href="#-data"></a></h2>
+      <h2 id="-gromov-wasserstein">[3] Gromov–Wasserstein<a class="anchor" aria-label="anchor" href="#-gromov-wasserstein"></a></h2>
+
+
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="gwbary.html">gwbary()</a></code>
+
+        </dt>
+        <dd>Gromov-Wasserstein Barycenter</dd>
+
+        <dt>
+
+          <code><a href="gwdist.html">gwdist()</a></code>
+
+        </dt>
+        <dd>Gromov-Wasserstein Distance</dd>
+      </dl></div><div class="section level2">
+      <h2 id="-data-sets">[4] Data Sets<a class="anchor" aria-label="anchor" href="#-data-sets"></a></h2>
 
 
 
@@ -324,7 +352,7 @@
         </dt>
         <dd>MNIST Images of All Digits</dd>
       </dl></div><div class="section level2">
-      <h2 id="-others">[6] Others<a class="anchor" aria-label="anchor" href="#-others"></a></h2>
+      <h2 id="-utilities">[5] Utilities<a class="anchor" aria-label="anchor" href="#-utilities"></a></h2>
 
 
 

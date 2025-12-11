@@ -36,26 +36,23 @@ navbar:
     - icon: fa-envelope
       href: mailto:kisung.you@outlook.com
       aria-label: "Email"
-
+      
 reference:
-  - title: "[1] Distance"
+  - title: "[1] Core OT for Empirical Measures"
+  - subtitle: "Distances"
     contents:
       - has_concept("dist")
-  - title: "[2] Centroid"
-  - subtitle: "Fixed-Support Centroids"
-    contents:
-      - has_concept("fixed_centroid")
   - subtitle: "Free-Support Centroids"
     contents:
       - has_concept("free_centroid")
-  - title: "[3] Gromov-Wasserstein"
+  - subtitle: "Fixed-Support Centroids"
     contents:
-      - has_concept("gromov")
-  - title: "[4] Special Cases"
+      - has_concept("fixed_centroid")
+  - title: "[2] Modality-Specific"
   - subtitle: "Cumulative Distribution Functions"
     contents:
       - has_concept("ecdf")
-  - subtitle: "Gaussian Distributions"
+  - subtitle: "Gaussian Measures"
     contents:
       - has_concept("gaussian")
   - subtitle: "Histograms"
@@ -64,9 +61,12 @@ reference:
   - subtitle: "Images"
     contents:
       - has_concept("image")
-  - title: "[5] Data"
+  - title: "[3] Gromov–Wasserstein"
+    contents:
+      - has_concept("gromov")
+  - title: "[4] Data Sets"
     contents:
       - has_concept("data")
-  - title: "[6] Others"
+  - title: "[5] Utilities"
     contents:
       - has_concept("other")

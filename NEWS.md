@@ -1,5 +1,7 @@
 # T4transport 0.1.6
 
+* API references restructured.
+* Added a number of functions for histograms, including distance, barycenter, interpolation, and median.
 * Added `img2measure()` to extract a discrete measure from a gray-scale image matrix.
 * New family of routines for Gromov-Wasserstein geometry, `gwdist()` and `gwbary()`, added.
 
@@ -15,7 +17,7 @@
 # T4transport 0.1.3
 
 * Changed the structure of the package. 
-* Applied the `log-sum-exp` trick for numerical stability.
+* Applied the `log-sum-exp` trick for numerical stability to the entropic regularization solver.
 * `rbary23L()` added for simple free-support Wasserstein barycenter computation.
 * Two ad hoc median routines for images and histograms are removed.
 

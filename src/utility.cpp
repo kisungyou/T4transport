@@ -21,6 +21,7 @@ static double logsumexp(const arma::vec& x) {
   return xmax + std::log(arma::sum(arma::exp(x - xmax)));
 }
 
+// [[Rcpp::export]]
 arma::mat util_plan_entropic(const arma::vec& a, const arma::vec& b, const arma::mat& C,
                              double lambda, int maxiter, double abstol){
   int M = C.n_rows;

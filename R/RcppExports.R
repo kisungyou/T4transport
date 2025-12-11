@@ -77,6 +77,10 @@ routine_bary15B <- function(dxy, marginals, weights, p, lambda, maxiter, abstol,
     .Call(`_T4transport_routine_bary15B`, dxy, marginals, weights, p, lambda, maxiter, abstol, printer, initvec, nthread)
 }
 
+util_plan_entropic <- function(a, b, C, lambda, maxiter, abstol) {
+    .Call(`_T4transport_util_plan_entropic`, a, b, C, lambda, maxiter, abstol)
+}
+
 util_mvrnorm <- function(par_mean, par_cov, num_samples) {
     .Call(`_T4transport_util_mvrnorm`, par_mean, par_cov, num_samples)
 }

@@ -58,7 +58,7 @@ histbary14C(hists, p = 2, weights = NULL, lambda = NULL, ...)
 
 ## Value
 
-a `"histogram"` object of barycenter.
+a `"histogram"` object representing the Wasserstein barycenter.
 
 ## References
 

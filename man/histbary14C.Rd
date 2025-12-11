@@ -26,7 +26,7 @@ would be taken, or it should be a nonnegative real number.}
 }}
 }
 \value{
-a \code{"histogram"} object of barycenter.
+a \code{"histogram"} object representing the Wasserstein barycenter.
 }
 \description{
 Given multiple histograms represented as \code{"histogram"} S3 objects, compute 
