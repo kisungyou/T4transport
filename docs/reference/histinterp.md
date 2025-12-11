@@ -8,7 +8,7 @@ linear interpolation of quantile functions (displacement interpolation).
 ## Usage
 
 ``` r
-histinterp(hist1, hist2, t = 0.5, L = 2000L, ...)
+histinterp(hist1, hist2, t = 0.5, L = 2000L)
 ```
 
 ## Arguments

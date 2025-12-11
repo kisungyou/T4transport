@@ -7,7 +7,7 @@ characterization. All input histograms must have identical breaks.
 ## Usage
 
 ``` r
-histbary(hists, weights = NULL, L = 2000L, ...)
+histbary(hists, weights = NULL, L = 2000L)
 ```
 
 ## Arguments
@@ -54,7 +54,7 @@ histxy[[1]] = hist(x, breaks=bk, plot=FALSE)
 histxy[[2]] = hist(y, breaks=bk, plot=FALSE)
 
 # COMPUTE
-hh = histbary(histxy, maxiter=5)
+hh = histbary(histxy)
 
 # VISUALIZE
 opar <- par(no.readonly=TRUE)

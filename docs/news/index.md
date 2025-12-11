@@ -2,12 +2,9 @@
 
 ## T4transport 0.1.6
 
-- Added
-  [`histbary()`](https://www.kisungyou.com/T4transport/reference/histbary.md)
-  for the 2-Wasserstein barycenter with quantile matching.
-- Added
-  [`hdist()`](https://www.kisungyou.com/T4transport/reference/hdist.md)
-  for computing the distance distance between two histograms.
+- API references restructured.
+- Added a number of functions for histograms, including distance,
+  barycenter, interpolation, and median.
 - Added
   [`img2measure()`](https://www.kisungyou.com/T4transport/reference/img2measure.md)
   to extract a discrete measure from a gray-scale image matrix.
