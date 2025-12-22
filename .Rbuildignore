@@ -12,3 +12,4 @@
 ^vignettes/.*\.(html|pdf|RData|rdb|rdx)$
 ^doc$
 ^Meta$
+^\.github$

@@ -1,3 +1,8 @@
+# T4transport 0.1.8
+
+* Changed `hdist()` to `histdist()` for modality-specific computation.
+
+
 # T4transport 0.1.7
 
 * Removed dependence on CVXR package.

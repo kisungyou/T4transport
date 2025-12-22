@@ -4,8 +4,6 @@
 
 ### Distances
 
-- [`hdist()`](https://www.kisungyou.com/T4transport/reference/hdist.md)
-  : Distance between Histograms
 - [`ipot()`](https://www.kisungyou.com/T4transport/reference/ipot.md)
   [`ipotD()`](https://www.kisungyou.com/T4transport/reference/ipot.md) :
   Wasserstein Distance via Inexact Proximal Point Method
@@ -73,6 +71,8 @@
   : Barycenter of Histograms by Cuturi and Doucet (2014)
 - [`histbary15B()`](https://www.kisungyou.com/T4transport/reference/histbary15B.md)
   : Barycenter of Histograms by Benamou et al. (2015)
+- [`histdist()`](https://www.kisungyou.com/T4transport/reference/histdist.md)
+  : Distance between Histograms
 - [`histinterp()`](https://www.kisungyou.com/T4transport/reference/histinterp.md)
   : Interpolation between Histograms
 - [`histmed()`](https://www.kisungyou.com/T4transport/reference/histmed.md)

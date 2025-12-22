@@ -34,7 +34,7 @@
 #' pdmat = array(0,c(20,20))
 #' for (i in 1:19){
 #'   for (j in (i+1):20){
-#'     pdmat[i,j] = hdist(hist20[[i]], hist20[[j]], p=2)$distance
+#'     pdmat[i,j] = histdist(hist20[[i]], hist20[[j]], p=2)$distance
 #'     pdmat[j,i] = pdmat[i,j]
 #'   }
 #' }
@@ -46,21 +46,21 @@
 #' par(opar)
 #' }
 #' 
-#' @concept dist
+#' @concept histogram
 #' @export
-hdist <- function(hist1, hist2, p=2){
+histdist <- function(hist1, hist2, p=2){
   # INPUTS
   if (!inherits(hist1, "histogram")){
-    stop("* hdist: input 'hist1' should be a histogram object.")
+    stop("* histdist: input 'hist1' should be a histogram object.")
   }
   if (!inherits(hist2, "histogram")){
-    stop("* hdist: input 'hist2' should be a histogram object.")
+    stop("* histdist: input 'hist2' should be a histogram object.")
   }
   if (is.null(hist1$breaks) || is.null(hist2$breaks)) {
-    stop("* hdist: both inputs must have a 'breaks' component (histogram objects).")
+    stop("* histdist: both inputs must have a 'breaks' component (histogram objects).")
   }
   if (is.null(hist1$counts) || is.null(hist2$counts)) {
-    stop("* hdist: both inputs must have a 'counts' component.")
+    stop("* histdist: both inputs must have a 'counts' component.")
   }
   
   # check equal breaks
@@ -69,7 +69,7 @@ hdist <- function(hist1, hist2, p=2){
   
   # enforce same binning
   if (length(breaks1) != length(breaks2) || any(breaks1 != breaks2)) {
-    stop("* hdist: 'hist1' and 'hist2' must have identical 'breaks'.")
+    stop("* histdist: 'hist1' and 'hist2' must have identical 'breaks'.")
   }
   
   ## bin midpoints
@@ -83,13 +83,13 @@ hdist <- function(hist1, hist2, p=2){
   counts2 <- as.numeric(hist2$counts)
   
   if (any(counts1 < 0) || any(counts2 < 0)) {
-    stop("* hdist.hist: negative counts are not allowed.")
+    stop("* histdist: negative counts are not allowed.")
   }
   
   sum1 <- sum(counts1)
   sum2 <- sum(counts2)
   if (sum1 <= 0 || sum2 <= 0) {
-    stop("* hdist.hist: both histograms must have positive total mass.")
+    stop("* histdist: both histograms must have positive total mass.")
   }
   
   ## normalize to probability masses

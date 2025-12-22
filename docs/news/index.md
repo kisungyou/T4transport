@@ -2,7 +2,9 @@
 
 ## T4transport 0.1.7
 
-- CRAN error fixes.
+CRAN release: 2025-12-22
+
+- Removed dependence on CVXR package.
 
 ## T4transport 0.1.6
 
