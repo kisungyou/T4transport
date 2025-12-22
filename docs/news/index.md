@@ -1,5 +1,9 @@
 # Changelog
 
+## T4transport 0.1.7
+
+- CRAN error fixes.
+
 ## T4transport 0.1.6
 
 - API references restructured.
@@ -21,7 +25,7 @@ CRAN release: 2025-11-13
 - Replaced `lpSolve` package’s EMD solver with Nicolas Bonneel’s
   highly-optimized [C
   library](https://github.com/nbonneel/network_simplex/).
-- Added functions for Procrustes-Wasserstein geometry;
+- Added functions for Procrustes-Wasserstein geometry:
   [`pwdist()`](https://www.kisungyou.com/T4transport/reference/pwdist.md)
   and
   [`pwbary()`](https://www.kisungyou.com/T4transport/reference/pwbary.md).

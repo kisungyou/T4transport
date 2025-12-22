@@ -1,3 +1,7 @@
+# T4transport 0.1.7
+
+* Removed dependence on CVXR package.
+
 # T4transport 0.1.6
 
 * API references restructured.
@@ -8,7 +12,7 @@
 # T4transport 0.1.5
 
 * Replaced `lpSolve` package's EMD solver with Nicolas Bonneel's highly-optimized [C library](https://github.com/nbonneel/network_simplex/).
-* Added functions for Procrustes-Wasserstein geometry; `pwdist()` and `pwbary()`.
+* Added functions for Procrustes-Wasserstein geometry: `pwdist()` and `pwbary()`.
 
 # T4transport 0.1.4
 
