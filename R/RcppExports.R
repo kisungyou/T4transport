@@ -101,3 +101,7 @@ util_plan_emd_C <- function(a, b, C) {
     .Call(`_T4transport_util_plan_emd_C`, a, b, C)
 }
 
+util_dual_emd_C <- function(a, b, C, return_plan = FALSE) {
+    .Call(`_T4transport_util_dual_emd_C`, a, b, C, return_plan)
+}
+

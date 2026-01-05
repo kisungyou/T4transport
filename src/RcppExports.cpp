@@ -395,6 +395,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// util_dual_emd_C
+Rcpp::List util_dual_emd_C(const arma::vec& a, const arma::vec& b, const arma::mat& C, const bool return_plan);
+RcppExport SEXP _T4transport_util_dual_emd_C(SEXP aSEXP, SEXP bSEXP, SEXP CSEXP, SEXP return_planSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< const bool >::type return_plan(return_planSEXP);
+    rcpp_result_gen = Rcpp::wrap(util_dual_emd_C(a, b, C, return_plan));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_compute_pdist2", (DL_FUNC) &_T4transport_compute_pdist2, 2},
@@ -422,6 +436,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_util_pairwise_dist", (DL_FUNC) &_T4transport_util_pairwise_dist, 1},
     {"_T4transport_util_cmds", (DL_FUNC) &_T4transport_util_cmds, 2},
     {"_T4transport_util_plan_emd_C", (DL_FUNC) &_T4transport_util_plan_emd_C, 3},
+    {"_T4transport_util_dual_emd_C", (DL_FUNC) &_T4transport_util_dual_emd_C, 4},
     {NULL, NULL, 0}
 };
 

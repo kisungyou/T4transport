@@ -10,28 +10,18 @@ compare_two <- function(X, Y, useR = TRUE){
   D2 = util_pairwise_sqdist(X, Y)
   
   # compute the plans
-  if (useR){
-    return(aux_emd(wx, wy, D2))
-  } else {
-    return(util_plan_emd_C(wx, wy, D2))
-  }
+  output1 = util_plan_emd_C(wx, wy, D2)
+  output2 = util_dual_emd_C(wx, wy, D2, TRUE)
+  return(list(plan=output1,
+              dual=output2))
 }
-
 # m = 300
 # n = 150
 # X = matrix(rnorm(m*2, mean=-1),ncol=2) # m obs. for X
 # Y = matrix(rnorm(n*2, mean=+1),ncol=2) # n obs. for Y
 # 
-# plan_R = compare_two(X, Y, useR=TRUE)
-# plan_C = compare_two(X, Y, useR=FALSE)
+# run_two = compare_two(X, Y)
 # 
 # par(mfrow=c(1,2))
-# image(plan_R, main="lpSolve")
-# image(plan_C, main="Bonneel")
-# norm(plan_R - plan_C, "F")
-# 
-# microbenchmark::microbenchmark(
-#   plan_R = compare_two(X, Y, useR=TRUE),
-#   plan_C = compare_two(X, Y, useR=FALSE),
-#   times=5L
-# )
+# image(run_two$plan, main="plan")
+# image(run_two$dual$G, main="dual plan")

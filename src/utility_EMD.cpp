@@ -147,3 +147,155 @@ arma::mat util_plan_emd_C(const arma::vec &a,
   
   return G;
 }
+
+
+
+// [[Rcpp::export]]
+Rcpp::List util_dual_emd_C(const arma::vec &a,
+                           const arma::vec &b,
+                           const arma::mat &C,
+                           const bool return_plan = false) {
+  const int n1 = static_cast<int>(a.n_elem);
+  const int n2 = static_cast<int>(b.n_elem);
+  
+  // Basic dimension checks
+  if (static_cast<int>(C.n_rows) != n1 || static_cast<int>(C.n_cols) != n2) {
+    Rcpp::stop("util_dual_emd_C: dimension mismatch between a, b, and C.");
+  }
+  
+  const double sum_a = arma::accu(a);
+  const double sum_b = arma::accu(b);
+  if (std::abs(sum_a - sum_b) > 1e-12) {
+    Rcpp::stop("util_dual_emd_C: a and b must have the same total mass.");
+  }
+  
+  // ---------------------------------------------------------------------------
+  // Compress supports: keep only indices where weights > 0
+  // ---------------------------------------------------------------------------
+  std::vector<int>    indI;
+  std::vector<int>    indJ;
+  std::vector<double> w1;  // supplies (positive)
+  std::vector<double> w2;  // demands (negative as required by supplyMap)
+  
+  indI.reserve(n1);
+  indJ.reserve(n2);
+  w1.reserve(n1);
+  w2.reserve(n2);
+  
+  for (int i = 0; i < n1; ++i) {
+    const double val = a(i);
+    if (val < 0.0) Rcpp::stop("util_dual_emd_C: negative mass in a is not allowed.");
+    if (val > 0.0) { indI.push_back(i); w1.push_back(val); }
+  }
+  for (int j = 0; j < n2; ++j) {
+    const double val = b(j);
+    if (val < 0.0) Rcpp::stop("util_dual_emd_C: negative mass in b is not allowed.");
+    if (val > 0.0) { indJ.push_back(j); w2.push_back(-val); }
+  }
+  
+  const int n = static_cast<int>(indI.size());
+  const int m = static_cast<int>(indJ.size());
+  
+  // Trivial case
+  arma::vec u_full(n1, arma::fill::zeros);
+  arma::vec v_full(n2, arma::fill::zeros);
+  
+  if (n == 0 || m == 0) {
+    if (return_plan) {
+      arma::mat G0(n1, n2, arma::fill::zeros);
+      return Rcpp::List::create(
+        Rcpp::Named("u") = u_full,
+        Rcpp::Named("v") = v_full,
+        Rcpp::Named("G") = G0
+      );
+    } else {
+      return Rcpp::List::create(
+        Rcpp::Named("u") = u_full,
+        Rcpp::Named("v") = v_full
+      );
+    }
+  }
+  
+  // ---------------------------------------------------------------------------
+  // Build bipartite graph and configure network simplex
+  // ---------------------------------------------------------------------------
+  Digraph di(n, m);  // IMPORTANT: your FullBipartiteDigraph stores _n1=n, _n2=m
+  
+  const std::uint64_t maxIter = 100000000;
+  
+  NetworkSimplexSimple<Digraph, double, double> net(
+      di,
+      true,     // arc_mixing
+      n + m,    // number of nodes
+      (int64_t)n * (int64_t)m,
+      maxIter);
+  
+  // supplies/demands
+  net.supplyMap(w1.data(), n, w2.data(), m);
+  
+  // costs: arcs are lexicographic in (i,j) under your graph's arcFromId
+  std::size_t arcId = 0;
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      const double cij = C(indI[i], indJ[j]);
+      if (cij < 0.0) Rcpp::stop("util_dual_emd_C: negative costs are not allowed.");
+      net.setCost(di.arcFromId(static_cast<int64_t>(arcId)), cij);
+      ++arcId;
+    }
+  }
+  
+  // solve
+  auto status = net.run();
+  if (status == NetworkSimplexSimple<Digraph,double,double>::INFEASIBLE) {
+    Rcpp::stop("util_dual_emd_C: network simplex infeasible.");
+  }
+  if (status == NetworkSimplexSimple<Digraph,double,double>::UNBOUNDED) {
+    Rcpp::stop("util_dual_emd_C: network simplex unbounded (check cost matrix C).");
+  }
+  
+  // ---------------------------------------------------------------------------
+  // Extract duals:
+  // In YOUR FullBipartiteDigraph:
+  //   left nodes are ids 0..n-1
+  //   right nodes are ids n..n+m-1
+  // ---------------------------------------------------------------------------
+  for (int i = 0; i < n; ++i) {
+    Digraph::Node node_left = di.nodeFromId(i);
+    const double ui = net.potential(node_left);
+    u_full(indI[i]) = ui;
+  }
+  for (int j = 0; j < m; ++j) {
+    Digraph::Node node_right = di.nodeFromId(n + j);
+    const double vj = net.potential(node_right);
+    v_full(indJ[j]) = vj;
+  }
+  
+  // Optional plan
+  if (return_plan) {
+    arma::mat G(n1, n2, arma::fill::zeros);
+    arcId = 0;
+    for (int i = 0; i < n; ++i) {
+      for (int j = 0; j < m; ++j) {
+        Arc a_edge = di.arcFromId(static_cast<int64_t>(arcId));
+        ++arcId;
+        
+        const double flow = net.flow(a_edge);
+        if (flow <= 0.0) continue;
+        
+        G(indI[i], indJ[j]) = flow;
+      }
+    }
+    
+    return Rcpp::List::create(
+      Rcpp::Named("u") = u_full,
+      Rcpp::Named("v") = v_full,
+      Rcpp::Named("G") = G
+    );
+  }
+  
+  return Rcpp::List::create(
+    Rcpp::Named("u") = u_full,
+    Rcpp::Named("v") = v_full
+  );
+}
+

@@ -1,7 +1,9 @@
 # T4transport 0.1.8
 
 * Changed `hdist()` to `histdist()` for modality-specific computation.
-
+* `imagebary()` added for unregularized Wasserstein barycenter of grayscale images.
+* `imagedist()` added for the Wasserstein distance between two grayscale images.
+* `imageinterp()` added for Wasserstein interpolation between two grayscale images.
 
 # T4transport 0.1.7
 

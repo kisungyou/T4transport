@@ -80,10 +80,16 @@
 
 ### Images
 
+- [`imagebary()`](https://www.kisungyou.com/T4transport/reference/imagebary.md)
+  : Barycenter of Images via Unregularized Optimal Transport
 - [`imagebary14C()`](https://www.kisungyou.com/T4transport/reference/imagebary14C.md)
   : Barycenter of Images according to Cuturi & Doucet (2014)
 - [`imagebary15B()`](https://www.kisungyou.com/T4transport/reference/imagebary15B.md)
   : Barycenter of Images according to Benamou et al. (2015)
+- [`imagedist()`](https://www.kisungyou.com/T4transport/reference/imagedist.md)
+  : Wasserstein Distance between Two Images
+- [`imageinterp()`](https://www.kisungyou.com/T4transport/reference/imageinterp.md)
+  : Interpolation between Images
 
 ## \[3\] Gromov–Wasserstein
 
