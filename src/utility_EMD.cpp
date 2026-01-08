@@ -1,5 +1,9 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 #include <RcppArmadillo.h>
+#include <random>
+#include <vector>
+#include <numeric>
+#include <algorithm>
 
 #include "network_simplex_simple.h"
 #include "full_bipartitegraph.h"

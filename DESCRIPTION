@@ -14,4 +14,5 @@ RdMacros: Rdpack
 Depends: 
     R (>= 2.10)
 Suggests: knitr, rmarkdown, ggplot2, mlbench
+SystemRequirements: C++20
 VignetteBuilder: knitr
