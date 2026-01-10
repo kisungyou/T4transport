@@ -2,7 +2,7 @@
 % Please edit documentation in R/image_bary.R
 \name{imagebary}
 \alias{imagebary}
-\title{Barycenter of Images via Unregularized Optimal Transport}
+\title{Barycenter of Images}
 \usage{
 imagebary(images, p = 2, weights = NULL, C = NULL, ...)
 }
