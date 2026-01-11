@@ -6,11 +6,13 @@
   [`histdist()`](https://www.kisungyou.com/T4transport/reference/histdist.md)
   for modality-specific computation.
 - [`imagebary()`](https://www.kisungyou.com/T4transport/reference/imagebary.md)
-  added for unregularized Wasserstein barycenter of grayscale images.
+  added for unregularized Wasserstein barycenter of images.
 - [`imagedist()`](https://www.kisungyou.com/T4transport/reference/imagedist.md)
-  added for the Wasserstein distance between two grayscale images.
+  added for the Wasserstein distance between two images.
 - [`imageinterp()`](https://www.kisungyou.com/T4transport/reference/imageinterp.md)
-  added for Wasserstein interpolation between two grayscale images.
+  added for Wasserstein interpolation between two images.
+- [`imagemed()`](https://www.kisungyou.com/T4transport/reference/imagemed.md)
+  added for unregularized Wasserstein median of images.
 
 ## T4transport 0.1.7
 

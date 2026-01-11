@@ -1,4 +1,4 @@
-# Barycenter of Images via Unregularized Optimal Transport
+# Barycenter of Images
 
 Using exact balanced optimal transport as a subroutine, `imagebary`
 computes an unregularized 2-Wasserstein barycenter image \\X^\star\\

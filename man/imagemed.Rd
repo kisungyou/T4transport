@@ -62,19 +62,19 @@ EMD plans under the same squared ground cost.
 #----------------------------------------------------------------------
 #                             MNIST Example
 #
-# Use 7 images from digit '8' and 3 images from digit '1'.
+# Use 6 images from digit '8' and 4 images from digit '1'.
 # The median should look closer to the shape of '8'.
 #----------------------------------------------------------------------
 # DATA PREP
 set.seed(11)
 data(digits)
-dat_8 = digits$image[sample(which(digits$label==8), 7)]
-dat_1 = digits$image[sample(which(digits$label==1), 3)]
+dat_8 = digits$image[sample(which(digits$label==8), 6)]
+dat_1 = digits$image[sample(which(digits$label==1), 4)]
 dat_all = c(dat_8, dat_1)
 
 # COMPUTE BARYCENTER AND MEDIAN
-img_bary = imagemed(dat_all, maxiter=10)
-img_med  = imagemed(dat_all, maxiter=10)
+img_bary = imagebary(dat_all, maxiter=50)
+img_med  = imagemed(dat_all, maxiter=50)
 
 # VISUALIZE
 opar <- par(no.readonly=TRUE)
