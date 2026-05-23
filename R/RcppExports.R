@@ -29,8 +29,12 @@ cpp_fixed_sinkhorn14 <- function(listdXY, marginals, weights, p, lambda, maxiter
     .Call(`_T4transport_cpp_fixed_sinkhorn14`, listdXY, marginals, weights, p, lambda, maxiter, abstol, printer, initvec)
 }
 
-cpp_free_bary_gradient <- function(measures, marginals, weights, num_support, maxiter, abstol) {
-    .Call(`_T4transport_cpp_free_bary_gradient`, measures, marginals, weights, num_support, maxiter, abstol)
+cpp_free_bary_gradient_damped <- function(measures, marginals, weights, num_support, maxiter, abstol, alpha) {
+    .Call(`_T4transport_cpp_free_bary_gradient_damped`, measures, marginals, weights, num_support, maxiter, abstol, alpha)
+}
+
+cpp_free_bary_gradient_damped_init <- function(measures, marginals, weights, maxiter, abstol, alpha, init_support) {
+    .Call(`_T4transport_cpp_free_bary_gradient_damped_init`, measures, marginals, weights, maxiter, abstol, alpha, init_support)
 }
 
 cpp_single_barycenter <- function(measures, marginals, weights, init_support) {

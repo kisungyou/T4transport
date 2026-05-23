@@ -2,9 +2,16 @@
 % Please edit documentation in R/free_bary_GradientDescent.R
 \name{rbaryGD}
 \alias{rbaryGD}
-\title{Free-Support Barycenter by Riemannian Gradient Descent}
+\title{Free-Support Wasserstein Barycenter by Barycentric-Projection Updates}
 \usage{
-rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
+rbaryGD(
+  atoms,
+  marginals = NULL,
+  weights = NULL,
+  num_support = 100,
+  alpha = 1,
+  ...
+)
 }
 \arguments{
 \item{atoms}{a length-\eqn{K} list where each element is an \eqn{(N_k \times P)} matrix of atoms.}
@@ -15,29 +22,33 @@ rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
 
 \item{num_support}{the number of support points \eqn{M} for the barycenter (default: 100).}
 
+\item{alpha}{step size parameter \eqn{\alpha \in (0,1]} controlling the update of support points (default: 1).}
+
 \item{...}{extra parameters including \describe{
 \item{abstol}{stopping criterion for iterations (default: 1e-6).}
 \item{maxiter}{maximum number of iterations (default: 10).}
 }}
 }
 \value{
-a list with three elements:
+a list with five elements:
 \describe{
   \item{support}{an \eqn{(M \times P)} matrix of barycenter support points.}
-  \item{weight}{a length-\eqn{M} vector of barycenter weights with all entries being \eqn{1/M}.}
-  \item{history}{a vector of cost values at each iteration.}
+  \item{weight}{a length-\eqn{M} vector of barycenter weights with all entries equal to \eqn{1/M}.}
+  \item{history}{a vector of objective values over iterations.}
+  \item{alpha}{the step size used for the update.}
+  \item{niter}{the number of completed iterations.}
 }
 }
 \description{
-For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 
-the free-support barycenter of order 2, defined as a minimizer of the following 
-functional,
+For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K},
+the free-support barycenter of order 2, defined as a minimizer of
 \deqn{
-\mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2^2 (\nu, \mu_k ),
+\mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2^2(\nu,\mu_k),
 }
-is computed using the Riemannian 
-gradient descent algorithm. The algorithm is based on the formal Riemannian 
-geometric view of the 2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}.
+is approximated by an iterative barycentric-projection update.
+The method is motivated by the formal first-order geometry of the
+2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}, but is implemented directly in the discrete setting
+through optimal transport plans and their barycentric projections.
 }
 \examples{
 \donttest{

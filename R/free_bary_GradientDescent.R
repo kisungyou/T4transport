@@ -1,30 +1,34 @@
-#' Free-Support Barycenter by Riemannian Gradient Descent
-#' 
+#' Free-Support Wasserstein Barycenter by Barycentric-Projection Updates
+#'
 #' @description
-#' For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K}, 
-#' the free-support barycenter of order 2, defined as a minimizer of the following 
-#' functional,
+#' For a collection of empirical measures \eqn{\lbrace \mu_k\rbrace_{k=1}^K},
+#' the free-support barycenter of order 2, defined as a minimizer of
 #' \deqn{
-#' \mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2^2 (\nu, \mu_k ),
+#' \mathcal{F}(\nu) = \sum_{k=1}^K w_k \mathcal{W}_2^2(\nu,\mu_k),
 #' }
-#' is computed using the Riemannian 
-#' gradient descent algorithm. The algorithm is based on the formal Riemannian 
-#' geometric view of the 2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}.
+#' is approximated by an iterative barycentric-projection update.
+#' The method is motivated by the formal first-order geometry of the
+#' 2-Wasserstein space according to \insertCite{otto_2001_GeometryDissipativeEvolution;textual}{T4transport}, but is implemented directly in the discrete setting
+#' through optimal transport plans and their barycentric projections.
+#' 
 #' 
 #' @param atoms a length-\eqn{K} list where each element is an \eqn{(N_k \times P)} matrix of atoms.
 #' @param marginals marginal distributions for empirical measures; if \code{NULL} (default), uniform weights are set for all measures. Otherwise, it should be a length-\eqn{K} list where each element is a length-\eqn{N_k} vector of nonnegative weights that sum to 1.
 #' @param weights weights for each individual measure; if \code{NULL} (default), each measure is considered equally. Otherwise, it should be a length-\eqn{K} vector.
 #' @param num_support the number of support points \eqn{M} for the barycenter (default: 100).
+#' @param alpha step size parameter \eqn{\alpha \in (0,1]} controlling the update of support points (default: 1).
 #' @param ... extra parameters including \describe{
 #' \item{abstol}{stopping criterion for iterations (default: 1e-6).}
 #' \item{maxiter}{maximum number of iterations (default: 10).}
 #' }
 #' 
-#' @return a list with three elements:
+#' @return a list with five elements:
 #' \describe{
 #'   \item{support}{an \eqn{(M \times P)} matrix of barycenter support points.}
-#'   \item{weight}{a length-\eqn{M} vector of barycenter weights with all entries being \eqn{1/M}.}
-#'   \item{history}{a vector of cost values at each iteration.}
+#'   \item{weight}{a length-\eqn{M} vector of barycenter weights with all entries equal to \eqn{1/M}.}
+#'   \item{history}{a vector of objective values over iterations.}
+#'   \item{alpha}{the step size used for the update.}
+#'   \item{niter}{the number of completed iterations.}
 #' }
 #' 
 #' @examples
@@ -81,14 +85,21 @@
 #' 
 #' @concept free_centroid
 #' @export
-rbaryGD <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
+rbaryGD <- function(atoms, marginals=NULL, weights=NULL,
+                    num_support=100, alpha=1, ...){
   ## INPUT : EXPLICIT
-  name.f    = "rbaryGD"
+  name.f         = "rbaryGD"
   par_measures   = valid_multiple_measures(atoms, base::ncol(atoms[[1]]), name.f)
   num_atoms      = unlist(lapply(atoms, nrow))
   par_marginals  = valid_multiple_marginal(marginals, num_atoms, name.f)
   par_weights    = valid_multiple_weight(weights, length(atoms), name.f)
   par_numsupport = max(2, round(num_support))
+  
+  par_alpha = as.double(alpha)
+  if ((length(par_alpha) != 1L) || (!is.finite(par_alpha)) ||
+      (par_alpha <= 0) || (par_alpha > 1)){
+    stop(name.f, ": 'alpha' should be a single number in (0,1].", call.=FALSE)
+  }
   
   ## INPUT : IMPLICIT
   params = list(...)
@@ -106,38 +117,37 @@ rbaryGD <- function(atoms, marginals=NULL, weights=NULL, num_support=100, ...){
   }
   
   ## COMPUTE
-  #  conditionally
   run_R_init <- TRUE
   
   if (run_R_init){
-    # initialize using R
     init_measure = aux_ginit(par_measures, par_numsupport)
-    cpprun = cpp_free_bary_gradient_init(
+    
+    cpprun = cpp_free_bary_gradient_damped_init(
       par_measures,
       par_marginals,
       par_weights,
       par_maxiter,
       par_abstol,
+      par_alpha,
       init_measure
     )
   } else {
-    #  run the algorithm
-    cpprun = cpp_free_bary_gradient(par_measures, 
-                                    par_marginals, 
-                                    par_weights,
-                                    par_numsupport,
-                                    par_maxiter,
-                                    par_abstol) 
+    cpprun = cpp_free_bary_gradient_damped(
+      par_measures,
+      par_marginals,
+      par_weights,
+      par_numsupport,
+      par_maxiter,
+      par_abstol,
+      par_alpha
+    )
   }
   
-  # manipulate the cost history
-  vec_history = as.vector(cpprun$cost_history)
-  vec_history = vec_history[vec_history > 1e-18]
-  
-  # return
   output = list()
   output[["support"]] = as.matrix(cpprun$support)
   output[["weight"]]  = rep(1/par_numsupport, par_numsupport)
-  output[["history"]] = vec_history
+  output[["history"]] = as.vector(cpprun$cost_history)
+  output[["alpha"]]   = cpprun$alpha
+  output[["niter"]]   = cpprun$niter
   return(output)
 }

@@ -125,9 +125,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_free_bary_gradient
-Rcpp::List cpp_free_bary_gradient(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, int num_support, int maxiter, double abstol);
-RcppExport SEXP _T4transport_cpp_free_bary_gradient(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP num_supportSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+// cpp_free_bary_gradient_damped
+Rcpp::List cpp_free_bary_gradient_damped(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, int num_support, int maxiter, double abstol, double alpha);
+RcppExport SEXP _T4transport_cpp_free_bary_gradient_damped(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP num_supportSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP alphaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -137,7 +137,25 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type num_support(num_supportSEXP);
     Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_free_bary_gradient(measures, marginals, weights, num_support, maxiter, abstol));
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_free_bary_gradient_damped(measures, marginals, weights, num_support, maxiter, abstol, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_free_bary_gradient_damped_init
+Rcpp::List cpp_free_bary_gradient_damped_init(const arma::field<arma::mat>& measures, const arma::field<arma::vec>& marginals, const arma::vec& weights, int maxiter, double abstol, double alpha, const arma::mat& init_support);
+RcppExport SEXP _T4transport_cpp_free_bary_gradient_damped_init(SEXP measuresSEXP, SEXP marginalsSEXP, SEXP weightsSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP alphaSEXP, SEXP init_supportSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::field<arma::mat>& >::type measures(measuresSEXP);
+    Rcpp::traits::input_parameter< const arma::field<arma::vec>& >::type marginals(marginalsSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type init_support(init_supportSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_free_bary_gradient_damped_init(measures, marginals, weights, maxiter, abstol, alpha, init_support));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -418,7 +436,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_T4transport_cpp_sinkhorn13", (DL_FUNC) &_T4transport_cpp_sinkhorn13, 7},
     {"_T4transport_cpp_barybregman15", (DL_FUNC) &_T4transport_cpp_barybregman15, 9},
     {"_T4transport_cpp_fixed_sinkhorn14", (DL_FUNC) &_T4transport_cpp_fixed_sinkhorn14, 9},
-    {"_T4transport_cpp_free_bary_gradient", (DL_FUNC) &_T4transport_cpp_free_bary_gradient, 6},
+    {"_T4transport_cpp_free_bary_gradient_damped", (DL_FUNC) &_T4transport_cpp_free_bary_gradient_damped, 7},
+    {"_T4transport_cpp_free_bary_gradient_damped_init", (DL_FUNC) &_T4transport_cpp_free_bary_gradient_damped_init, 7},
     {"_T4transport_cpp_single_barycenter", (DL_FUNC) &_T4transport_cpp_single_barycenter, 4},
     {"_T4transport_cpp_free_bary_gradient_init", (DL_FUNC) &_T4transport_cpp_free_bary_gradient_init, 6},
     {"_T4transport_cpp_free_median_PF", (DL_FUNC) &_T4transport_cpp_free_median_PF, 6},
