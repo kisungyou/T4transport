@@ -28,7 +28,8 @@
 - [`rbary23L()`](https://www.kisungyou.com/T4transport/reference/rbary23L.md)
   : Free-Support Barycenter by von Lindheim (2023)
 - [`rbaryGD()`](https://www.kisungyou.com/T4transport/reference/rbaryGD.md)
-  : Free-Support Barycenter by Riemannian Gradient Descent
+  : Free-Support Wasserstein Barycenter by Barycentric-Projection
+  Updates
 - [`rmedIRLS()`](https://www.kisungyou.com/T4transport/reference/rmedIRLS.md)
   : Free-Support Median by IRLS
 - [`rmedWB()`](https://www.kisungyou.com/T4transport/reference/rmedWB.md)

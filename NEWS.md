@@ -1,5 +1,6 @@
 # T4transport 0.1.9
 
+* The `rbaryGD()` function allows arbitrary step-size selection for $\alpha \in (0,1]$ provided by a user. Default is $\alpha=1$. 
 
 # T4transport 0.1.8
 

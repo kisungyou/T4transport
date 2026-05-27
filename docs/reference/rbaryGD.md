@@ -1,17 +1,25 @@
-# Free-Support Barycenter by Riemannian Gradient Descent
+# Free-Support Wasserstein Barycenter by Barycentric-Projection Updates
 
 For a collection of empirical measures \\\lbrace
 \mu_k\rbrace\_{k=1}^K\\, the free-support barycenter of order 2, defined
-as a minimizer of the following functional, \$\$ \mathcal{F}(\nu) =
-\sum\_{k=1}^K w_k \mathcal{W}\_2^2 (\nu, \mu_k ), \$\$ is computed using
-the Riemannian gradient descent algorithm. The algorithm is based on the
-formal Riemannian geometric view of the 2-Wasserstein space according to
-Otto (2001) .
+as a minimizer of \$\$ \mathcal{F}(\nu) = \sum\_{k=1}^K w_k
+\mathcal{W}\_2^2(\nu,\mu_k), \$\$ is approximated by an iterative
+barycentric-projection update. The method is motivated by the formal
+first-order geometry of the 2-Wasserstein space according to Otto (2001)
+, but is implemented directly in the discrete setting through optimal
+transport plans and their barycentric projections.
 
 ## Usage
 
 ``` r
-rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
+rbaryGD(
+  atoms,
+  marginals = NULL,
+  weights = NULL,
+  num_support = 100,
+  alpha = 1,
+  ...
+)
 ```
 
 ## Arguments
@@ -37,6 +45,11 @@ rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
 
   the number of support points \\M\\ for the barycenter (default: 100).
 
+- alpha:
+
+  step size parameter \\\alpha \in (0,1\]\\ controlling the update of
+  support points (default: 1).
+
 - ...:
 
   extra parameters including
@@ -51,7 +64,7 @@ rbaryGD(atoms, marginals = NULL, weights = NULL, num_support = 100, ...)
 
 ## Value
 
-a list with three elements:
+a list with five elements:
 
 - support:
 
@@ -59,12 +72,20 @@ a list with three elements:
 
 - weight:
 
-  a length-\\M\\ vector of barycenter weights with all entries being
+  a length-\\M\\ vector of barycenter weights with all entries equal to
   \\1/M\\.
 
 - history:
 
-  a vector of cost values at each iteration.
+  a vector of objective values over iterations.
+
+- alpha:
+
+  the step size used for the update.
+
+- niter:
+
+  the number of completed iterations.
 
 ## References
 

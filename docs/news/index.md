@@ -1,6 +1,15 @@
 # Changelog
 
+## T4transport 0.1.9
+
+- The
+  [`rbaryGD()`](https://www.kisungyou.com/T4transport/reference/rbaryGD.md)
+  function allows arbitrary step-size selection for \\\alpha \in
+  (0,1\]\\ provided by a user. Default is \\\alpha=1\\.
+
 ## T4transport 0.1.8
+
+CRAN release: 2026-01-11
 
 - Changed `hdist()` to
   [`histdist()`](https://www.kisungyou.com/T4transport/reference/histdist.md)

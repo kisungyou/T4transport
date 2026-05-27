@@ -13,6 +13,7 @@ field of optimal transport.
   [CRAN](https://CRAN.R-project.org).
 
 ``` r
+
 install.packages("T4transport")
 ```
 
@@ -20,6 +21,7 @@ install.packages("T4transport")
   [GitHub](https://github.com/kisungyou/T4transport).
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("kisungyou/T4transport")
 ```

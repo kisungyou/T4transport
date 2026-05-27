@@ -33,6 +33,7 @@ normalized to have mean zero and unit variance across both dimensions,
 and the second one is translated by +5 in the \\x\\-direction.
 
 ``` r
+
 # load the library
 library(mlbench)
 
@@ -69,6 +70,7 @@ function achieves that. Let’s see how we can use it. Assume that we
 consider the simplest case of order 2.
 
 ``` r
+
 # call the function
 output = wasserstein(data1, data2, p=2)
 
@@ -110,6 +112,7 @@ according to a user-defined metric. The
 function is the choice in such scenarios.
 
 ``` r
+
 # compute the cross distance with a helper function
 cross_dist <- function(X, Y) {
   X2 <- rowSums(X^2)
@@ -151,4 +154,4 @@ Monge, Gaspard. 1781. *Mémoire Sur La Théorie Des Déblais Et Des
 Remblais*. De l’Imprimerie Royale.
 
 Villani, Cédric. 2003. *Topics in Optimal Transportation*. Vol. 58.
-Graduate Studies in Mathematics. S.l.: American Mathematical Society.
+Graduate Studies in Mathematics. American Mathematical Society.
